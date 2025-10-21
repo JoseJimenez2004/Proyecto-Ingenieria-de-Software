@@ -1,0 +1,111 @@
+Frontend/
+│
+├── 📁 src/                          # CARPETA PRINCIPAL - Todo el código fuente
+│   │
+│   ├── 📁 css/                      # ESTILOS - Todos los archivos CSS
+│   │   ├── styles.css               # ✅ CSS principal con variables y reset
+│   │   ├── 📁 components/           # CSS modular por componentes
+│   │   │   ├── header.css           # ✅ Estilos del encabezado
+│   │   │   ├── footer.css           # ✅ Estilos del pie de página  
+│   │   │   ├── buttons.css          # ✅ Estilos de botones
+│   │   │   └── cards.css            # ❌ FALTANTE - Estilos de tarjetas
+│   │   └── 📁 pages/                # CSS específico por página
+│   │       ├── home.css             # ❌ FALTANTE - Estilos página inicio
+│   │       ├── about.css            # ❌ FALTANTE - Estilos página about
+│   │       └── contact.css          # ❌ FALTANTE - Estilos página contacto
+│   │
+│   ├── 📁 js/                       # JAVASCRIPT - Toda la lógica JS
+│   │   ├── app.js                   # ✅ Archivo principal JS
+│   │   ├── 📁 modules/              # Módulos JS reutilizables
+│   │   │   ├── api.js               # ❌ FALTANTE - Llamadas a API
+│   │   │   ├── utils.js             # ❌ FALTANTE - Funciones utilitarias
+│   │   │   └── auth.js              # ❌ FALTANTE - Autenticación
+│   │   └── 📁 components/           # Componentes JS
+│   │       ├── header.js            # ❌ FALTANTE - Lógica del header
+│   │       ├── modal.js             # ❌ FALTANTE - Lógica de modales
+│   │       └── forms.js             # ❌ FALTANTE - Manejo de formularios
+│   │
+│   ├── 📁 pages/                    # PÁGINAS HTML
+│   │   ├── index.html               # ✅ Página principal
+│   │   ├── 📁 templates/            # PLANTILLAS - Fragmentos HTML reutilizables
+│   │   │   └── (archivos .html)     # ❌ FALTANTES - Templates parciales
+│   │   └── (otros .html)            # ❌ FALTANTES - about.html, contact.html, etc.
+│   │
+│   ├── 📁 assets/                   # RECURSOS ESTÁTICOS
+│   │   ├── 📁 img/                  # IMÁGENES
+│   │   │   └── 📁 icons/            # ÍCONOS - carpeta creada
+│   │   │       └── (archivos .svg/.png)  # ❌ FALTANTES - iconos reales
+│   │   └── 📁 fonts/                # FUENTES - carpeta creada
+│   │       └── (archivos .woff2)    # ❌ FALTANTES - fuentes personalizadas
+│   │
+│   └── 📁 utils/                    # UTILIDADES - carpeta creada
+│       └── (archivos .js)           # ❌ FALTANTES - constantes.js, helpers.js
+│
+└── (archivos raíz)                  # CONFIGURACIÓN DEL PROYECTO
+    ├── README.md                    # ❌ FALTANTE - Documentación
+    ├── package.json                 # ❌ FALTANTE - Dependencias npm
+    └── vite.config.js              # ❌ FALTANTE - Configuración build
+    Backend/
+│
+├── 📁 app/                          # APLICACIÓN PRINCIPAL
+│   ├── __init__.py                  # ✅ Factory de la app Flask
+│   ├── 📁 models/                   # MODELOS DE DATOS
+│   │   ├── __init__.py
+│   │   ├── user.py                  # Modelo Usuario
+│   │   ├── product.py               # Modelo Producto
+│   │   └── order.py                 # Modelo Pedido
+│   │
+│   ├── 📁 routes/                   # RUTAS/ENDPOINTS
+│   │   ├── __init__.py
+│   │   ├── auth.py                  # Autenticación
+│   │   ├── users.py                 # CRUD Usuarios
+│   │   ├── products.py              # CRUD Productos
+│   │   └── orders.py                # CRUD Pedidos
+│   │
+│   ├── 📁 templates/                # PLANTILLAS JINJA2 (si usas SSR)
+│   │   ├── base.html
+│   │   ├── 📁 auth/
+│   │   │   ├── login.html
+│   │   │   └── register.html
+│   │   └── 📁 admin/
+│   │       └── dashboard.html
+│   │
+│   ├── 📁 static/                   # ARCHIVOS ESTÁTICOS
+│   │   ├── 📁 css/
+│   │   ├── 📁 js/
+│   │   └── 📁 images/
+│   │
+│   ├── 📁 config/                   # CONFIGURACIÓN
+│   │   ├── __init__.py
+│   │   └── config.py                # Configs desarrollo/producción
+│   │
+│   ├── 📁 utils/                    # UTILIDADES
+│   │   ├── __init__.py
+│   │   ├── helpers.py               # Funciones helper
+│   │   ├── validators.py            # Validaciones
+│   │   └── security.py              # Seguridad (JWT, bcrypt)
+│   │
+│   └── 📁 services/                 # LÓGICA DE NEGOCIO
+│       ├── __init__.py
+│       ├── user_service.py
+│       ├── product_service.py
+│       └── order_service.py
+│
+├── 📁 migrations/                   # MIGRACIONES DE BD (Flask-Migrate)
+│   ├── versions/
+│   └── (archivos de Alembic)
+│
+├── 📁 tests/                        # PRUEBAS
+│   ├── __init__.py
+│   ├── test_models.py
+│   ├── test_routes.py
+│   └── test_services.py
+│
+├── 📁 instance/                     # CONFIGURACIÓN INSTANCIA
+│   └── config.py                    # Configs sensibles (no commit)
+│
+├── requirements.txt                 # DEPENDENCIAS
+├── .env.example                     # VARIABLES ENTORNO EJEMPLO
+├── .flaskenv                        # CONFIG FLASK
+├── run.py                          # EJECUCIÓN
+└── README.md                       # DOCUMENTACIÓN
