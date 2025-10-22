@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizador Interactivo de Gráficas Matplotlib</title>
+    
+    <!-- Chart.js para generar gráficas -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Highlight.js para resaltado de sintaxis -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #FFC107;
+            --background-color: #1F2937;
+            --card-color: #374151;
+            --text-color: #F9FAFB;
+            --code-bg: #282c34;
+            --success-color: #10B981;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            background-color: var(--primary-color);
+            text-align: center;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .controls {
+            width: 100%;
+            background-color: var(--card-color);
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .controls h2 {
+            color: var(--secondary-color);
+            margin: 0 0 15px 0;
+            text-align: center;
+        }
+
+        .controls-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .controls button:hover {
+            background-color: #3f7acb;
+            transform: translateY(-2px);
+        }
+
+        .controls button.active {
+            background-color: var(--secondary-color);
+            color: #1F2937;
+        }
+
+        main {
+            display: flex;
+            max-width: 1200px;
+            width: 95%;
+            margin: 20px 0;
+            gap: 20px;
+            flex: 1;
+        }
+
+        .graph-container {
+            flex: 1;
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .graph-container h2 {
+            color: var(--secondary-color);
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .chart-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #graph-canvas {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .code-container {
+            flex: 1;
+            background-color: var(--card-color);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .code-header h2 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        #run-code {
+            padding: 8px 16px;
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        #run-code:hover {
+            background-color: #0da271;
+        }
+
+        .code-editor {
+            background-color: var(--code-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #python-code {
+            flex: 1;
+            background-color: var(--code-bg);
+            color: #abb2bf;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            border: none;
+            padding: 15px;
+            resize: none;
+            outline: none;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: auto;
+        }
+
+        .status-message {
+            margin-top: 10px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .status-success {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--success-color);
+            border: 1px solid var(--success-color);
+        }
+
+        .status-error {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+            border: 1px solid #EF4444;
+        }
+
+        footer {
+            width: 100%;
+            text-align: center;
+            padding: 15px;
+            background-color: var(--card-color);
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+            
+            .controls-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .controls button {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Matplotlib 📊: Visualización Interactiva</h1>
+        <p>Edita el código y ve los cambios en tiempo real</p>
+    </header>
+
+    <div class="controls">
+        <div class="controls-container">
+            <h2>Selecciona una Gráfica:</h2>
+            <div class="controls-buttons">
+                <button data-graph="linea_basica" class="active">Línea Básica</button>
+                <button data-graph="dispersion">Dispersión</button>
+                <button data-graph="barras">Barras (Anotación)</button>
+                <button data-graph="histograma">Histograma</button>
+                <button data-graph="dashboard">Dashboard Avanzado</button>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <div class="graph-container">
+            <h2>Visualización de la Gráfica</h2>
+            <div class="chart-wrapper">
+                <canvas id="graph-canvas"></canvas>
+            </div>
+        </div>
+        
+        <div class="code-container">
+            <div class="code-header">
+                <h2>Código Python</h2>
+                <button id="run-code">Ejecutar Código</button>
+            </div>
+            <div class="code-editor">
+                <textarea id="python-code" spellcheck="false">
+# Selecciona una gráfica para comenzar
+# Luego puedes editar este código y hacer clic en "Ejecutar Código"
+                </textarea>
+            </div>
+            <div id="status-message" class="status-message"></div>
+        </div>
+    </main>
+
+ 
+    <script>
+        // --- 1. Definición de Contenidos (Códigos de Python) ---
+        const graphData = {
+            linea_basica: {
+                code: 
+`# Gráfica de línea básica - Onda sinusoidal
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Generación de la onda sinusoidal
+x = np.linspace(0, 2*np.pi, 200)
+y = np.sin(x)
+
+fig, ax = plt.subplots()
+ax.plot(x, y, label="sin(x)", color='blue', linewidth=2)
+
+ax.set_title("Ejemplo básico en Matplotlib")
+ax.set_xlabel("x (radianes)")
+ax.set_ylabel("amplitud")
+ax.grid(True, alpha=0.3)
+ax.legend()
+
+plt.show()`
+            },
+            dispersion: {
+                code:
+`# Gráfica de dispersión - Correlación con ruido
+import matplotlib.pyplot as plt
+import numpy as np
+
+rng = np.random.RandomState(42)
+x = rng.uniform(0, 10, 120)
+# Correlación lineal con ruido
+y = 1.8*x + 5 + rng.normal(scale=3, size=x.size)
+
+fig, ax = plt.subplots()
+# Control de tamaño (s=30) y transparencia (alpha=0.8)
+ax.scatter(x, y, s=30, alpha=0.8, color='orange')
+
+ax.set_title("Relación altura vs. peso (ejemplo)")
+ax.set_xlabel("Altura")
+ax.set_ylabel("Peso")
+ax.grid(True, alpha=0.3)
+
+plt.show()`
+            },
+            barras: {
+                code:
+`# Gráfica de barras con anotaciones
+import matplotlib.pyplot as plt
+import numpy as np
+
+categorias = ["A", "B", "C", "D"]
+valores = [35, 52, 27, 41]
+
+fig, ax = plt.subplots()
+x = np.arange(len(categorias))
+barras = ax.bar(x, valores, color=['#4A90E2', '#FFC107', '#10B981', '#EF4444'])
+
+# Uso de annotate para poner valores sobre las barras
+for xi, v in zip(x, valores):
+    ax.annotate(f"{v}", xy=(xi, v), xytext=(0, 4),
+                textcoords="offset points", ha="center", fontweight='bold')
+
+ax.set_title("Gráfica de Barras con Anotaciones")
+ax.set_xlabel("Categorías")
+ax.set_ylabel("Valores")
+ax.set_xticks(x)
+ax.set_xticklabels(categorias)
+
+plt.show()`
+            },
+            histograma: {
+                code:
+`# Histograma - Distribución normal
+import matplotlib.pyplot as plt
+import numpy as np
+
+rng = np.random.RandomState(0)
+# 1000 puntos de datos con media 50
+datos = rng.normal(loc=50, scale=10, size=1000)
+
+fig, ax = plt.subplots()
+ax.hist(datos, bins=20, edgecolor="black", alpha=0.7, color='purple')
+
+ax.set_title("Distribución de puntajes")
+ax.set_xlabel("Puntaje")
+ax.set_ylabel("Frecuencia")
+ax.grid(axis="y", alpha=0.3)
+
+plt.show()`
+            },
+            dashboard: {
+                code:
+`# Dashboard avanzado con múltiples gráficas
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Configuración de la figura con 4 subplots
+fig, axes = plt.subplots(2, 2, figsize=(10, 8))
+fig.suptitle('Dashboard Avanzado', fontsize=16, fontweight='bold')
+
+# Datos para las gráficas
+x_line = np.linspace(0, 10, 100)
+y1_line = np.sin(x_line)
+y2_line = np.cos(x_line)
+
+categorias_bar = ['Ene', 'Feb', 'Mar', 'Abr']
+valores_bar = [23, 45, 56, 37]
+
+datos_hist = np.random.normal(0, 1, 1000)
+
+x_scatter = np.random.rand(50) * 10
+y_scatter = x_scatter + np.random.randn(50) * 2
+
+# Gráfica de líneas
+axes[0, 0].plot(x_line, y1_line, label='sin(x)', color='blue')
+axes[0, 0].plot(x_line, y2_line, label='cos(x)', color='red')
+axes[0, 0].set_title('Funciones Trigonométricas')
+axes[0, 0].legend()
+axes[0, 0].grid(True, alpha=0.3)
+
+# Gráfica de barras
+axes[0, 1].bar(categorias_bar, valores_bar, color=['#4A90E2', '#FFC107', '#10B981', '#EF4444'])
+axes[0, 1].set_title('Ventas por Mes')
+axes[0, 1].set_ylabel('Ventas')
+
+# Histograma
+axes[1, 0].hist(datos_hist, bins=20, edgecolor='black', alpha=0.7, color='green')
+axes[1, 0].set_title('Distribución Normal')
+axes[1, 0].set_xlabel('Valor')
+axes[1, 0].set_ylabel('Frecuencia')
+
+# Gráfica de dispersión
+axes[1, 1].scatter(x_scatter, y_scatter, alpha=0.7, color='orange')
+axes[1, 1].set_title('Dispersión con Correlación')
+axes[1, 1].set_xlabel('Variable X')
+axes[1, 1].set_ylabel('Variable Y')
+
+plt.tight_layout()
+plt.show()`
+            }
+        };
+
+        // --- 2. Variables globales ---
+        const canvas = document.getElementById('graph-canvas');
+        const codeElement = document.getElementById('python-code');
+        const runButton = document.getElementById('run-code');
+        const statusMessage = document.getElementById('status-message');
+        const buttons = document.querySelectorAll('.controls button');
+        let currentChart = null;
+        let currentGraphType = 'linea_basica';
+
+        // --- 3. Funciones auxiliares ---
+        function showStatus(message, isSuccess = true) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message ${isSuccess ? 'status-success' : 'status-error'}`;
+            statusMessage.style.display = 'block';
+            
+            setTimeout(() => {
+                statusMessage.style.display = 'none';
+            }, 3000);
+        }
+
+        function generateRandomData(count, min, max) {
+            const data = [];
+            for (let i = 0; i < count; i++) {
+                data.push(Math.random() * (max - min) + min);
+            }
+            return data;
+        }
+
+        // --- 4. Funciones para crear gráficas ---
+        const chartFunctions = {
+            linea_basica: function(code) {
+                // Extraer parámetros del código si es posible
+                const x = Array.from({length: 200}, (_, i) => i * (2 * Math.PI) / 200);
+                const y = x.map(val => Math.sin(val));
+                
+                if (currentChart) currentChart.destroy();
+                
+                currentChart = new Chart(canvas, {
+                    type: 'line',
+                    data: {
+                        labels: x.map(val => val.toFixed(2)),
+                        datasets: [{
+                            label: 'sin(x)',
+                            data: y,
+                            borderColor: '#4A90E2',
+                            backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Ejemplo básico en Matplotlib',
+                                font: {
+                                    size: 16
+                                }
+                            },
+                            legend: {
+                                display: true
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'x (radianes)'
+                                },
+                                grid: {
+                                    display: true,
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'amplitud'
+                                },
+                                grid: {
+                                    display: true,
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            
+            dispersion: function(code) {
+                // Generar datos con correlación lineal y ruido
+                const x = generateRandomData(120, 0, 10);
+                const y = x.map(val => 1.8 * val + 5 + (Math.random() * 6 - 3));
+                
+                if (currentChart) currentChart.destroy();
+                
+                currentChart = new Chart(canvas, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: 'Datos de dispersión',
+                            data: x.map((val, i) => ({x: val, y: y[i]})),
+                            backgroundColor: 'rgba(255, 193, 7, 0.8)',
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Relación altura vs. peso (ejemplo)',
+                                font: {
+                                    size: 16
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Altura'
+                                },
+                                grid: {
+                                    display: true,
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Peso'
+                                },
+                                grid: {
+                                    display: true,
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            
+            barras: function(code) {
+                // Intentar extraer categorías y valores del código
+                let categorias = ["A", "B", "C", "D"];
+                let valores = [35, 52, 27, 41];
+                
+                // Búsqueda simple en el código para valores personalizados
+                const barMatch = code.match(/valores\s*=\s*\[([^\]]+)\]/);
+                if (barMatch) {
+                    const valoresStr = barMatch[1];
+                    valores = valoresStr.split(',').map(v => parseInt(v.trim()));
+                }
+                
+                const catMatch = code.match(/categorias\s*=\s*\[([^\]]+)\]/);
+                if (catMatch) {
+                    const catStr = catMatch[1].replace(/['"]/g, '');
+                    categorias = catStr.split(',').map(c => c.trim());
+                }
+                
+                if (currentChart) currentChart.destroy();
+                
+                currentChart = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: categorias,
+                        datasets: [{
+                            label: 'Valores',
+                            data: valores,
+                            backgroundColor: [
+                                'rgba(74, 144, 226, 0.7)',
+                                'rgba(255, 193, 7, 0.7)',
+                                'rgba(40, 167, 69, 0.7)',
+                                'rgba(220, 53, 69, 0.7)'
+                            ],
+                            borderColor: [
+                                'rgba(74, 144, 226, 1)',
+                                'rgba(255, 193, 7, 1)',
+                                'rgba(40, 167, 69, 1)',
+                                'rgba(220, 53, 69, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Gráfica de Barras',
+                                font: {
+                                    size: 16
+                                }
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    display: true,
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            
+            histograma: function(code) {
+                // Generar datos normales
+                const datos = [];
+                for (let i = 0; i < 1000; i++) {
+                    // Aproximación de distribución normal usando el teorema del límite central
+                    let sum = 0;
+                    for (let j = 0; j < 12; j++) {
+                        sum += Math.random();
+                    }
+                    datos.push((sum - 6) * 10 + 50); // Media 50, desviación 10
+                }
+                
+                // Crear bins para el histograma
+                const binCount = 20;
+                const min = Math.min(...datos);
+                const max = Math.max(...datos);
+                const binWidth = (max - min) / binCount;
+                
+                const bins = Array(binCount).fill(0);
+                datos.forEach(val => {
+                    const binIndex = Math.floor((val - min) / binWidth);
+                    if (binIndex >= 0 && binIndex < binCount) {
+                        bins[binIndex]++;
+                    }
+                });
+                
+                const labels = Array.from({length: binCount}, (_, i) => 
+                    (min + i * binWidth).toFixed(1)
+                );
+                
+                if (currentChart) currentChart.destroy();
+                
+                currentChart = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Frecuencia',
+                            data: bins,
+                            backgroundColor: 'rgba(147, 51, 234, 0.7)',
+                            borderColor: 'rgba(147, 51, 234, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Distribución de puntajes',
+                                font: {
+                                    size: 16
+                                }
+                            },
+                            legend: {
+                                display: false
+                            }
+                        },
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Puntaje'
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Frecuencia'
+                                },
+                                beginAtZero: true,
+                                grid: {
+                                    display: true,
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            }
+                        }
+                    }
+                });
+            },
+            
+            dashboard: function(code) {
+                // Para el dashboard, creamos un contenedor con múltiples gráficas
+                const container = document.querySelector('.chart-wrapper');
+                container.innerHTML = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; height: 100%;">
+                        <div style="position: relative;">
+                            <canvas id="line-chart"></canvas>
+                        </div>
+                        <div style="position: relative;">
+                            <canvas id="bar-chart"></canvas>
+                        </div>
+                        <div style="position: relative;">
+                            <canvas id="hist-chart"></canvas>
+                        </div>
+                        <div style="position: relative;">
+                            <canvas id="scatter-chart"></canvas>
+                        </div>
+                    </div>
+                `;
+                
+                // Gráfica de líneas
+                const lineCtx = document.getElementById('line-chart').getContext('2d');
+                const xLine = Array.from({length: 100}, (_, i) => i * 10 / 100);
+                new Chart(lineCtx, {
+                    type: 'line',
+                    data: {
+                        labels: xLine.map(v => v.toFixed(1)),
+                        datasets: [{
+                            label: 'sin(x)',
+                            data: xLine.map(val => Math.sin(val)),
+                            borderColor: '#4A90E2',
+                            backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }, {
+                            label: 'cos(x)',
+                            data: xLine.map(val => Math.cos(val)),
+                            borderColor: '#EF4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Funciones Trigonométricas'
+                            }
+                        }
+                    }
+                });
+                
+                // Gráfica de barras
+                const barCtx = document.getElementById('bar-chart').getContext('2d');
+                new Chart(barCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Ene', 'Feb', 'Mar', 'Abr'],
+                        datasets: [{
+                            label: 'Ventas',
+                            data: [23, 45, 56, 37],
+                            backgroundColor: [
+                                'rgba(74, 144, 226, 0.7)',
+                                'rgba(255, 193, 7, 0.7)',
+                                'rgba(40, 167, 69, 0.7)',
+                                'rgba(220, 53, 69, 0.7)'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Ventas por Mes'
+                            }
+                        }
+                    }
+                });
+                
+                // Histograma
+                const histCtx = document.getElementById('hist-chart').getContext('2d');
+                const histData = [];
+                for (let i = 0; i < 1000; i++) {
+                    let sum = 0;
+                    for (let j = 0; j < 12; j++) {
+                        sum += Math.random();
+                    }
+                    histData.push((sum - 6));
+                }
+                
+                const histBins = Array(20).fill(0);
+                const histMin = Math.min(...histData);
+                const histMax = Math.max(...histData);
+                const histBinWidth = (histMax - histMin) / 20;
+                
+                histData.forEach(val => {
+                    const binIndex = Math.floor((val - histMin) / histBinWidth);
+                    if (binIndex >= 0 && binIndex < 20) {
+                        histBins[binIndex]++;
+                    }
+                });
+                
+                new Chart(histCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: Array.from({length: 20}, (_, i) => 
+                            (histMin + i * histBinWidth).toFixed(1)
+                        ),
+                        datasets: [{
+                            label: 'Frecuencia',
+                            data: histBins,
+                            backgroundColor: 'rgba(40, 167, 69, 0.7)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Distribución Normal'
+                            }
+                        }
+                    }
+                });
+                
+                // Gráfica de dispersión
+                const scatterCtx = document.getElementById('scatter-chart').getContext('2d');
+                const xScatter = generateRandomData(50, 0, 10);
+                const yScatter = xScatter.map(val => val + (Math.random() * 4 - 2));
+                
+                new Chart(scatterCtx, {
+                    type: 'scatter',
+                    data: {
+                        datasets: [{
+                            label: 'Datos',
+                            data: xScatter.map((val, i) => ({x: val, y: yScatter[i]})),
+                            backgroundColor: 'rgba(255, 193, 7, 0.8)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Dispersión con Correlación'
+                            }
+                        }
+                    }
+                });
+            }
+        };
+
+        // --- 5. Event listeners ---
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const graphKey = this.getAttribute('data-graph');
+                const data = graphData[graphKey];
+                
+                if (data) {
+                    // Actualizar el tipo de gráfica actual
+                    currentGraphType = graphKey;
+                    
+                    // Actualizar estado activo de botones
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Restaurar el contenedor si se selecciona otra gráfica después del dashboard
+                    if (graphKey !== 'dashboard') {
+                        const container = document.querySelector('.chart-wrapper');
+                        container.innerHTML = '<canvas id="graph-canvas"></canvas>';
+                    }
+                    
+                    // Actualizar el código en el editor
+                    codeElement.value = data.code;
+                    
+                    // Actualizar el canvas
+                    const canvas = document.getElementById('graph-canvas');
+                    
+                    // Generar la gráfica inicial
+                    chartFunctions[graphKey](data.code);
+                    
+                    showStatus(`Gráfica "${this.textContent}" cargada correctamente`);
+                }
+            });
+        });
+
+        runButton.addEventListener('click', function() {
+            if (currentGraphType && chartFunctions[currentGraphType]) {
+                try {
+                    chartFunctions[currentGraphType](codeElement.value);
+                    showStatus('Código ejecutado correctamente');
+                } catch (error) {
+                    showStatus('Error al ejecutar el código: ' + error.message, false);
+                }
+            } else {
+                showStatus('Primero selecciona un tipo de gráfica', false);
+            }
+        });
+
+        // Inicializar con la primera gráfica
+        if (buttons.length > 0) {
+            buttons[0].click();
+        }
+    </script>
+</body>
+</html>
