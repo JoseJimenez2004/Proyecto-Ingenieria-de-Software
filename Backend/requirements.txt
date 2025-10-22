@@ -1,0 +1,70 @@
+Flask==2.3.3
+Flask-SQLAlchemy==3.0.5
+Flask-Migrate==4.0.5
+Flask-CORS==4.0.0
+psycopg2-binary==2.9.7
+bcrypt==4.0.1
+python-dotenv==1.0.0
+
+# En la carpeta Backend
+flask db init
+flask db migrate -m "Tabla enfermeros"
+flask db upgrade
+
+# Navegar a la carpeta Backend
+cd Backend
+
+# Crear entorno virtual (Windows)
+python -m venv venv
+
+# Activar entorno virtual (Windows)
+venv\Scripts\activate
+
+# O si usas Git Bash/Mingw en Windows:
+source venv/Scripts/activate
+
+# Para Linux/Mac:
+python3 -m venv venv
+source venv/bin/activate
+
+# Instalar todos los requirements
+pip install -r requirements.txt
+
+# O si no tienes el archivo requirements.txt, instalar manualmente:
+pip install Flask==2.3.3
+pip install Flask-SQLAlchemy==3.0.5
+pip install Flask-Migrate==4.0.5
+pip install Flask-CORS==4.0.0
+pip install psycopg2-binary==2.9.7
+pip install bcrypt==4.0.1
+pip install python-dotenv==1.0.0
+
+pip list
+
+# 5. Configurar FLASK_APP
+$env:FLASK_APP = "run.py"
+
+# 6. Inicializar migraciones
+flask db init
+
+# 7. Crear migración
+flask db migrate -m "Initial migration"
+
+# 8. Aplicar migración
+flask db upgrade
+
+# 9. Ejecutar servidor
+python run.py
+
+
+# Establecer variable de entorno (IMPORTANTE)
+$env:FLASK_APP = "run.py"
+
+# Inicializar migraciones
+flask db init
+
+# Crear migración
+flask db migrate -m "Crear tabla enfermeros"
+
+# Aplicar migración a la base de datos
+flask db upgrade

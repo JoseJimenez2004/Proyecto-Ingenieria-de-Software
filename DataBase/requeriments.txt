@@ -1,0 +1,7 @@
+# Conectar a la base de datos desde PowerShell:
+
+psql -U postgres -d aliviohospital -h localhost
+
+Verificar las tablas actuales:
+
+\dt

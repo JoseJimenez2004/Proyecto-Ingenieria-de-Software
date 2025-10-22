@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlivioHospitalario | Registrar Enfermero</title>
+    <link rel="icon" type="image/x-icon" href="../assets/img/icons/logo2.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600&family=Inter:wght@400&display=swap" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-toggler">
+                <ul class="navbar-nav d-flex justify-content-center align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="registro-enfermero.html">Registro Enfermero</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../curso-capacitacion.html">Curso Capacitación</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../crear-rol.html">Crear Rol</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Formulario Principal -->
+    <div class="form-container">
+        <form id="registroEnfermeroForm">
+            <h2>Registrar Enfermero</h2>
+            
+            <div class="section-divider">I. Datos Personales</div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="nombre">Nombre(s) y Apellidos <span>*</span></label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-field">
+                    <label for="email">Email <span>*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-field">
+                    <label for="fechaNacimiento">Fecha de Nacimiento <span>*</span></label>
+                    <input type="date" id="fechaNacimiento" name="fecha_nacimiento" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="curp">CURP / RFC <span>*</span></label>
+                    <input type="text" id="curp" name="curp" required>
+                </div>
+                <div class="form-field">
+                    <label for="telCelular">Tel. Celular <span>*</span></label>
+                    <input type="text" id="telCelular" name="telefono" required>
+                </div>
+                <div class="form-field">
+                    <label for="cedula">Cédula Profesional <span>*</span></label>
+                    <input type="text" id="cedula" name="cedula_profesional" required>
+                </div>
+            </div>
+
+            <div class="form-row form-field-full">
+                <label for="direccion">Dirección de Residencia <span>*</span></label>
+                <input type="text" id="direccion" name="direccion" placeholder="Calle, Número, Colonia, Municipio, Código Postal" required>
+            </div>
+
+            <div class="section-divider">II. Datos profesionales y de contacto</div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="puesto">Puesto Asignado <span>*</span></label>
+                    <select id="puesto" name="puesto" required>
+                        <option value="">Seleccione el puesto</option>
+                        <option value="base">Enfermero/a Base</option>
+                        <option value="especialista">Enfermero/a Especialista</option>
+                        <option value="jefatura">Jefatura de Piso</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="especialidad">Especialidad (si aplica)</label>
+                    <input type="text" id="especialidad" name="especialidad">
+                </div>
+                <div class="form-field">
+                    <label for="fechaContrato">Fecha de Contratación <span>*</span></label>
+                    <input type="date" id="fechaContrato" name="fecha_contratacion" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="rotacion">Tipo de Rotación <span>*</span></label>
+                    <select id="rotacion" name="tipo_rotacion" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="fijo">Asignado a Área Específica</option>
+                        <option value="variable">Rotación a Diferentes Áreas</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label for="supervisor">Supervisor Directo <span>*</span></label>
+                    <input type="text" id="supervisor" name="supervisor" value="Coordinador General de Enfermería" readonly>
+                </div>
+            </div>
+
+            <div class="section-divider">III. Datos del sistema y acceso</div>
+
+            <div class="form-row">
+                <div class="form-field">
+                    <label for="usuario">Nombre de Usuario <span>*</span></label>
+                    <input type="text" id="usuario" name="usuario" required>
+                </div>
+                <div class="form-field">
+                    <label for="contrasena">Contraseña Inicial <span>*</span></label>
+                    <input type="password" id="contrasena" name="contrasena" required>
+                </div>
+                <div class="form-field">
+                    <label for="rolAcceso">Rol de Acceso al Sistema <span>*</span></label>
+                    <select id="rolAcceso" name="rol_acceso" required>
+                        <option value="base">Enfermero Base</option>
+                        <option value="jefatura">Jefatura/Líder</option>
+                        <option value="coordinador">Coordinador</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-field-full checkbox-group">
+                <label>Áreas de Acceso Permitidas:</label>
+                <label><input type="checkbox" name="areas_acceso" value="urgencias"> Urgencias</label>
+                <label><input type="checkbox" name="areas_acceso" value="uti"> Terapia Intensiva</label>
+                <label><input type="checkbox" name="areas_acceso" value="pediatria"> Hospitalización Pediátrica</label>
+                <label><input type="checkbox" name="areas_acceso" value="ginecologia"> Hospitalización Ginecología</label>
+            </div>
+
+            <div class="section-divider">IV. Notas Adicionales</div>
+
+            <div class="form-row form-field-full">
+                <label for="comentarios">Comentarios Adicionales</label>
+                <textarea id="comentarios" name="comentarios" placeholder="Notas sobre documentación pendiente, historial, etc."></textarea>
+            </div>
+
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" id="aceptoTerminos" required>
+                    Certifico que los datos de registro son correctos <span>*</span>
+                </label>
+            </div>
+
+            <button type="submit">Registrar y Activar Cuenta</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="seccion-oscura d-flex flex-column align-items-center justify-content-center">
+        <img class="footer-logo" src="../assets/img/icons/logo2.png" alt="Logo AlivioHospital">
+        <p class="footer-texto text-center">
+            Proveer atención médica hospitalaria de Alta Especialidad<br>
+            con un enfoque integral que prioriza el alivio del sufrimiento<br>
+            y la preservación de la vida
+        </p>
+        <div class="derechos-de-autor">AlivioHospital (2025) &#169;</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/Frontend/src/js/components/forms.js"></script>
+    <script src="/Frontend/src/js/pages/registro-enfermero.js"></script>
+</body>
+</html>
