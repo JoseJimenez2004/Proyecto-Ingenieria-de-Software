@@ -9,10 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
- 
 </head>
 <body>
-       <!-- Header Profesional -->
+    <!-- Header Profesional -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -33,7 +32,8 @@
             </div>
         </div>
     </header>
-      <!-- Navegación Principal -->
+
+    <!-- Navegación Principal -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
@@ -70,6 +70,7 @@
             </ul>
         </div>
     </nav>
+
     <!-- Breadcrumb -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
@@ -82,6 +83,7 @@
             </nav>
         </div>
     </div>
+
     <!-- Contenido Principal -->
     <main class="main-content">
         <div class="container-fluid">
@@ -103,54 +105,238 @@
                 </div>
             </div>
 
-    <div class="form-container">
-        <form id="registroEnfermeroForm">
-            <h2>Registrar Enfermero</h2>
-            
-            <div class="section-divider">I. Datos Personales</div>
-            <div class="form-row">
-                <div class="form-field"><label>Nombre <span>*</span><input type="text" name="nombre" required></div>
-                <div class="form-field"><label>Email <span>*</span><input type="email" name="email" required></div>
-                <div class="form-field"><label>Fecha Nacimiento <span>*</span><input type="date" name="fecha_nacimiento" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-field"><label>CURP <span>*</span><input type="text" name="curp" required></div>
-                <div class="form-field"><label>Teléfono <span>*</span><input type="text" name="telefono" required></div>
-                <div class="form-field"><label>Cédula <span>*</span><input type="text" name="cedula_profesional" required></div>
-            </div>
-            <div class="form-field"><label>Dirección <span>*</span><input type="text" name="direccion" required></div>
+            <!-- Formulario Mejorado -->
+            <div class="form-container">
+                <form id="registroEnfermeroForm">
+                    <!-- Sección 1: Datos Personales -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="bi bi-person-vcard"></i>
+                            <h3>I. Datos Personales</h3>
+                            <span class="section-badge">Requerido</span>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="nombre">
+                                    <i class="bi bi-person"></i>
+                                    Nombre(s) y Apellidos <span>*</span>
+                                </label>
+                                <input type="text" id="nombre" name="nombre" required placeholder="Ej: María García López">
+                                <div class="field-hint">Nombre completo como aparece en documentos oficiales</div>
+                            </div>
+                            <div class="form-field">
+                                <label for="email">
+                                    <i class="bi bi-envelope"></i>
+                                    Email Institucional <span>*</span>
+                                </label>
+                                <input type="email" id="email" name="email" required placeholder="ejemplo@aliviohospital.com">
+                            </div>
+                            <div class="form-field">
+                                <label for="fechaNacimiento">
+                                    <i class="bi bi-calendar3"></i>
+                                    Fecha de Nacimiento <span>*</span>
+                                </label>
+                                <input type="date" id="fechaNacimiento" name="fecha_nacimiento" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="curp">
+                                    <i class="bi bi-file-text"></i>
+                                    CURP <span>*</span>
+                                </label>
+                                <input type="text" id="curp" name="curp" required placeholder="Ej: GAML850820MDFRPR02" class="uppercase-input">
+                            </div>
+                            <div class="form-field">
+                                <label for="telCelular">
+                                    <i class="bi bi-phone"></i>
+                                    Tel. Celular <span>*</span>
+                                </label>
+                                <input type="text" id="telCelular" name="telefono" required placeholder="55 1234 5678">
+                            </div>
+                            <div class="form-field">
+                                <label for="cedula">
+                                    <i class="bi bi-award"></i>
+                                    Cédula Profesional <span>*</span>
+                                </label>
+                                <input type="text" id="cedula" name="cedula_profesional" required placeholder="Ej: 1234567">
+                            </div>
+                        </div>
 
-            <div class="section-divider">II. Datos Profesionales</div>
-            <div class="form-row">
-                <div class="form-field">
-                    <label>Puesto <span>*</span>
-                    <select name="puesto" required>
-                        <option value="base">Enfermero Base</option>
-                        <option value="especialista">Especialista</option>
-                        <option value="jefatura">Jefatura</option>
-                    </select>
-                </div>
-                <div class="form-field"><label>Especialidad<input type="text" name="especialidad"></div>
-                <div class="form-field"><label>Fecha Contrato <span>*</span><input type="date" name="fecha_contratacion" required></div>
-            </div>
+                        <div class="form-field-full">
+                            <label for="direccion">
+                                <i class="bi bi-geo-alt"></i>
+                                Dirección de Residencia <span>*</span>
+                            </label>
+                            <input type="text" id="direccion" name="direccion" placeholder="Calle, Número, Colonia, Municipio, Código Postal" required>
+                        </div>
+                    </div>
 
-            <div class="section-divider">III. Datos del Sistema</div>
-            <div class="form-row">
-                <div class="form-field"><label>Usuario <span>*</span><input type="text" name="usuario" required></div>
-                <div class="form-field"><label>Contraseña <span>*</span><input type="password" name="contrasena" required></div>
-                <div class="form-field">
-                    <label>Rol <span>*</span>
-                    <select name="rol_acceso" required>
-                        <option value="base">Base</option>
-                        <option value="jefatura">Jefatura</option>
-                    </select>
-                </div>
-            </div>
+                    <!-- Sección 2: Datos Profesionales -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="bi bi-briefcase"></i>
+                            <h3>II. Datos Profesionales</h3>
+                            <span class="section-badge">Requerido</span>
+                        </div>
 
-            <button type="submit">Registrar Enfermero</button>
-        </form>
-    </div>
-      <!-- Footer -->
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="puesto">
+                                    <i class="bi bi-person-badge"></i>
+                                    Puesto Asignado <span>*</span>
+                                </label>
+                                <select id="puesto" name="puesto" required>
+                                    <option value="">Seleccione el puesto</option>
+                                    <option value="base">Enfermero/a Base</option>
+                                    <option value="especialista">Enfermero/a Especialista</option>
+                                    <option value="jefatura">Jefatura de Piso</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="especialidad">
+                                    <i class="bi bi-star"></i>
+                                    Especialidad (si aplica)
+                                </label>
+                                <input type="text" id="especialidad" name="especialidad" placeholder="Ej: Pediatría, UCI, etc.">
+                            </div>
+                            <div class="form-field">
+                                <label for="fechaContrato">
+                                    <i class="bi bi-calendar-check"></i>
+                                    Fecha de Contratación <span>*</span>
+                                </label>
+                                <input type="date" id="fechaContrato" name="fecha_contratacion" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="rotacion">
+                                    <i class="bi bi-arrow-repeat"></i>
+                                    Tipo de Rotación <span>*</span>
+                                </label>
+                                <select id="rotacion" name="tipo_rotacion" required>
+                                    <option value="">Seleccione una opción</option>
+                                    <option value="fijo">Asignado a Área Específica</option>
+                                    <option value="variable">Rotación a Diferentes Áreas</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="supervisor">
+                                    <i class="bi bi-person-gear"></i>
+                                    Supervisor Directo <span>*</span>
+                                </label>
+                                <input type="text" id="supervisor" name="supervisor" value="Coordinador General de Enfermería" readonly class="readonly-field">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección 3: Datos del Sistema -->
+                    <div class="form-section">
+                        <div class="section-header">
+                            <i class="bi bi-lock"></i>
+                            <h3>III. Datos del Sistema</h3>
+                            <span class="section-badge">Requerido</span>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="usuario">
+                                    <i class="bi bi-person-circle"></i>
+                                    Nombre de Usuario <span>*</span>
+                                </label>
+                                <input type="text" id="usuario" name="usuario" required placeholder="Ej: mgarcia">
+                                <div class="field-hint">Mínimo 4 caracteres, sin espacios</div>
+                            </div>
+                            <div class="form-field">
+                                <label for="contrasena">
+                                    <i class="bi bi-key"></i>
+                                    Contraseña Inicial <span>*</span>
+                                </label>
+                                <div class="password-container">
+                                    <input type="password" id="contrasena" name="contrasena" required>
+                                    <button type="button" class="btn-toggle-password" onclick="togglePassword()">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="field-hint">Mínimo 8 caracteres, incluir números y letras</div>
+                            </div>
+                            <div class="form-field">
+                                <label for="rolAcceso">
+                                    <i class="bi bi-shield-check"></i>
+                                    Rol de Acceso <span>*</span>
+                                </label>
+                                <select id="rolAcceso" name="rol_acceso" required>
+                                    <option value="base">Enfermero Base</option>
+                                    <option value="jefatura">Jefatura/Líder</option>
+                                    <option value="coordinador">Coordinador</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-field-full">
+                            <label class="checkbox-group-label">
+                                <i class="bi bi-building"></i>
+                                Áreas de Acceso Permitidas:
+                            </label>
+                            <div class="checkbox-grid">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="areas_acceso" value="urgencias">
+                                    <span class="checkmark"></span>
+                                    <i class="bi bi-ambulance"></i>
+                                    Urgencias
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="areas_acceso" value="uti">
+                                    <span class="checkmark"></span>
+                                    <i class="bi bi-heart-pulse"></i>
+                                    Terapia Intensiva
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="areas_acceso" value="pediatria">
+                                    <span class="checkmark"></span>
+                                    <i class="bi bi-balloon"></i>
+                                    Hospitalización Pediátrica
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" name="areas_acceso" value="ginecologia">
+                                    <span class="checkmark"></span>
+                                    <i class="bi bi-gender-female"></i>
+                                    Hospitalización Ginecología
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Términos y Condiciones -->
+                    <div class="terms-section">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="aceptoTerminos" required>
+                            <label class="form-check-label" for="aceptoTerminos">
+                                Certifico que los datos proporcionados son verídicos y completos, y autorizo el tratamiento de esta información para fines hospitalarios según la normativa vigente. <span>*</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Acciones del Formulario -->
+                    <div class="form-actions-footer">
+                        <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
+                            <i class="bi bi-arrow-clockwise"></i>
+                            Limpiar Formulario
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-person-check"></i>
+                            Registrar y Activar Cuenta
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">
@@ -185,37 +371,68 @@
         </div>
     </footer>
 
-   
-
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Función para mostrar/ocultar contraseña
+        function togglePassword() {
+            const passwordInput = document.getElementById('contrasena');
+            const toggleButton = document.querySelector('.btn-toggle-password i');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.classList.remove('bi-eye');
+                toggleButton.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.classList.remove('bi-eye-slash');
+                toggleButton.classList.add('bi-eye');
+            }
+        }
+
+        // Función para limpiar formulario
+        function limpiarFormulario() {
+            const formulario = document.getElementById('registroEnfermeroForm');
+            formulario.reset();
+            alert('Formulario limpiado correctamente');
+        }
+
+        // Manejo del formulario - MANTENIENDO LA ESTRUCTURA QUE FUNCIONA
         document.getElementById('registroEnfermeroForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const formData = new FormData(this);
+            
+            // Obtener áreas de acceso seleccionadas
+            const areasAcceso = [];
+            document.querySelectorAll('input[name="areas_acceso"]:checked').forEach(checkbox => {
+                areasAcceso.push(checkbox.value);
+            });
+
+            // ESTRUCTURA DE DATOS QUE SABEMOS QUE FUNCIONA
             const datos = {
                 datos_personales: {
-                    nombre: formData.get('nombre'),
-                    email: formData.get('email'),
-                    fecha_nacimiento: formData.get('fecha_nacimiento'),
-                    curp: formData.get('curp'),
-                    telefono: formData.get('telefono'),
-                    cedula_profesional: formData.get('cedula_profesional'),
-                    direccion: formData.get('direccion')
+                    nombre: document.getElementById('nombre').value,
+                    email: document.getElementById('email').value,
+                    fecha_nacimiento: document.getElementById('fechaNacimiento').value,
+                    curp: document.getElementById('curp').value,
+                    telefono: document.getElementById('telCelular').value,
+                    cedula_profesional: document.getElementById('cedula').value,
+                    direccion: document.getElementById('direccion').value
                 },
                 datos_profesionales: {
-                    puesto: formData.get('puesto'),
-                    especialidad: formData.get('especialidad'),
-                    fecha_contratacion: formData.get('fecha_contratacion'),
-                    tipo_rotacion: 'fijo',
-                    supervisor: 'Coordinador General de Enfermería'
+                    puesto: document.getElementById('puesto').value,
+                    especialidad: document.getElementById('especialidad').value,
+                    fecha_contratacion: document.getElementById('fechaContrato').value,
+                    tipo_rotacion: document.getElementById('rotacion').value,
+                    supervisor: document.getElementById('supervisor').value
                 },
                 datos_sistema: {
-                    usuario: formData.get('usuario'),
-                    contrasena: formData.get('contrasena'),
-                    rol_acceso: formData.get('rol_acceso'),
-                    areas_acceso: ['urgencias']
+                    usuario: document.getElementById('usuario').value,
+                    contrasena: document.getElementById('contrasena').value,
+                    rol_acceso: document.getElementById('rolAcceso').value,
+                    areas_acceso: areasAcceso.length > 0 ? areasAcceso : ['urgencias'] // Default si no se selecciona nada
                 }
             };
+
+            console.log('📤 Datos a enviar:', datos); // Para debug
 
             try {
                 const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
@@ -223,7 +440,9 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(datos)
                 });
+                
                 const result = await response.json();
+                
                 if (response.ok) {
                     alert('✅ Enfermero registrado exitosamente!');
                     this.reset();
@@ -233,6 +452,11 @@
             } catch (error) {
                 alert('❌ Error de conexión: ' + error.message);
             }
+        });
+
+        // Auto-formato para CURP (convertir a mayúsculas)
+        document.getElementById('curp').addEventListener('input', function(e) {
+            this.value = this.value.toUpperCase();
         });
     </script>
 </body>
