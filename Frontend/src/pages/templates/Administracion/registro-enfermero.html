@@ -3,23 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Enfermero - AlivioHospital</title>
+    <title>Registro de Enfermero - AlivioHospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Estilos básicos incluidos directamente */
-        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; padding: 20px; }
-        .form-container { max-width: 900px; margin: 30px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        h2 { color: #003366; margin-bottom: 30px; text-align: center; }
-        .form-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px; }
-        .form-field { flex: 1 1 250px; }
-        label { display: block; margin-bottom: 5px; font-weight: 500; }
-        label span { color: #CC3333; }
-        input, select, textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
-        button { background-color: #3CB371; color: white; padding: 12px; border: none; border-radius: 4px; width: 100%; margin-top: 15px; }
-        .section-divider { margin: 30px 0 20px; border-bottom: 1px solid #ddd; padding-bottom: 5px; color: #003366; font-weight: 600; }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+ 
 </head>
 <body>
+       <!-- Header Profesional -->
+    <header class="hospital-header">
+        <div class="container-fluid">
+            <div class="header-content">
+                <div class="hospital-brand">
+                    <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="hospital-logo">
+                    <div class="hospital-name">
+                        <h1>AlivioHospital</h1>
+                        <p>Cuidado Humano, Ciencia de Vanguardia</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <span class="user-welcome">Bienvenido, Administrador</span>
+                    <button class="btn-logout">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+      <!-- Navegación Principal -->
+    <nav class="main-navigation">
+        <div class="container-fluid">
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="registro-enfermero.html" class="nav-link">
+                        <i class="bi bi-person-plus"></i>
+                        Registrar Enfermero
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../curso-capacitacion.html" class="nav-link">
+                        <i class="bi bi-book"></i>
+                        Cursos Capacitación
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../crear-rol.html" class="nav-link">
+                        <i class="bi bi-shield-check"></i>
+                        Gestión de Roles
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../reportes.html" class="nav-link">
+                        <i class="bi bi-graph-up"></i>
+                        Reportes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../dashboard.html" class="nav-link">
+                        <i class="bi bi-speedometer2"></i>
+                        Dashboard
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-container">
+        <div class="container-fluid">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="container-fluid">
+            <!-- Header del Formulario -->
+            <div class="form-header">
+                <div class="form-title-section">
+                    <h2><i class="bi bi-person-plus"></i> Registrar Nuevo Enfermero</h2>
+                    <p class="form-subtitle">Complete la información requerida para el registro del personal de enfermería</p>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-outline-secondary">
+                        <i class="bi bi-download"></i>
+                        Exportar
+                    </button>
+                    <button class="btn btn-outline-primary">
+                        <i class="bi bi-list-ul"></i>
+                        Ver Lista
+                    </button>
+                </div>
+            </div>
+
     <div class="form-container">
         <form id="registroEnfermeroForm">
             <h2>Registrar Enfermero</h2>
@@ -67,6 +150,43 @@
             <button type="submit">Registrar Enfermero</button>
         </form>
     </div>
+      <!-- Footer -->
+    <footer class="hospital-footer">
+        <div class="container-fluid">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="footer-logo">
+                    <div class="footer-info">
+                        <h3>AlivioHospital</h3>
+                        <p>Proveer atención médica hospitalaria de Alta Especialidad con un enfoque integral</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Contacto</h4>
+                        <p><i class="bi bi-telephone"></i> (55) 1234-5678</p>
+                        <p><i class="bi bi-envelope"></i> info@aliviohospital.com</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Horarios</h4>
+                        <p>Administración: 8:00 - 18:00</p>
+                        <p>Urgencias: 24/7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AlivioHospital. Todos los derechos reservados.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+   
+
 
     <script>
         document.getElementById('registroEnfermeroForm').addEventListener('submit', async function(e) {
