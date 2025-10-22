@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Registro Enfermero</title>
+</head>
+<body>
+    <h1>Probando Registro de Enfermero</h1>
+    <button onclick="probarRegistro()">Probar Registro</button>
+    <div id="resultado"></div>
+
+    <script>
+        async function probarRegistro() {
+            const datos = {
+                datos_personales: {
+                    nombre: "Maria Garcia Lopez",
+                    email: "maria.garcia@hospital.com",
+                    fecha_nacimiento: "1985-08-20",
+                    curp: "GALM850820MDFRPR02",
+                    telefono: "5512345678",
+                    cedula_profesional: "ENF789012",
+                    direccion: "Av. Insurgentes 456, CDMX"
+                },
+                datos_profesionales: {
+                    puesto: "base",
+                    especialidad: "Enfermeria General",
+                    fecha_contratacion: "2024-01-15",
+                    tipo_rotacion: "fijo",
+                    supervisor: "Coordinador General de Enfermeria"
+                },
+                datos_sistema: {
+                    usuario: "maria.garcia",
+                    contrasena: "password123",
+                    rol_acceso: "base",
+                    areas_acceso: ["urgencias", "pediatria"]
+                },
+                comentarios: "Enfermera de prueba"
+            };
+
+            try {
+                console.log("📤 Enviando datos:", datos);
+                
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                console.log("📥 Respuesta status:", response.status);
+                const result = await response.json();
+                console.log("📥 Respuesta datos:", result);
+
+                if (response.ok) {
+                    document.getElementById('resultado').innerHTML = 
+                        '✅ ÉXITO: ' + result.mensaje + ' (ID: ' + result.enfermero_id + ')';
+                } else {
+                    document.getElementById('resultado').innerHTML = 
+                        '❌ ERROR: ' + result.error;
+                }
+            } catch (error) {
+                console.error("🔥 Error completo:", error);
+                document.getElementById('resultado').innerHTML = 
+                    '❌ ERROR DE CONEXIÓN: ' + error.message;
+            }
+        }
+
+        // Probar automáticamente al cargar la página
+        probarRegistro();
+    </script>
+</body>
+</html>
