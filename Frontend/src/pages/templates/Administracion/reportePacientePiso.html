@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta charset="utf-8">
+    <meta name="author" content="Ethiel Loo">
+    <meta name="description" content="Pagina Web de ayuda a perros de la calle">
+    <meta name="keywords" content="Ayuda, adopcion, rehabilitacion, donación">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AlivioHospitalario | Seguimiento de Enfermeria</title>
+     <link rel="icon" type="image/x-icon" href="imagenes/logo2.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="reportePacientePiso.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Rubik+Dirt&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+   <!-- Google Fonts -->
+     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Rubik+Dirt&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Spray+Paint&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
+</head>
+<body>
+ <!-- Header Profesional -->
+    <header class="hospital-header">
+        <div class="container-fluid">
+            <div class="header-content">
+                <div class="hospital-brand">
+                    <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="hospital-logo">
+                    <div class="hospital-name">
+                        <h1>AlivioHospital</h1>
+                        <p>Cuidado Humano, Ciencia de Vanguardia</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <span class="user-welcome">Bienvenido, Administrador</span>
+                    <button class="btn-logout">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navegación Principal -->
+    <nav class="main-navigation">
+        <div class="container-fluid">
+            <ul class="nav-menu">
+                <li class="nav-item active">
+                    <a href="registro-enfermero.html" class="nav-link">
+                        <i class="bi bi-person-plus"></i>
+                        Registrar Enfermero
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../curso-capacitacion.html" class="nav-link">
+                        <i class="bi bi-book"></i>
+                        Cursos Capacitación
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../crear-rol.html" class="nav-link">
+                        <i class="bi bi-shield-check"></i>
+                        Gestión de Roles
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../reportes.html" class="nav-link">
+                        <i class="bi bi-graph-up"></i>
+                        Reportes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../dashboard.html" class="nav-link">
+                        <i class="bi bi-speedometer2"></i>
+                        Dashboard
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb-container">
+        <div class="container-fluid">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+      
+    </section>
+<div class="app-container">
+    <div class="form-header">
+        <h2 class="main-title">Reporte de Pacientes por Piso</h2>
+    </div>
+
+    <section id="panel-control-reporte" class="contenedor">
+        <Panel class="section-title">Panel de Control y Periodicidad</h3>
+
+        <div class="filtros mb-4 d-flex flex-wrap justify-content-start gap-3">
+            
+            <div class="form-select-group">
+                <label for="fechaInicio">Fecha Inicio</label>
+                <input type="date" id="fechaInicio" class="form-select w-auto">
+            </div>
+            <div class="form-select-group">
+                <label for="fechaFin">Fecha Fin</label>
+                <input type="date" id="fechaFin" class="form-select w-auto">
+            </div>
+
+            <div class="form-select-group">
+                <label for="filtroPeriodicidad">Periodicidad de Agrupación</label>
+                <select id="filtroPeriodicidad" class="form-select w-auto">
+                    <option value="dia">Por Día</option>
+                    <option value="semana">Por Semana</option>
+                    <option value="mes">Por Mes</option>
+                </select>
+            </div>
+
+            <div class="form-select-group">
+                <label for="filtroArea">Filtrar por Área/Piso</label>
+                <select id="filtroArea" class="form-select w-auto">
+                    <option value="todos">Todas las Áreas</option>
+                    <option value="uci">UCI</option>
+                    <option value="urgencias">Urgencias</option>
+                    <option value="piso1_pediatria">Piso 1 (Pediatría)</option>
+                    <option value="piso2_ginecologia">Piso 2 (Ginecología)</option>
+                </select>
+            </div>
+
+            <div class="form-select-group">
+                <label for="filtroFlujo">Flujo de Paciente</label>
+                <select id="filtroFlujo" class="form-select w-auto">
+                    <option value="todos">Todos los Flujos</option>
+                    <option value="ingreso">Solo Ingresados</option>
+                    <option value="egreso">Solo Egresados</option>
+                </select>
+            </div>
+
+            <div class="form-select-group action-buttons">
+                <button id="generarReporte" class="btn btn-salud">Generar Reporte</button>
+                <button id="limpiarFiltros" class="btn btn-principal">Limpiar Filtros</button>
+            </div>
+        </div>
+    </section>
+    
+    <section class="form-section">
+        <h3 class="section-title">Indicadores Clave de Gestión</h3>
+        <div class="resumen-grid">
+            <div class="resumen-card bg-confianza">
+                <h4>Total Pacientes Atendidos</h4>
+                <p id="totalAtendidos">-</p>
+            </div>
+            <div class="resumen-card bg-salud">
+                <h4>Ocupación Promedio (%)</h4>
+                <p id="ocupacionPromedio">-</p>
+            </div>
+            <div class="resumen-card bg-humano">
+                <h4>Días Estancia Promedio</h4>
+                <p id="depPromedio">-</p>
+            </div>
+            <div class="resumen-card bg-alerta">
+                <h4>Alerta RR.HH.</h4>
+                <p id="alertaRrhh">Esperando datos</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="form-section">
+        <h3 class="section-title">Detalle y Tendencia</h3>
+        
+        <div id="graficosContainer" class="mb-4">
+            <div class="chart-container">
+                <h4>Gráfico de Tendencia de Ocupación</h4>
+                <canvas id="ocupacionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="table table-striped table-bordered">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>Período</th>
+                        <th>Total Ingresos</th>
+                        <th>Ocupación (%)</th>
+                        <th>DEP (Días)</th>
+                        <th>Relación Enf./Pct.</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaResultadosBody">
+                    <tr>
+                        <td colspan="5" class="text-center">Aplique filtros y presione "Generar Reporte".</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="form-actions justify-content-end">
+            <button id="exportar" class="btn btn-principal">Exportar a Excel (CSV)</button>
+        </div>
+    </section>
+</div>
+   <!-- Footer -->
+    <footer class="hospital-footer">
+        <div class="container-fluid">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="footer-logo">
+                    <div class="footer-info">
+                        <h3>AlivioHospital</h3>
+                        <p>Proveer atención médica hospitalaria de Alta Especialidad con un enfoque integral</p>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Contacto</h4>
+                        <p><i class="bi bi-telephone"></i> (55) 1234-5678</p>
+                        <p><i class="bi bi-envelope"></i> info@aliviohospital.com</p>
+                    </div>
+                    <div class="footer-section">
+                        <h4>Horarios</h4>
+                        <p>Administración: 8:00 - 18:00</p>
+                        <p>Urgencias: 24/7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AlivioHospital. Todos los derechos reservados.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="bi bi-facebook"></i></a>
+                    <a href="#"><i class="bi bi-twitter"></i></a>
+                    <a href="#"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+<script src="data_reportePacientePiso.js"></script>
+<script src="reportePacientePiso.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
