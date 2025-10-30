@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Enfermero - AlivioHospital</title>
+    <title>Reporte Diario de Eventos - AlivioHospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet"> <!--PLANTILLA GLOBAL-->
+    <link href="/Frontend/src/css/pages/reporte-diario-eventos-piso.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Profesional -->
+
+    <!-- ===== HEADER ===== -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -23,7 +25,7 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <span class="user-welcome">Bienvenido, Administrador</span>
+                    <span class="user-welcome">Bienvenido, Jefe de Piso</span>
                     <button class="btn-logout">
                         <i class="bi bi-box-arrow-right"></i>
                         Cerrar Sesión
@@ -33,59 +35,142 @@
         </div>
     </header>
 
-    <!-- Navegación Principal -->
+    <!-- ===== NAVEGACIÓN ===== -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="registro-enfermero.html" class="nav-link"><i class="bi bi-person-plus"></i> Registrar Enfermero</a>
+                </li>
+                <li class="nav-item">
+                    <a href="asignar-turno.html" class="nav-link"><i class="bi bi-calendar-check"></i> Asignar Turno</a>
+                </li>
+                <li class="nav-item">
+                    <a href="crear-curso.html" class="nav-link"><i class="bi bi-book"></i> Crear Curso</a>
+                </li>
+                <li class="nav-item">
+                    <a href="crear-rol.html" class="nav-link"><i class="bi bi-shield-check"></i> Gestión de Roles</a>
+                </li>
                 <li class="nav-item active">
-                    <a href="registro-enfermero.html" class="nav-link">
-                        <i class="bi bi-person-plus"></i>
-                        Registrar Enfermero
-                    </a>
+                    <a href="reporte-diario.html" class="nav-link"><i class="bi bi-clipboard-data"></i> Reporte Diario</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../curso-capacitacion.html" class="nav-link">
-                        <i class="bi bi-book"></i>
-                        Cursos Capacitación
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../crear-rol.html" class="nav-link">
-                        <i class="bi bi-shield-check"></i>
-                        Gestión de Roles
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../reportes.html" class="nav-link">
-                        <i class="bi bi-graph-up"></i>
-                        Reportes
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../dashboard.html" class="nav-link">
-                        <i class="bi bi-speedometer2"></i>
-                        Dashboard
-                    </a>
+                    <a href="dashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Breadcrumb -->
+    <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
+                    <li class="breadcrumb-item"><a href="dashboard.html">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Reporte Diario</li>
                 </ol>
             </nav>
         </div>
     </div>
 
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="main-content page-reporte-diario">
+        <div class="form-header">
+            <div class="form-title-section">
+                <h2><i class="bi bi-clipboard-plus"></i> Reporte Diario de Eventos del Piso</h2>
+                <p class="form-subtitle">Registra los eventos ocurridos durante el turno en cada piso</p>
+            </div>
+        </div>
 
-    <!-- Footer -->
+        <div class="form-container">
+            <!-- FORMULARIO DE REGISTRO -->
+            <section class="form-section">
+                <div class="section-header">
+                    <i class="bi bi-pencil-square"></i>
+                    <h3>Registrar Reporte</h3>
+                    <span class="section-badge">Nuevo</span>
+                </div>
+
+                <form id="formReporte">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="fecha"><i class="bi bi-calendar-event"></i> Fecha <span>*</span></label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="piso"><i class="bi bi-building"></i> Piso <span>*</span></label>
+                            <select id="piso" name="piso" required>
+                                <option value="" disabled selected>Seleccione piso</option>
+                                <option value="1">Piso 1 - Pediatría</option>
+                                <option value="2">Piso 2 - Ginecología</option>
+                                <option value="3">Piso 3 - Cirugía</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="ingresos"><i class="bi bi-door-open"></i> Ingresos</label>
+                            <input type="number" id="ingresos" name="ingresos" min="0" placeholder="Número de ingresos del día">
+                        </div>
+
+                        <div class="form-field">
+                            <label for="egresos"><i class="bi bi-door-closed"></i> Egresos</label>
+                            <input type="number" id="egresos" name="egresos" min="0" placeholder="Número de egresos del día">
+                        </div>
+                    </div>
+
+                    <div class="form-field form-field-full">
+                        <label for="incidencias"><i class="bi bi-exclamation-triangle"></i> Incidencias</label>
+                        <textarea id="incidencias" name="incidencias" rows="2" placeholder="Incidentes relevantes del día"></textarea>
+                    </div>
+
+                    <div class="form-field form-field-full">
+                        <label for="observaciones"><i class="bi bi-chat-text"></i> Observaciones</label>
+                        <textarea id="observaciones" name="observaciones" rows="2" placeholder="Comentarios adicionales"></textarea>
+                    </div>
+
+                    <div class="form-actions-footer">
+                        <button type="reset" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Registrar Reporte</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- TABLA DE REPORTES -->
+            <section class="form-section">
+                <div class="section-header">
+                    <i class="bi bi-list-ul"></i>
+                    <h3>Reportes Registrados</h3>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Fecha</th>
+                                <th>Piso</th>
+                                <th>Ingresos</th>
+                                <th>Egresos</th>
+                                <th>Incidencias</th>
+                                <th>Observaciones</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaReportes">
+                            <tr>
+                            
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">
@@ -121,6 +206,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+    <script src="/Frontend/src/js/pages/reporte-diario-eventos-piso.js"></script>
 </body>
 </html>

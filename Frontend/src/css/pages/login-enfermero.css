@@ -1,0 +1,54 @@
+/*  Estilos Login Enfermero  */
+
+body.login-body {
+    background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.hospital-header img {
+    height: 90px;
+}
+
+.hospital-name {
+    font-family: 'BBH Sans Hegarty', sans-serif;
+    color: #004aad;
+}
+
+.hospital-slogan {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.login-container {
+    min-height: 75vh;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid #e0e0e0;
+    transition: transform 0.2s ease;
+}
+
+.login-card:hover {
+    transform: translateY(-4px);
+}
+
+.btn-primary {
+    background-color: #004aad;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #003580;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+}
+
+#alertContainer {
+    font-size: 0.95rem;
+}

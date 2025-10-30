@@ -1,0 +1,23 @@
+/* Estilos específicos para Reporte Diario */
+.page-reporte-diario .form-title-section h2 i {
+    color: var(--primary-color);
+}
+
+.page-reporte-diario .section-header i {
+    color: var(--primary-color);
+}
+
+.page-reporte-diario .table thead {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--white);
+}
+
+.page-reporte-diario .btn-outline-danger {
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+.page-reporte-diario .btn-outline-danger:hover {
+    background: var(--error-color);
+    color: var(--white);
+}
