@@ -1,0 +1,33 @@
+/* Estilos específicos para la vista Asignar Turno
+   Mantiene el esquema de la plantilla global y solo ajusta detalles locales */
+
+.page-asignar-turno .form-title-section h2 i {
+    color: var(--primary-color);
+}
+
+.page-asignar-turno .form-subtitle {
+    color: var(--text-light);
+}
+
+.page-asignar-turno .section-header i {
+    color: var(--primary-color);
+}
+
+.page-asignar-turno .table thead {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--white);
+}
+
+.page-asignar-turno .table thead th {
+    border: none;
+}
+
+.page-asignar-turno .btn-outline-danger {
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+.page-asignar-turno .btn-outline-danger:hover {
+    background: var(--error-color);
+    color: var(--white);
+}

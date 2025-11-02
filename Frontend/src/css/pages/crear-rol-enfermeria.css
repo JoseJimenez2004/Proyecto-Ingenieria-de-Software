@@ -1,0 +1,41 @@
+/* Estilos específicos para la vista Crear o Modificar Rol */
+.page-crear-rol .form-title-section h2 i {
+    color: var(--primary-color);
+}
+
+.page-crear-rol .form-subtitle {
+    color: var(--text-light);
+}
+
+.page-crear-rol .section-header i {
+    color: var(--primary-color);
+}
+
+.page-crear-rol .table thead {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--white);
+}
+
+.page-crear-rol .table th {
+    border: none;
+}
+
+.page-crear-rol .btn-outline-danger {
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+.page-crear-rol .btn-outline-danger:hover {
+    background: var(--error-color);
+    color: var(--white);
+}
+
+.page-crear-rol .btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.page-crear-rol .btn-outline-primary:hover {
+    background: var(--primary-color);
+    color: var(--white);
+}

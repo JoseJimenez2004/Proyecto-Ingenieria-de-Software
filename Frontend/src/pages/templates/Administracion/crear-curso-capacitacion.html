@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Enfermero - AlivioHospital</title>
+    <title>Crear Curso de Capacitación - AlivioHospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet"> <!--PLANTILLA GLOBAL-->
+    <link href="/Frontend/src/css/pages/crear-curso.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Profesional -->
+
+    <!--  HEADER  -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -33,59 +35,138 @@
         </div>
     </header>
 
-    <!-- Navegación Principal -->
+    <!-- ===== NAVBAR ===== -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="registro-enfermero.html" class="nav-link"><i class="bi bi-person-plus"></i> Registrar Enfermero</a>
+                </li>
+                <li class="nav-item">
+                    <a href="asignar-turno.html" class="nav-link"><i class="bi bi-calendar-check"></i> Asignar Turno</a>
+                </li>
                 <li class="nav-item active">
-                    <a href="registro-enfermero.html" class="nav-link">
-                        <i class="bi bi-person-plus"></i>
-                        Registrar Enfermero
-                    </a>
+                    <a href="crear-curso.html" class="nav-link"><i class="bi bi-book"></i> Crear Curso</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../curso-capacitacion.html" class="nav-link">
-                        <i class="bi bi-book"></i>
-                        Cursos Capacitación
-                    </a>
+                    <a href="crear-rol.html" class="nav-link"><i class="bi bi-shield-check"></i> Gestión de Roles</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../crear-rol.html" class="nav-link">
-                        <i class="bi bi-shield-check"></i>
-                        Gestión de Roles
-                    </a>
+                    <a href="reportes.html" class="nav-link"><i class="bi bi-graph-up"></i> Reportes</a>
                 </li>
                 <li class="nav-item">
-                    <a href="../reportes.html" class="nav-link">
-                        <i class="bi bi-graph-up"></i>
-                        Reportes
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../dashboard.html" class="nav-link">
-                        <i class="bi bi-speedometer2"></i>
-                        Dashboard
-                    </a>
+                    <a href="dashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Breadcrumb -->
+    <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
+                    <li class="breadcrumb-item"><a href="dashboard.html">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Crear Curso</li>
                 </ol>
             </nav>
         </div>
     </div>
 
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="main-content page-crear-curso">
+        <div class="form-header">
+            <div class="form-title-section">
+                <h2><i class="bi bi-journal-plus"></i> Crear Curso de Capacitación</h2>
+                <p class="form-subtitle">Registra un nuevo curso para el personal de enfermería</p>
+            </div>
+        </div>
 
-    <!-- Footer -->
+        <div class="form-container">
+            <section class="form-section">
+                <div class="section-header">
+                    <i class="bi bi-pencil-square"></i>
+                    <h3>Datos del Curso</h3>
+                    <span class="section-badge">Curso</span>
+                </div>
+
+                <form id="formCurso">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="nombreCurso"><i class="bi bi-bookmark"></i> Nombre del Curso <span>*</span></label>
+                            <input type="text" id="nombreCurso" name="nombreCurso" placeholder="Ej. Actualización en cuidados intensivos" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="instructor"><i class="bi bi-person-badge"></i> Instructor <span>*</span></label>
+                            <input type="text" id="instructor" name="instructor" placeholder="Nombre del instructor" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="modalidad"><i class="bi bi-laptop"></i> Modalidad <span>*</span></label>
+                            <select id="modalidad" name="modalidad" required>
+                                <option value="" disabled selected>Seleccione modalidad</option>
+                                <option value="presencial">Presencial</option>
+                                <option value="virtual">Virtual</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="fechaInicio"><i class="bi bi-calendar-event"></i> Fecha de Inicio <span>*</span></label>
+                            <input type="date" id="fechaInicio" name="fechaInicio" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="fechaFin"><i class="bi bi-calendar2-check"></i> Fecha de Fin <span>*</span></label>
+                            <input type="date" id="fechaFin" name="fechaFin" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field form-field-full">
+                        <label for="descripcion"><i class="bi bi-card-text"></i> Descripción</label>
+                        <textarea id="descripcion" name="descripcion" rows="3" placeholder="Breve descripción del curso"></textarea>
+                    </div>
+
+                    <div class="form-actions-footer">
+                        <button type="reset" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Limpiar</button>
+                        <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Guardar Curso</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- LISTA DE CURSOS (SIMULADA) -->
+            <section class="form-section">
+                <div class="section-header">
+                    <i class="bi bi-list-task"></i>
+                    <h3>Cursos Registrados</h3>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Curso</th>
+                                <th>Instructor</th>
+                                <th>Modalidad</th>
+                                <th>Fechas</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaCursos">
+                            <tr>
+                               
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">
@@ -121,6 +202,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+    <script src="/Frontend/src/js/pages/crear-curso.js"></script>
 </body>
 </html>

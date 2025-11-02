@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Enfermero - AlivioHospital</title>
+    <title>Crear o Modificar Rol de Enfermería - AlivioHospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet"> <!--PLANTILLA GLOBAL-->
+    <link href="/Frontend/src/css/pages/crear-rol-enfermeria.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Profesional -->
+    <!-- ===== HEADER ===== -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -33,59 +34,154 @@
         </div>
     </header>
 
-    <!-- Navegación Principal -->
+    <!-- ===== NAVEGACIÓN PRINCIPAL ===== -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="registro-enfermero.html" class="nav-link">
-                        <i class="bi bi-person-plus"></i>
-                        Registrar Enfermero
+                        <i class="bi bi-person-plus"></i> Registrar Enfermero
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../curso-capacitacion.html" class="nav-link">
-                        <i class="bi bi-book"></i>
-                        Cursos Capacitación
+                    <a href="asignar-turno.html" class="nav-link">
+                        <i class="bi bi-calendar-check"></i> Asignar Turno
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../crear-rol.html" class="nav-link">
-                        <i class="bi bi-shield-check"></i>
-                        Gestión de Roles
+                    <a href="curso-capacitacion.html" class="nav-link">
+                        <i class="bi bi-book"></i> Cursos Capacitación
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="crear-rol-enfermeria.html" class="nav-link">
+                        <i class="bi bi-shield-check"></i> Gestión de Roles
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../reportes.html" class="nav-link">
-                        <i class="bi bi-graph-up"></i>
-                        Reportes
+                    <a href="reportes.html" class="nav-link">
+                        <i class="bi bi-graph-up"></i> Reportes
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../dashboard.html" class="nav-link">
-                        <i class="bi bi-speedometer2"></i>
-                        Dashboard
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="bi bi-speedometer2"></i> Dashboard
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Breadcrumb -->
+    <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
+                    <li class="breadcrumb-item"><a href="dashboard.html">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Gestión de Roles</li>
                 </ol>
             </nav>
         </div>
     </div>
 
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
+    <main class="main-content page-crear-rol">
+        <div class="form-header">
+            <div class="form-title-section">
+                <h2><i class="bi bi-shield-plus"></i> Crear o Modificar Rol de Enfermería</h2>
+                <p class="form-subtitle">Define los roles y permisos del personal de enfermería</p>
+            </div>
+        </div>
 
-    <!-- Footer -->
+        <div class="form-container">
+            <!-- FORMULARIO -->
+            <section class="form-section">
+                <div class="section-header">
+                    <i class="bi bi-pencil-square"></i>
+                    <h3>Gestión de Rol</h3>
+                    <span class="section-badge">Rol</span>
+                </div>
+
+                <form id="formRol">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="nombreRol"><i class="bi bi-tag"></i> Nombre del Rol <span>*</span></label>
+                            <input type="text" id="nombreRol" name="nombreRol" placeholder="Ej. Enfermero Jefe" required>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="descripcionRol"><i class="bi bi-card-text"></i> Descripción</label>
+                            <textarea id="descripcionRol" name="descripcionRol" rows="2" placeholder="Breve descripción del rol"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row form-field-full">
+                        <label><i class="bi bi-key"></i> Permisos Asociados</label>
+                        <div class="checkbox-grid">
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="permisos" value="asignar-turno">
+                                <span class="checkmark"></span>
+                                <i class="bi bi-calendar-check"></i> Asignar Turno
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="permisos" value="ver-pacientes">
+                                <span class="checkmark"></span>
+                                <i class="bi bi-hospital"></i> Ver Pacientes
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="permisos" value="inventario">
+                                <span class="checkmark"></span>
+                                <i class="bi bi-box-seam"></i> Gestión de Inventario
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" name="permisos" value="reportes">
+                                <span class="checkmark"></span>
+                                <i class="bi bi-graph-up"></i> Acceso a Reportes
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions-footer">
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="bi bi-x-circle"></i> Limpiar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-circle"></i> Guardar Rol
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- TABLA DE ROLES EXISTENTES -->
+            <section class="form-section">
+                <div class="section-header">
+                    <i class="bi bi-list-task"></i>
+                    <h3>Roles Registrados</h3>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Rol</th>
+                                <th>Descripción</th>
+                                <th>Permisos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tablaRoles">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">
@@ -121,6 +217,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+    <script src="/Frontend/src/js/pages/crear-rol-enfermeria.js"></script>
 </body>
 </html>
