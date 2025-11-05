@@ -1,0 +1,33 @@
+/*  ESTILOS ESPECÍFICOS: VER ACTIVIDADES  */
+.filter-container {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+}
+
+.filter-container label {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.table-container {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    overflow-x: auto;
+}
+
+.table thead {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--white);
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.text-muted {
+    color: var(--text-light);
+}

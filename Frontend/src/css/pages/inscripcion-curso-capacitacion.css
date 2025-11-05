@@ -1,0 +1,32 @@
+/*  ESTILOS ESPECÍFICOS: INSCRIPCIÓN A CURSO  */
+
+.form-section {
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    margin-bottom: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+.section-header i {
+    font-size: 1.4rem;
+}
+
+#formInscripcionCurso select,
+#formInscripcionCurso input {
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+}
+
+#formInscripcionCurso input:focus,
+#formInscripcionCurso select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 4px rgba(0, 51, 102, 0.3);
+}
+
+#formInscripcionCurso p {
+    color: var(--text-light);
+}
+
+.form-actions-footer button i {
+    font-size: 1rem;
+}
