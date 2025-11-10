@@ -13,7 +13,6 @@
 </head>
 <body>
 
-    <!-- ===== HEADER ==== -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -35,7 +34,6 @@
         </div>
     </header>
 
-    <!-- ===== NAVEGACIÓN PRINCIPAL ===== -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
@@ -73,7 +71,6 @@
         </div>
     </nav>
 
-    <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
@@ -85,9 +82,7 @@
         </div>
     </div>
 
-    <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <main class="main-content page-asignar-turno">
-        <!-- Encabezado del formulario -->
         <div class="form-header">
             <div class="form-title-section">
                 <h2><i class="bi bi-calendar-plus"></i> Asignar Turno a Enfermero</h2>
@@ -95,13 +90,12 @@
             </div>
         </div>
 
-        <!-- Contenedor del formulario -->
         <div class="form-container">
             <section class="form-section">
                 <div class="section-header">
                     <i class="bi bi-person-badge"></i>
                     <h3>Datos del Turno</h3>
-                    <span class="section-badge">Turno</span>
+                    <span class="section-badge">Requerido</span>
                 </div>
 
                 <form id="formAsignarTurno" action="/Backend/asignar_turno.php" method="POST">
@@ -110,10 +104,16 @@
                             <label for="enfermero"><i class="bi bi-person"></i> Enfermero <span>*</span></label>
                             <select id="enfermero" name="enfermero" required>
                                 <option value="" disabled selected>Seleccione un enfermero</option>
-                                <!--ALGUNOS REGISTROS PARA PROBAR EL FUNCIONAMIENTO DEL FORM-->
                                 <option value="1">Lamine Yamal</option>
                                 <option value="2">Esteban Trabajos</option>
                                 <option value="3">Walter Blanco</option>
+                                <option value="4">María González</option>
+                                <option value="5">Ana Rodríguez</option>
+                                <option value="6">Carlos López</option>
+                                <option value="7">Laura Martínez</option>
+                                <option value="8">Javier Pérez</option>
+                                <option value="9">Sofía Hernández</option>
+                                <option value="10">Miguel Sánchez</option>
                             </select>
                         </div>
 
@@ -123,12 +123,20 @@
                                 <option value="" disabled selected>Seleccione turno</option>
                                 <option value="matutino">Matutino (8:00 a.m. - 7:00 p.m.)</option>
                                 <option value="nocturno">Nocturno (7:00 p.m. - 8:00 a.m.)</option>
+                                <option value="vespertino">Vespertino (12:00 p.m. - 8:00 p.m.)</option>
+                                <option value="madrugada">Madrugada (12:00 a.m. - 8:00 a.m.)</option>
+                                <option value="completo">Completo (8:00 a.m. - 8:00 a.m.)</option>
                             </select>
                         </div>
 
                         <div class="form-field">
                             <label for="fecha"><i class="bi bi-calendar"></i> Fecha <span>*</span></label>
-                            <input type="date" id="fecha" name="fecha" required>
+                            <div class="date-input-container">
+                                <input type="text" id="fecha" name="fecha" required readonly placeholder="Seleccione una fecha">
+                                <button type="button" class="btn-calendar" id="btnOpenCalendar">
+                                    <i class="bi bi-calendar3"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -143,26 +151,69 @@
                 </form>
             </section>
 
-            <!-- Sección inferior: lista de turnos -->
             <section class="form-section">
                 <div class="section-header">
                     <i class="bi bi-list-task"></i>
-                    <h3>Turnos Asignados Recientemente</h3>
+                    <h3>Turnos Asignados</h3>
+                    <span class="section-badge" id="totalTurnos">3 turnos</span>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-striped align-middle">
+                    <table class="table table-hover align-middle">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Enfermero</th>
                                 <th>Turno</th>
+                                <th>Horario</th>
                                 <th>Fecha</th>
                                 <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody id="tablaTurnos">
-                            <tr>
+                            <tr class="turno-matutino">
+                                <td>
+                                    <div class="nurse-info">
+                                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=40&h=40&fit=crop&crop=face" alt="Lamine Yamal" class="nurse-avatar">
+                                        <div class="nurse-details">
+                                            <span class="nurse-name">Lamine Yamal</span>
+                                            <span class="nurse-id">ID: ENF001</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge turno-badge matutino">Matutino</span></td>
+                                <td>8:00 a.m. - 7:00 p.m.</td>
+                                <td>15/01/2025</td>
+                                <td><button class="btn btn-sm btn-outline-danger btn-delete"><i class="bi bi-trash"></i></button></td>
+                            </tr>
+                            <tr class="turno-nocturno">
+                                <td>
+                                    <div class="nurse-info">
+                                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=40&h=40&fit=crop&crop=face" alt="María González" class="nurse-avatar">
+                                        <div class="nurse-details">
+                                            <span class="nurse-name">María González</span>
+                                            <span class="nurse-id">ID: ENF004</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge turno-badge nocturno">Nocturno</span></td>
+                                <td>7:00 p.m. - 8:00 a.m.</td>
+                                <td>15/01/2025</td>
+                                <td><button class="btn btn-sm btn-outline-danger btn-delete"><i class="bi bi-trash"></i></button></td>
+                            </tr>
+                            <tr class="turno-vespertino">
+                                <td>
+                                    <div class="nurse-info">
+                                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=40&h=40&fit=crop&crop=face" alt="Carlos López" class="nurse-avatar">
+                                        <div class="nurse-details">
+                                            <span class="nurse-name">Carlos López</span>
+                                            <span class="nurse-id">ID: ENF006</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="badge turno-badge vespertino">Vespertino</span></td>
+                                <td>12:00 p.m. - 8:00 p.m.</td>
+                                <td>16/01/2025</td>
+                                <td><button class="btn btn-sm btn-outline-danger btn-delete"><i class="bi bi-trash"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -171,7 +222,58 @@
         </div>
     </main>
 
-    <!-- ===== FOOTER ==== -->
+    <div id="calendarModal" class="modal-calendar">
+        <div class="modal-calendar-content">
+            <div class="modal-calendar-header">
+                <h5>Seleccionar Fecha</h5>
+                <button class="btn-close-calendar">&times;</button>
+            </div>
+            <div class="modal-calendar-body">
+                <div class="calendar-navigation">
+                    <button class="btn-calendar-nav" id="btnPrevMonth">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <h6 id="currentMonth">Enero 2025</h6>
+                    <button class="btn-calendar-nav" id="btnNextMonth">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-weekday">Dom</div>
+                    <div class="calendar-weekday">Lun</div>
+                    <div class="calendar-weekday">Mar</div>
+                    <div class="calendar-weekday">Mié</div>
+                    <div class="calendar-weekday">Jue</div>
+                    <div class="calendar-weekday">Vie</div>
+                    <div class="calendar-weekday">Sáb</div>
+                    
+                    <div id="calendarDays" class="calendar-days-container">
+                    </div>
+                </div>
+                
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <div class="legend-color available"></div>
+                        <span>Disponible</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color occupied"></div>
+                        <span>Ocupado</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color selected"></div>
+                        <span>Seleccionado</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-calendar-footer">
+                <button type="button" class="btn btn-secondary" id="btnCancelCalendar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmDate">Confirmar Fecha</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">

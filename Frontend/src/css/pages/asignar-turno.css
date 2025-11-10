@@ -1,6 +1,3 @@
-/* Estilos específicos para la vista Asignar Turno
-   Mantiene el esquema de la plantilla global y solo ajusta detalles locales */
-
 .page-asignar-turno .form-title-section h2 i {
     color: var(--primary-color);
 }
@@ -30,4 +27,328 @@
 .page-asignar-turno .btn-outline-danger:hover {
     background: var(--error-color);
     color: var(--white);
+}
+
+.turno-badge {
+    padding: 0.5rem 0.75rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border: none;
+}
+
+.turno-badge.matutino {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.turno-badge.nocturno {
+    background-color: #e8eaf6;
+    color: #303f9f;
+}
+
+.turno-badge.vespertino {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.turno-badge.madrugada {
+    background-color: #e0f2f1;
+    color: #00796b;
+}
+
+.turno-badge.completo {
+    background-color: #fff3e0;
+    color: #ef6c00;
+}
+
+.turno-matutino {
+    border-left: 4px solid #1565c0;
+    background-color: #f8fbff;
+}
+
+.turno-nocturno {
+    border-left: 4px solid #303f9f;
+    background-color: #f8f9ff;
+}
+
+.turno-vespertino {
+    border-left: 4px solid #7b1fa2;
+    background-color: #fdf8ff;
+}
+
+.turno-madrugada {
+    border-left: 4px solid #00796b;
+    background-color: #f8fffe;
+}
+
+.turno-completo {
+    border-left: 4px solid #ef6c00;
+    background-color: #fffaf2;
+}
+
+.nurse-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.nurse-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-color);
+}
+
+.nurse-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.nurse-name {
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.nurse-id {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.date-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.date-input-container input {
+    padding-right: 3rem;
+}
+
+.btn-calendar {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-calendar:hover {
+    background: #f1f5f9;
+}
+
+.modal-calendar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-calendar-content {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    width: 90%;
+    max-width: 400px;
+    overflow: hidden;
+}
+
+.modal-calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--border-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: var(--white);
+}
+
+.modal-calendar-header h5 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.btn-close-calendar {
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.btn-close-calendar:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.modal-calendar-body {
+    padding: 1.5rem;
+}
+
+.calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-navigation h6 {
+    margin: 0;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.btn-calendar-nav {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    padding: 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn-calendar-nav:hover {
+    background: #f1f5f9;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-light);
+    padding: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.calendar-days-container {
+    display: contents;
+}
+
+.calendar-day {
+    padding: 0.75rem;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    border: 2px solid transparent;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 0.9rem;
+}
+
+.calendar-day:hover {
+    background-color: #f0f8ff;
+    border-color: var(--primary-color);
+}
+
+.calendar-day.available {
+    background-color: var(--white);
+    color: var(--text-dark);
+}
+
+.calendar-day.occupied {
+    background-color: #ffeaa7;
+    color: var(--text-dark);
+    cursor: not-allowed;
+}
+
+.calendar-day.occupied::after {
+    content: '⛔';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.6rem;
+}
+
+.calendar-day.selected {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--primary-color);
+}
+
+.calendar-day.other-month {
+    color: #ccc;
+    background-color: #f8f9fa;
+    cursor: not-allowed;
+}
+
+.calendar-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.legend-color.available {
+    background-color: var(--white);
+    border: 1px solid var(--border-color);
+}
+
+.legend-color.occupied {
+    background-color: #ffeaa7;
+}
+
+.legend-color.selected {
+    background-color: var(--primary-color);
+}
+
+.modal-calendar-footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background: #f8fafc;
+}
+
+.table-hover tbody tr:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+#totalTurnos {
+    background: var(--secondary-color);
 }

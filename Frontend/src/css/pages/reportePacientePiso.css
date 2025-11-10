@@ -1,1309 +1,804 @@
-
-/* =======================================
-   ESTILOS GENERALES Y LAYOUT
-   ======================================= */
-   /* =======================================
-   PALETA DE COLORES
-   ======================================= */
-:root {
-    --primary-color: #003366;
-    --primary-light: #004d99;
-    --secondary-color: #3CB371;
-    --secondary-dark: #2E8B57;
-    --accent-color: #FF6B35;
-    --text-dark: #2c3e50;
-    --text-light: #7f8c8d;
-    --background: #f8fafc;
-    --white: #ffffff;
-    --border-color: #e1e8ed;
-    --success-color: #27ae60;
-    --warning-color: #f39c12;
-    --error-color: #e74c3c;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-    --border-radius: 12px;
-    --transition: all 0.3s ease;
-       --color-principal: #003366;      /* Azul Sanitario (Confianza) */
-    --color-fondo-claro: #E0FFFF;    /* Ciano Claro (Higiene) */
-    --color-acento-salud: #3CB371;   /* Verde Esmeralda (Salud/Acción) */
-    --color-acento-alerta: #CC3333;  /* Rojo Suave (Alerta/Publicar) */
-    --color-texto: #333333;
-    --color-borde: #ddd;             /* Gris claro para bordes de campos */
-    --color-fondo-app: #f4f7f9;
-    --font-encabezados: 'Roboto', sans-serif;
-    --font-cuerpo: 'Inter', sans-serif;
+.page-reporte-pacientes .form-title-section h2 {
+    color: #2c3e50;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
-/* ===== HEADER PROFESIONAL ===== */
-.hospital-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: var(--white);
-    padding: 1rem 0;
-    box-shadow: var(--shadow);
-    position: sticky;
+.page-reporte-pacientes .form-title-section h2 i {
+    color: #3498db;
+    margin-right: 1rem;
+}
+
+.page-reporte-pacientes .form-subtitle {
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+.page-reporte-pacientes .section-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-left: 4px solid #3498db;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.page-reporte-pacientes .section-header h3 {
+    color: #2c3e50;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.page-reporte-pacientes .section-header i {
+    color: #3498db;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.page-reporte-pacientes .section-badge {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+}
+
+/* Header Stats */
+.header-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
     top: 0;
-    z-index: 1000;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
 }
 
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
 }
 
-.hospital-brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.hospital-logo {
+.stat-icon {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    border: 3px solid var(--white);
-    padding: 5px;
-    background: var(--white);
+    border-radius: 12px;
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
 }
 
-.hospital-name h1 {
-   font-family: 'Inter', sans-serif;
-   font-weight: 700;
-    font-size: 1.8rem;
-    margin: 0;
-    color: var(--white);
+.stat-info {
+    display: flex;
+    flex-direction: column;
 }
 
-.hospital-name p {
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
     font-size: 0.9rem;
-    opacity: 0.9;
-    margin: 0;
-}
-
-.header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.user-welcome {
+    color: #7f8c8d;
     font-weight: 500;
 }
 
-.btn-logout {
-    background: rgba(255, 255, 255, 0.2);
-    color: var(--white);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+/* Form Layout */
+.form-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-.btn-logout:hover {
-    background: rgba(255, 255, 255, 0.3);
+.form-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
 }
 
-/* ===== NAVEGACIÓN PRINCIPAL ===== */
-.main-navigation {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-color);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.dashboard-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
 }
 
-.nav-menu {
-    display: flex;
-    list-style: none;
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.nav-item {
-    position: relative;
-}
-
-.nav-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem 1.5rem;
-    color: var(--text-dark);
-    text-decoration: none;
-    font-weight: 500;
-    transition: var(--transition);
-    border-bottom: 3px solid transparent;
-}
-
-.nav-link:hover {
-    color: var(--primary-color);
-    background: #f8f9fa;
-}
-
-.nav-item.active .nav-link {
-    color: var(--primary-color);
-    border-bottom-color: var(--secondary-color);
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-}
-
-/* ===== BREADCRUMB ===== */
-.breadcrumb-container {
-    background: var(--white);
-    border-bottom: 1px solid var(--border-color);
-    padding: 1rem 0;
-}
-
-.breadcrumb {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.breadcrumb-item a {
-    color: var(--primary-color);
-    text-decoration: none;
-}
-
-.breadcrumb-item.active {
-    color: var(--text-light);
-}
-
-
-/* =======================================
-   ESTILOS GENERALES Y LAYOUT
-   ======================================= */
-body {
-    font-family: var(--font-cuerpo);
-    background-color: var(--color-gris-claro);
-    color: var(--color-texto);
-    margin: 0;
-    padding: 20px;
-}
-
-.form-container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: var(--color-fondo-form);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Título Principal ("Registrar Enfermero") */
-.main-title {
-    font-family: var(--font-encabezados);
-    color: var(--color-principal);
-    font-size: 2em;
-    padding-bottom: 10px;
-    margin-top: 0;
-    margin-bottom: 30px;
-    /* Línea sutil debajo del título si es necesario: border-bottom: 2px solid #eee; */
-}
-
-/* Títulos de Sección (I, II, III, IV) */
-.section-divider {
-    font-family: var(--font-encabezados);
-    font-size: 1.1em;
-    color: var(--color-texto); /* Color oscuro como en la imagen */
-    margin: 30px 0 10px 0;
-    padding-bottom: 5px;
-}
-
-/* Estructura de Filas y Columnas */
+/* Form Elements */
 .form-row {
-    display: flex;
-    flex-wrap: wrap; 
-    gap: 20px;
-    margin-bottom: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-field {
-    flex: 1 1 250px; /* Distribuye en 3 columnas por defecto */
-}
-
-.form-field-full {
-    flex: 1 1 100%; /* Ocupa el ancho completo */
-}
-
-/* Estilos de Etiquetas y Campos de Entrada */
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    font-weight: 400; /* Texto normal, como en la imagen */
-    color: var(--color-texto);
-}
-
-label span {
-    color: var(--color-rojo-req); 
-    font-size: 1.1em;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; 
-    transition: border-color 0.3s;
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: var(--color-principal); 
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 51, 102, 0.2);
-}
-
-textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-/* Estilos de Checkboxes de Áreas de Acceso */
-.checkbox-group {
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
-
-.checkbox-label {
-    font-size: 0.9em;
-    font-weight: 400;
-    margin-bottom: 5px;
-    display: block;
-}
-
-.checkbox-options label {
-    display: inline-flex; /* Para alinear el checkbox con el texto */
-    align-items: center;
-    margin-right: 20px;
-    font-size: 0.95em;
-}
-
-/* Estilo para el checkbox de Aceptación */
-.checkbox-group.acceptance label {
-    margin-top: 10px;
-}
-
-/* Botón de Acción (Verde Esmeralda) */
-.btn-submit {
-    background-color: var(--color-acento-salud); /* Verde Esmeralda */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background-color 0.3s;
-    margin-top: 20px;
-}
-
-.btn-submit:hover {
-    background-color: #33a364; /* Un verde ligeramente más oscuro */
-}
-
-/* Media query para móviles */
-@media (max-width: 768px) {
-    .form-row {
-        flex-direction: column;
-        gap: 0;
-    }
-    .form-container {
-        padding: 15px;
-    }
-}/* Barra de navegacion */
-
-.navbar {
-  padding: 2rem;
-  background-color:   #003366;
-;
-}
-
-.navbar-collapse {
-  align-items: center;
-  justify-content: space-between;  
-}
-.navbar-collapse .nav-link {
-    color: #FFFFFF !important; /* Blanco puro para contraste con el azul oscuro */
-    font-weight: 600; /* Le da un toque más profesional */
-    padding: 0 10px; /* Ajuste opcional del espaciado */
-}
-
-/* 2. Estilo al pasar el ratón (Hover) */
-.navbar-collapse .nav-link:hover {
-    color: #E0FFFF !important; /* Ciano Claro/Menta (de tu paleta de higiene) al pasar el ratón */
-}
-
-
-/* Estilos generales */
-
-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-h1 {
-  font-size: 2.5rem;
-  font-family: 'Inter', sans-serif;
-  color: #4d82bc;
-}
-
-/*.color1 {color: #1b0f06;}
-.color2 {color: #7f7971;}
-.color3 {color: #ff5ab0;}
-.color4 {color: #ffb9f4;}
-.color5 {color: #ffe4f4;}*/
-
-.btn-info {
-  font-size: 1.1rem;
-  margin: 20px;
-  color: white;
-  background-color: #a6a6a6;
-  border: 20px solid #a6a6a6;
-}
-
-.btn-info:hover {
-  font-size: 1.1rem;
-  margin: 20px;
-  color: white;
-  background-color: #a6a6a6;
-  border: 20px solid #a6a6a6;
-}
-
-.texto-negro {
-  color: black;
-}
-
-.texto-blanco {
-  color: white;
-}
-
-/* Seccion Hero */
-
-.hero {
-  background-color: white;
-  min-height: 200px;
-  text-align: center;
-}
-
-.hero-principal {
-  padding: 3rem;
-}
-
-
-.hero-principal h2 {
-  font-size: 1.5rem;
-  color: #615151;
-}
-
-/* Sobre mi */
-
-.sobre-mi {
-  height: 500px;
-  padding: 10px;
-}
-
-.sobre-mi .contenedor {
-  max-width: 600px;
-  text-align: center;
-}
-
-/* Experiencia */
-
-.experiencia {
-  padding: 40px 40px 60px 40px;
-}
-
-.experiencia .columna {
-  padding: 20px;
-  border: 2px solid #8080804d;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  transition: all 0.2s ease-in;
-}
-
-.experiencia .columna:hover {
-  color: rgb(251, 198, 247);
-  background-color:#0a0a23;
-}
-
-.experiencia i {
-  font-size: 2.5rem;
-  color: #ee72b2;
-  background-color: #747873;
-  padding: 8px 19px;
-  border-radius: 50%;
-}
-
-.experiencia-titulo {
-  font-size: 25px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.badges-contenedor {
-  font-size: 20px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-
-.badge {
-  margin: 5px;
-  background-color: #a6a6a6;
-}
-
-
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
-
-a {
-	text-decoration: none;
-	color: #fff;
-	outline: none;
-}
-
-
-.logotipo {
-	padding: 10px;
-	color: var(--logotipo);
-}
-
-.logotipo .subtitulo {
-	text-align: center;
-	color: var(--profesion);
-	background: var(--logotipo);
-	padding: 12px 20px;
-	transition: .5s ease all;
-	font-size: 36px;
-font-family: 'Inter', sans-serif;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-}
-
-.logotipo:hover .subtitulo {
-	background: var(--primario);
-}
-
-.texto-animado {
-	display: flex;
-	justify-content: center;
-	overflow: hidden;
-}
-
-.texto-animado > div {
-	display: flex;
-	flex-direction: column;
-	position: relative;
-	transition: .3s ease all;
-}
-
-.texto-animado > div.animacion {
-	transform: translateY(-100px);
-}
-
-.texto-animado > div span {
-	font-size: 100px;
-	font-weight: normal;
-	line-height: 100px;
-}
-
-.texto-animado .segunda-linea {
-	position: absolute;
-	top: 100px;
-}
-
-@media screen and (max-width: 600px){
-	.texto-animado > div span {
-		font-size: 50px;
-		line-height: 50px;
-	}
-
-	.texto-animado .segunda-linea {
-		top: 50px;
-	}
-
-	.texto-animado > div.animacion {
-		transform: translateY(-50px);
-	}
-
-	.logotipo .subtitulo {
-		font-size: 20px;
-	}
-}
-
-/* Articulos */
-
-.articulos {
-  min-height: 500px;
-  padding: 30px;
-
-}
-
-.articulos .card {
-  width: 80%;
-  max-width: 600px;
-  margin: 20px;
-  box-shadow: 3px 3px 10px rgba(157, 175, 125);
-  border: 2px solid #9daf7d;
-  border-bottom: 1px solid #9daf7d;
- 
-}
-
-.articulos .card-header {
-  font-weight: bold;
-}
-
-.list-group-item {
-  border-top: 0.5px solid #9daf7d;
-  border-bottom: 0.5px solid #9daf7d;
-    
-}
-
-
-/* ===== FOOTER ===== */
-.hospital-footer {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: var(--white);
-    margin-top: 4rem;
-}
-
-.footer-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 3rem 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-}
-
-.footer-brand {
     display: flex;
-    align-items: flex-start;
-    gap: 1rem;
+    flex-direction: column;
 }
 
-.footer-logo {
+.form-field label {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-field label i {
+    color: #3498db;
+    margin-right: 0.5rem;
+}
+
+.form-field label span {
+    color: #e74c3c;
+    margin-left: 0.25rem;
+}
+
+.form-field select,
+.form-field input {
+    padding: 0.875rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-field select:focus,
+.form-field input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Date Input Container */
+.date-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.date-input-container input {
+    padding-right: 3rem;
+    width: 100%;
+}
+
+.btn-calendar {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #3498db;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-calendar:hover {
+    background: #f8f9fa;
+    transform: scale(1.1);
+}
+
+/* Metrics Grid */
+.metricas-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.metrica-card {
+    padding: 1.5rem;
+    border-radius: 12px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.metrica-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+}
+
+.metrica-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.metrica-icon {
     width: 50px;
     height: 50px;
-}
-
-.footer-info h3 {
-   font-family: 'Inter', sans-serif;
-    margin-bottom: 0.5rem;
-}
-
-.footer-info p {
-    opacity: 0.9;
-    line-height: 1.5;
-}
-
-.footer-links {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-
-.footer-section h4 {
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-}
-
-.footer-section p {
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
     display: flex;
     align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    backdrop-filter: blur(10px);
+}
+
+.metrica-info {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
+
+.metrica-valor {
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+
+.metrica-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+/* Color Themes */
+.bg-confianza {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+.bg-salud {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.bg-alerta {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.bg-humano {
+    background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+}
+
+/* Chart Container */
+.grafico-container {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    height: 300px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+/* Section Actions */
+.section-actions {
+    display: flex;
     gap: 0.5rem;
-    margin-bottom: 0.5rem;
-    opacity: 0.9;
-}
-
-.footer-bottom {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 1.5rem 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
-.footer-social {
+.section-actions .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+/* Form Actions Footer */
+.form-actions-footer {
     display: flex;
     gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e9ecef;
 }
 
-.footer-social a {
-    color: var(--white);
-    font-size: 1.2rem;
-    transition: var(--transition);
+.form-actions-footer .btn {
+    padding: 0.875rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
 }
 
-.footer-social a:hover {
-    color: var(--secondary-color);
+.btn-primary {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    border: none;
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.btn-secondary {
+    background: white;
+    border: 2px solid #bdc3c7;
+    color: #7f8c8d;
+}
+
+.btn-secondary:hover {
+    border-color: #95a5a6;
+    background: #f8f9fa;
     transform: translateY(-2px);
 }
 
-
-
-/* Adaptable (Responsivo) */
-
-@media screen and (max-width: 400px) {
-  .overlay p {
-    font-size: 18px;
-  }
-
-  .overlay i {
-    font-size: 40px;
-  }
+/* Reports Section */
+.reportes-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    margin-top: 2rem;
 }
 
-@media screen and (max-width: 767px) {
-  .navbar-brand {
-    display: none;
-  }
+/* Table Styles */
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-@media screen and (max-width: 800px) {
-  .historia-imagen {
-    height: 120px;
-    width: 120px;
-  }
-
-  .historia-texto {
-    font-size: 18px;
-    
-  }
-}
-
-@media screen and (min-width: 700px) {
-  .hero-inferior-imagen {
-    max-width: 600px;
-  }
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .donar-contenedor {
-      flex-direction: column;
-  }
-}
-
-
-/* (Estilos anteriores continúan abajo) */
-/* =======================================
-   ESTILOS CSS (para estilos.css)
-   ======================================= */
-        
-/* Estilos Globales y de Contenedor */
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #f7f7f7;
-    padding: 20px;
+.table {
     margin: 0;
-}
-
-.form-container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Título del Formulario */
-h2 {
-    font-family: 'Inter', sans-serif;
-    color:  #003366;
-    margin-top: 0;
-    margin-bottom: 30px;
-    border-bottom: 2px #eee;
-    padding-bottom: 10px;
-}
-
-/* Estructura de Filas y Columnas */
-.form-row {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los campos se apilen en móviles */
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-.form-field {
-    flex: 1 1 250px; /* Distribuye en 3 columnas por defecto */
-}
-
-.form-field-full {
-    flex: 1 1 100%; /* Ocupa el ancho completo */
-}
-
-/* Estilos de Etiquetas y Campos de Entrada */
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    color: #333;
-}
-
-label span {
-    color: #CC3333; /* Rojo suave para los requeridos (Basado en la paleta hospitalaria) */
-    font-size: 1.1em;
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Asegura que el padding no cambie el ancho */
-    transition: border-color 0.3s;
-}
-
-input:focus, select:focus, textarea:focus {
-    border-color: #333333; /* Azul Sanitario al enfocar */
-    outline: none;
-    box-shadow: 0 0 5px rgba(0, 51, 102, 0.2);
-}
-
-textarea {
-    resize: vertical;
-    min-height: 80px;
-}
-
-/* Estilo de los Divisores de Sección */
-.section-divider {
-    margin-top: 30px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-    color: #333333; /* Azul Sanitario */
-   font-family: 'Inter', sans-serif;
-    font-size: 1.1em;
-}
-
-/* Estilos específicos para Checkboxes y Radio buttons */
-.checkbox-group {
-    margin-top: 15px;
-    margin-bottom: 20px;
-}
-
-.checkbox-group label {
-    font-weight: normal;
-    display: inline-block;
-    margin-right: 25px;
-    font-size: 1em;
-}
-
-/* Estilo del Botón de Acción (Naranja/Melocotón replicando la imagen) */
-button[type="submit"] {
-    background-color: #3CB371; 
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 500;
-    transition: background-color 0.3s;
-    margin-top: 15px;
-}
-
-button[type="submit"]:hover {
-    background-color: #3CB371;
-}
-
-/* Para el Cuerpo del Texto, Párrafos y Botones */
-body, p, button {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400; /* Regular */
-}
-
-
-/* =======================================
-   ESTILOS GENERALES Y LAYOUT
-   ======================================= */
-body {
-    font-family: var(--font-cuerpo);
-    background-color: var(--color-fondo-app);
-    color: var(--color-texto);
-    margin: 0;
-    padding: 20px;
-}
-
-.app-container {
-    max-width: 1300px;
-    margin: 0 auto;
-    background: #FFFFFF; /* Fondo blanco */
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Header (Estilo similar al del formulario de registro) */
-.form-header {
-    border-bottom: 2px solid var(--color-fondo-claro);
-    padding-bottom: 5px;
-    margin-bottom: 20px;
-}
-.form-header h2 {
-  font-family: 'Inter', sans-serif;
-  color: #003366;
-    
-    margin: 0;
-    font-size: 1.8em;
-}
-
-/* Títulos de Sección (I, II, III, IV) */
-.form-section {
-    margin-bottom: 30px;
-}
-
-.section-title {
-   font-family: 'Inter', sans-serif;
-  color: #003366;
-    font-size: 1.3em;
-    margin-bottom: 15px;
-}
-
-/* -------------------------------------------
-   I. FORMULARIO INICIAL (Estilo de 3 columnas del formulario de registro)
-   ------------------------------------------- */
-.form-row {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 15px;
-}
-
-.form-field {
-    flex: 1 1 30%; /* Tres campos por fila */
-}
-
-.form-field-half {
-    flex: 1 1 50%; /* Dos campos por fila */
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    font-weight: 600;
-    color: var(--color-texto);
-}
-
-label span {
-    color: var(--color-acento-alerta); /* Rojo para el asterisco */
-}
-
-input[type="date"],
-input[type="text"],
-select {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--color-borde);
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: border-color 0.3s;
-    font-size: 1em;
-}
-
-input:focus, select:focus {
-    border-color: var(--color-acento-salud);
-    outline: none;
-    box-shadow: 0 0 5px rgba(60, 179, 113, 0.3);
-}
-
-/* -------------------------------------------
-   II. PANEL DE RESUMEN
-   ------------------------------------------- */
-.resumen-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.resumen-card {
-    padding: 15px;
-    border-radius: 6px;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.resumen-card h4 {
-    margin: 0 0 5px 0;
-    font-size: 0.9em;
-    font-weight: 600;
-}
-
-.resumen-card p {
-    margin: 0;
-    font-size: 1.6em;
-    font-family: var(--font-encabezados);
-    font-weight: 700;
-}
-
-/* Colores de las tarjetas de resumen */
-.bg-confianza { background-color: var(--color-principal); }
-.bg-salud { background-color: var(--color-acento-salud); }
-.bg-alerta { background-color: var(--color-acento-alerta); }
-.bg-humano { background-color: #6c757d; }
-
-
-/* -------------------------------------------
-   III. TABLA CENTRAL MATRIZ (Asignación)
-   ------------------------------------------- */
-.table-wrapper {
-    overflow-x: auto;
-    margin-top: 15px;
-    border: 1px solid var(--color-borde);
-    border-radius: 6px;
-}
-
-#rol-matriz {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 900px;
-    background-color: white;
-}
-
-#rol-matriz thead th {
-    background-color: var(--color-fondo-claro); /* Menta clara para el encabezado de la tabla */
-    border-bottom: 2px solid var(--color-principal);
-    padding: 12px 8px;
-    text-align: center;
-    font-weight: 700;
-    font-size: 0.9em;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    color: var(--color-principal);
-}
-
-#rol-matriz tbody td {
-    padding: 5px;
-    border: 1px solid #eee;
-    text-align: center;
-}
-
-.sticky-col {
-    position: sticky !important;
-    left: 0;
-    background-color: #f7f7f7; /* Gris claro para diferenciar la columna */
-    z-index: 1;
-    text-align: left !important;
-    font-weight: 600;
-    min-width: 180px;
-    padding-left: 15px !important;
-}
-
-/* Estilo para los selectores interactivos */
-.area-selector {
-    padding: 5px;
-    border: 1px solid var(--color-borde);
-    border-radius: 3px;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 0.85em;
-}
-
-/* Etiquetas de Rotación */
-.tag {
-    display: inline-block;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 0.7em;
-    margin-left: 5px;
-    font-weight: 700;
-    color: white;
-    vertical-align: top;
-}
-.tag-fijo { background-color: var(--color-principal); }
-.tag-variable { background-color: var(--color-acento-salud); }
-
-
-/* -------------------------------------------
-   IV. HERRAMIENTAS DE GESTIÓN (Botones)
-   ------------------------------------------- */
-.form-actions {
-    margin-top: 40px;
-    display: flex;
-    gap: 15px;
-    justify-content: flex-end;
-}
-
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.2s;
-}
-
-/* Botón 'Generar Reporte' (Clase original .btn-salud) */
-/* Color solicitado para ambos botones */
-.btn-salud,
-.btn-principal {
-    background-color: #4d82bc; /* Azul deseado */
-    color: white; /* Asegura que el texto sea blanco para un buen contraste */
-    font-weight: 700;
-}
-
-/* Color para el estado Hover (Generar Reporte) */
-.btn-salud:hover {
-    background-color: #3b659c; /* Un tono ligeramente más oscuro para el efecto */
-}
-
-/* Color para el estado Hover (Limpiar Filtros) */
-.btn-principal:hover {
-    background-color: #3b659c; /* Usamos el mismo tono oscuro para la coherencia */
-}
-
-
-/* Media query para móviles */
-@media (max-width: 768px) {
-    .form-row {
-        flex-direction: column;
-    }
-    .resumen-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .form-field, .form-field-half {
-        flex: 1 1 100%;
-    }
-    .form-actions {
-        flex-direction: column;
-        align-items: stretch;
-    }
-}
-/* =======================================
-   ESTILOS BASE DE LA APLICACIÓN Y FORMULARIO
-   ======================================= */
-body {
-    font-family: var(--font-cuerpo);
-    background-color: var(--color-gris-claro);
-    color: var(--color-texto);
-    margin: 0;
-    padding: 20px;
-}
-
-.app-container {
-    max-width: 1300px;
-    margin: 30px auto;
-    background: var(--color-fondo-form);
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.main-title {
-    font-family: var(--font-encabezados);
-    color: var(--color-principal);
-    font-size: 2em;
-    padding-bottom: 10px;
-    margin-top: 0;
-    margin-bottom: 30px;
-}
-
-.section-title {
-    font-family: var(--font-encabezados);
-    color: var(--color-principal);
-    font-size: 1.3em;
-    margin-bottom: 15px;
-}
-
-.form-section {
-    margin-bottom: 30px;
-}
-
-/* Estructura de Filas y Campos (Panel de Control) */
-.filtros {
-    gap: 20px;
-    margin-bottom: 15px;
-}
-
-.form-select-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    min-width: 180px;
-}
-
-.form-select-group label {
-    font-size: 0.9em;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-/* Estilo de los Inputs/Selects */
-#panel-control-reporte input[type="date"],
-#panel-control-reporte select {
-    width: 100%;
-    padding: 8px 12px;
-    border: 1px solid var(--color-borde);
-    border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 1em;
-}
-
-/* -------------------------------------------
-   II. INDICADORES CLAVE (MÉTRICAS)
-   ------------------------------------------- */
-.resumen-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.resumen-card {
-    padding: 15px;
-    border-radius: 6px;
-    color: white;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.resumen-card h4 {
-    margin: 0 0 5px 0;
-    font-size: 0.9em;
-    font-weight: 600;
-}
-
-.resumen-card p {
-    margin: 0;
-    font-size: 1.6em;
-    font-family: var(--font-encabezados);
-    font-weight: 700;
-}
-
-/* Colores de las tarjetas de resumen */
-.bg-confianza { background-color: var(--color-principal); } /* #003366 */
-.bg-salud { background-color: var(--color-acento-salud); } /* #3CB371 */
-.bg-alerta { background-color: var(--color-acento-alerta); } /* #CC3333 */
-.bg-humano { background-color: #6c757d; } /* Gris de soporte */
-
-/* -------------------------------------------
-   III. SALIDA DE DATOS (TABLA Y GRÁFICOS)
-   ------------------------------------------- */
-.table-wrapper {
-    overflow-x: auto;
-    margin-top: 15px;
+    border-collapse: separate;
+    border-spacing: 0;
 }
 
 .table thead {
-  background-color: #4d82bc;
-    background-color: var(--color-principal); 
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+}
+
+.table thead th {
+    color: white;
+    font-weight: 600;
+    padding: 1rem;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.table tbody tr:hover {
+    background: #f8f9fa;
+    transform: scale(1.01);
+}
+
+.table tbody td {
+    padding: 1rem;
+    vertical-align: middle;
+    border-color: #e9ecef;
+    font-weight: 500;
+}
+
+/* Status Badges */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    border: none;
+}
+
+.badge-optimo {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
     color: white;
 }
-/* Si tu tabla usa clases de Bootstrap como .bg-primary o .text-white, puedes anularlas: */
-.table thead.bg-primary {
-    background-color: #4d82bc !important;
+
+.badge-alerta {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
 }
 
-/* Si quieres que los bordes de la tabla también coincidan (opcional): */
-.table.table-bordered {
-    border-color: #4d82bc; 
-}
-.table th, .table td {
-    text-align: center;
-    vertical-align: middle;
+.badge-normal {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
 }
 
-/* Contenedor que da altura al gráfico */
-.chart-container {
-    position: relative; 
-    height: 350px; 
+/* Status Rows */
+.estado-optimo {
+    border-left: 4px solid #2ecc71;
+    background: rgba(46, 204, 113, 0.05);
+}
+
+.estado-alerta {
+    border-left: 4px solid #e74c3c;
+    background: rgba(231, 76, 60, 0.05);
+}
+
+.estado-normal {
+    border-left: 4px solid #3498db;
+    background: rgba(52, 152, 219, 0.05);
+}
+
+/* Progress Bars */
+.progress {
+    background: #ecf0f1;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+/* Action Buttons */
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary {
+    border: 2px solid #3498db;
+    color: #3498db;
+    background: transparent;
+}
+
+.btn-outline-primary:hover {
+    background: #3498db;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-outline-info {
+    border: 2px solid #17a2b8;
+    color: #17a2b8;
+    background: transparent;
+}
+
+.btn-outline-info:hover {
+    background: #17a2b8;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-outline-success {
+    border: 2px solid #28a745;
+    color: #28a745;
+    background: transparent;
+}
+
+.btn-outline-success:hover {
+    background: #28a745;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.btn-outline-danger {
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    background: transparent;
+}
+
+.btn-outline-danger:hover {
+    background: #dc3545;
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* Calendar Modal */
+.modal-calendar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 20px;
-    background-color: white;
-    border: 1px solid var(--color-borde);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
 }
 
-.chart-container h4 {
-    color: var(--color-principal);
-    font-family: var(--font-encabezados);
-    font-size: 1.1em;
-    font-weight: 700;
-    margin-bottom: 15px;
+.modal-calendar-content {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 400px;
+    overflow: hidden;
+    animation: modalSlideIn 0.3s ease;
 }
 
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
 
-.form-actions {
-    margin-top: 20px;
+.modal-calendar-header {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 1.5rem;
     display: flex;
-    gap: 15px;
-    justify-content: flex-end;
-}
-
-/* Modifica esta regla en tu archivo style.css */
-.action-buttons {
-    display: flex;
-    flex-direction: row; /* CAMBIO CLAVE: Los fuerza a ir en fila */
-    justify-content: space-between; /* Distribuye el espacio entre los botones */
-    gap: 10px; /* Mantiene un pequeño espacio entre ellos */
-    width: 100%; /* Permite que el contenedor use el ancho disponible */
+    justify-content: space-between;
     align-items: center;
 }
 
-/* También debes asegurarte de que los botones ocupen el espacio equitativamente */
-.action-buttons .btn {
-    flex-grow: 1; /* Permite que ambos botones crezcan y compartan el espacio */
+.modal-calendar-header h5 {
+    margin: 0;
+    font-weight: 600;
 }
 
-.btn {
-    padding: 10px 20px;
+.btn-close-calendar {
+    background: rgba(255, 255, 255, 0.2);
     border: none;
-    border-radius: 5px;
     color: white;
+    font-size: 1.2rem;
     cursor: pointer;
-    font-weight: 700; /* Negrita Fuerte */
-    transition: background-color 0.2s;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-salud { background-color: var(--color-acento-salud); } 
-.btn-principal { background-color: var(--color-principal); } 
+.btn-close-calendar:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
 
-.btn-salud:hover { background-color: #4d82bc }
-.btn-principal:hover { background-color: #4d82bc }
+.calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    background: #f8f9fa;
+}
 
-/* Media Query para móviles */
-@media (max-width: 992px) {
-    .resumen-grid {
+.calendar-navigation h6 {
+    margin: 0;
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.btn-calendar-nav {
+    background: white;
+    border: 2px solid #e9ecef;
+    color: #3498db;
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-calendar-nav:hover {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+    padding: 1.5rem;
+}
+
+.calendar-weekday {
+    text-align: center;
+    font-weight: 600;
+    color: #7f8c8d;
+    padding: 0.75rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.calendar-days-container {
+    display: contents;
+}
+
+.calendar-day {
+    padding: 0.75rem;
+    text-align: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border: 2px solid transparent;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-size: 0.9rem;
+}
+
+.calendar-day:hover {
+    background: #3498db;
+    color: white;
+    transform: scale(1.05);
+}
+
+.calendar-day.available {
+    background: white;
+    color: #2c3e50;
+    border: 2px solid #e9ecef;
+}
+
+.calendar-day.selected {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    border-color: #3498db;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.calendar-day.other-month {
+    color: #bdc3c7;
+    background: #f8f9fa;
+    cursor: not-allowed;
+}
+
+.calendar-day.today {
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.modal-calendar-footer {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .form-layout {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .header-stats {
         grid-template-columns: repeat(2, 1fr);
     }
-    .filtros {
+}
+
+@media (max-width: 768px) {
+    .header-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .metricas-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-actions {
         flex-direction: column;
         align-items: stretch;
     }
-    .form-select-group {
-        min-width: 100%;
+    
+    .form-actions-footer {
+        flex-direction: column;
     }
-    .action-buttons {
-        flex-direction: row;
-        align-items: center;
+    
+    .calendar-grid {
+        gap: 0.25rem;
+        padding: 1rem;
+    }
+    
+    .calendar-day {
+        padding: 0.5rem;
+        min-height: 40px;
+        font-size: 0.8rem;
+    }
+    
+    .metrica-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    
+    .stat-card {
+        text-align: center;
+    }
+    
+    .stat-icon {
+        margin: 0 auto 1rem auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-section,
+    .dashboard-section,
+    .reportes-section {
+        padding: 1.5rem;
+    }
+    
+    .section-header {
+        padding: 1rem;
+    }
+    
+    .modal-calendar-content {
+        margin: 1rem;
+        width: calc(100% - 2rem);
     }
 }

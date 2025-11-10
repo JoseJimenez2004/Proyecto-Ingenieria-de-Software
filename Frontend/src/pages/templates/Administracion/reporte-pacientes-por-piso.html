@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/reportePacientePiso.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -34,7 +34,6 @@
         </div>
     </header>
 
-    <!-- ===== NAV ===== -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
@@ -60,7 +59,6 @@
         </div>
     </nav>
 
-    <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
@@ -72,91 +70,246 @@
         </div>
     </div>
 
-    <!-- ===== MAIN ===== -->
     <main class="main-content page-reporte-pacientes">
         <div class="form-header">
             <div class="form-title-section">
                 <h2><i class="bi bi-clipboard-pulse"></i> Reporte de Pacientes por Piso</h2>
-                <p class="form-subtitle">Genera reportes periódicos de ocupación y personal asignado</p>
+                <p class="form-subtitle">Monitoreo integral de ocupación y recursos hospitalarios</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="totalPacientes">0</span>
+                        <span class="stat-label">Pacientes Totales</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-hospital"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="ocupacionPromedio">0%</span>
+                        <span class="stat-label">Ocupación</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-person-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="totalEnfermeros">0</span>
+                        <span class="stat-label">Enfermeros Activos</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="form-container">
-            <!-- FILTROS DE REPORTE -->
-            <section class="form-section">
-                <div class="section-header">
-                    <i class="bi bi-funnel"></i>
-                    <h3>Generar Reporte</h3>
-                    <span class="section-badge">Filtro</span>
-                </div>
+            <div class="form-layout">
+                <section class="form-section">
+                    <div class="section-header">
+                        <i class="bi bi-funnel"></i>
+                        <h3>Filtros del Reporte</h3>
+                        <span class="section-badge">Configuración</span>
+                    </div>
 
-                <form id="formReportePacientes">
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label for="frecuencia"><i class="bi bi-clock-history"></i> Frecuencia <span>*</span></label>
-                            <select id="frecuencia" name="frecuencia" required>
-                                <option value="" disabled selected>Seleccione frecuencia</option>
-                                <option value="diario">Diario</option>
-                                <option value="semanal">Semanal</option>
-                                <option value="mensual">Mensual</option>
-                            </select>
+                    <form id="formReportePacientes">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="frecuencia"><i class="bi bi-clock-history"></i> Frecuencia <span>*</span></label>
+                                <select id="frecuencia" name="frecuencia" required>
+                                    <option value="" disabled selected>Seleccione frecuencia</option>
+                                    <option value="diario">Diario</option>
+                                    <option value="semanal">Semanal</option>
+                                    <option value="mensual">Mensual</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="piso"><i class="bi bi-building"></i> Piso <span>*</span></label>
+                                <select id="piso" name="piso" required>
+                                    <option value="" disabled selected>Seleccione piso</option>
+                                    <option value="todos">Todos los pisos</option>
+                                    <option value="1">Piso 1 - Pediatría</option>
+                                    <option value="2">Piso 2 - Ginecología</option>
+                                    <option value="3">Piso 3 - Cirugía</option>
+                                    <option value="4">Piso 4 - Cardiología</option>
+                                    <option value="5">Piso 5 - Ortopedia</option>
+                                </select>
+                            </div>
                         </div>
 
-                        <div class="form-field">
-                            <label for="piso"><i class="bi bi-building"></i> Piso <span>*</span></label>
-                            <select id="piso" name="piso" required>
-                                <option value="" disabled selected>Seleccione piso</option>
-                                <option value="1">Piso 1 - Pediatría</option>
-                                <option value="2">Piso 2 - Ginecología</option>
-                                <option value="3">Piso 3 - Cirugía</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="fechaInicio"><i class="bi bi-calendar-event"></i> Fecha Inicio</label>
+                                <div class="date-input-container">
+                                    <input type="text" id="fechaInicio" name="fechaInicio" readonly placeholder="Seleccione fecha">
+                                    <button type="button" class="btn-calendar" id="btnOpenCalendarInicio">
+                                        <i class="bi bi-calendar3"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="fechaFin"><i class="bi bi-calendar-check"></i> Fecha Fin</label>
+                                <div class="date-input-container">
+                                    <input type="text" id="fechaFin" name="fechaFin" readonly placeholder="Seleccione fecha">
+                                    <button type="button" class="btn-calendar" id="btnOpenCalendarFin">
+                                        <i class="bi bi-calendar3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions-footer">
+                            <button type="button" class="btn btn-secondary" id="btnLimpiar">
+                                <i class="bi bi-arrow-clockwise"></i> Limpiar Filtros
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-clipboard-check"></i> Generar Reporte
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <i class="bi bi-speedometer2"></i>
+                        <h3>Métricas en Tiempo Real</h3>
+                        <div class="section-actions">
+                            <button class="btn btn-outline-primary btn-sm" id="btnActualizar">
+                                <i class="bi bi-arrow-clockwise"></i> Actualizar
+                            </button>
                         </div>
                     </div>
 
-                    <div class="form-actions-footer">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="bi bi-clipboard-check"></i> Generar Reporte
-                        </button>
-                    </div>
-                </form>
-            </section>
+                    <div class="metricas-grid">
+                        <div class="metrica-card bg-confianza">
+                            <div class="metrica-icon">
+                                <i class="bi bi-activity"></i>
+                            </div>
+                            <div class="metrica-info">
+                                <span class="metrica-valor" id="metricaPacientes">0</span>
+                                <span class="metrica-label">Pacientes Activos</span>
+                            </div>
+                        </div>
 
-            <!-- TABLA DE REPORTE -->
-            <section class="form-section">
+                        <div class="metrica-card bg-salud">
+                            <div class="metrica-icon">
+                                <i class="bi bi-hospital"></i>
+                            </div>
+                            <div class="metrica-info">
+                                <span class="metrica-valor" id="metricaOcupacion">0%</span>
+                                <span class="metrica-label">Tasa Ocupación</span>
+                            </div>
+                        </div>
+
+                        <div class="metrica-card bg-alerta">
+                            <div class="metrica-icon">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+                            <div class="metrica-info">
+                                <span class="metrica-valor" id="metricaAlerta">0</span>
+                                <span class="metrica-label">Alertas Activas</span>
+                            </div>
+                        </div>
+
+                        <div class="metrica-card bg-humano">
+                            <div class="metrica-icon">
+                                <i class="bi bi-person-gear"></i>
+                            </div>
+                            <div class="metrica-info">
+                                <span class="metrica-valor" id="metricaRelacion">1:0</span>
+                                <span class="metrica-label">Relación Enf/Pac</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grafico-container">
+                        <canvas id="ocupacionChart"></canvas>
+                    </div>
+                </section>
+            </div>
+
+            <section class="reportes-section">
                 <div class="section-header">
                     <i class="bi bi-list-ul"></i>
-                    <h3>Resultados del Reporte</h3>
+                    <h3>Reporte Detallado</h3>
+                    <div class="section-actions">
+                        <button class="btn btn-outline-success btn-sm" id="btnExportExcel">
+                            <i class="bi bi-file-earmark-excel"></i> Excel
+                        </button>
+                        <button class="btn btn-outline-danger btn-sm" id="btnExportPDF">
+                            <i class="bi bi-file-earmark-pdf"></i> PDF
+                        </button>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-striped align-middle">
+                    <table class="table table-hover align-middle">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Piso</th>
-                                <th>Pacientes Totales</th>
+                                <th>Especialidad</th>
+                                <th>Pacientes</th>
                                 <th>Camas Ocupadas</th>
-                                <th>Enfermeros Asignados</th>
-                                <th>Tipo de Atención</th>
+                                <th>Enfermeros</th>
+                                <th>Ocupación</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tablaPacientes">
-                            <tr>
-
-                            </tr>
+                            <!-- Los datos se cargarán dinámicamente -->
                         </tbody>
                     </table>
-                </div>
-
-                <div class="export-actions">
-                    <button class="btn btn-outline-primary" id="btnExportPDF"><i class="bi bi-file-earmark-pdf"></i> Exportar PDF</button>
-                    <button class="btn btn-outline-success" id="btnExportExcel"><i class="bi bi-file-earmark-excel"></i> Exportar Excel</button>
                 </div>
             </section>
         </div>
     </main>
 
-    <!-- ===== FOOTER ===== -->
+    <!-- Modal del Calendario -->
+    <div id="calendarModal" class="modal-calendar">
+        <div class="modal-calendar-content">
+            <div class="modal-calendar-header">
+                <h5 id="modalCalendarTitle">Seleccionar Fecha</h5>
+                <button class="btn-close-calendar">&times;</button>
+            </div>
+            <div class="modal-calendar-body">
+                <div class="calendar-navigation">
+                    <button class="btn-calendar-nav" id="btnPrevMonth">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <h6 id="currentMonth">Enero 2025</h6>
+                    <button class="btn-calendar-nav" id="btnNextMonth">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-weekday">Dom</div>
+                    <div class="calendar-weekday">Lun</div>
+                    <div class="calendar-weekday">Mar</div>
+                    <div class="calendar-weekday">Mié</div>
+                    <div class="calendar-weekday">Jue</div>
+                    <div class="calendar-weekday">Vie</div>
+                    <div class="calendar-weekday">Sáb</div>
+                    
+                    <div id="calendarDays" class="calendar-days-container">
+                        <!-- Los días se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-calendar-footer">
+                <button type="button" class="btn btn-secondary" id="btnCancelCalendar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmDate">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">
@@ -191,6 +344,7 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/Frontend/src/js/pages/reportePacientePiso.js"></script>
 </body>

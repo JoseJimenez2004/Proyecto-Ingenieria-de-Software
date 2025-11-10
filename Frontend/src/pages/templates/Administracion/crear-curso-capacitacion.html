@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet"> <!--PLANTILLA GLOBAL-->
+    <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet">
     <link href="/Frontend/src/css/pages/crear-curso.css" rel="stylesheet">
 </head>
 <body>
 
-    <!--  HEADER  -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -35,7 +34,6 @@
         </div>
     </header>
 
-    <!-- ===== NAVBAR ===== -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
@@ -61,7 +59,6 @@
         </div>
     </nav>
 
-    <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
@@ -73,7 +70,6 @@
         </div>
     </div>
 
-    <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <main class="main-content page-crear-curso">
         <div class="form-header">
             <div class="form-title-section">
@@ -108,6 +104,7 @@
                                 <option value="" disabled selected>Seleccione modalidad</option>
                                 <option value="presencial">Presencial</option>
                                 <option value="virtual">Virtual</option>
+                                <option value="hibrido">Híbrido</option>
                             </select>
                         </div>
                     </div>
@@ -115,18 +112,43 @@
                     <div class="form-row">
                         <div class="form-field">
                             <label for="fechaInicio"><i class="bi bi-calendar-event"></i> Fecha de Inicio <span>*</span></label>
-                            <input type="date" id="fechaInicio" name="fechaInicio" required>
+                            <div class="date-input-container">
+                                <input type="text" id="fechaInicio" name="fechaInicio" required readonly placeholder="Seleccione fecha de inicio">
+                                <button type="button" class="btn-calendar" id="btnOpenCalendarInicio">
+                                    <i class="bi bi-calendar3"></i>
+                                </button>
+                            </div>
                         </div>
 
                         <div class="form-field">
                             <label for="fechaFin"><i class="bi bi-calendar2-check"></i> Fecha de Fin <span>*</span></label>
-                            <input type="date" id="fechaFin" name="fechaFin" required>
+                            <div class="date-input-container">
+                                <input type="text" id="fechaFin" name="fechaFin" required readonly placeholder="Seleccione fecha de fin">
+                                <button type="button" class="btn-calendar" id="btnOpenCalendarFin">
+                                    <i class="bi bi-calendar3"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="duracion"><i class="bi bi-clock"></i> Duración (horas)</label>
+                            <input type="number" id="duracion" name="duracion" placeholder="Ej. 40" min="1">
                         </div>
                     </div>
 
                     <div class="form-field form-field-full">
                         <label for="descripcion"><i class="bi bi-card-text"></i> Descripción</label>
-                        <textarea id="descripcion" name="descripcion" rows="3" placeholder="Breve descripción del curso"></textarea>
+                        <textarea id="descripcion" name="descripcion" rows="3" placeholder="Breve descripción del curso y objetivos de aprendizaje"></textarea>
+                    </div>
+
+                    <div class="form-field form-field-full">
+                        <label for="material"><i class="bi bi-paperclip"></i> Material del Curso</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <i class="bi bi-cloud-arrow-up"></i>
+                            <p>Arrastra y suelta archivos aquí o <span>haz clic para seleccionar</span></p>
+                            <input type="file" id="material" name="material" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.png">
+                        </div>
+                        <div id="fileList" class="file-list"></div>
                     </div>
 
                     <div class="form-actions-footer">
@@ -136,28 +158,70 @@
                 </form>
             </section>
 
-            <!-- LISTA DE CURSOS (SIMULADA) -->
             <section class="form-section">
                 <div class="section-header">
                     <i class="bi bi-list-task"></i>
                     <h3>Cursos Registrados</h3>
+                    <span class="section-badge" id="totalCursos">0 cursos</span>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-striped align-middle">
+                    <table class="table table-hover align-middle">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Curso</th>
                                 <th>Instructor</th>
                                 <th>Modalidad</th>
+                                <th>Duración</th>
                                 <th>Fechas</th>
+                                <th>Material</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tablaCursos">
-                            <tr>
-                               
+                            <tr class="curso-presencial">
+                                <td>
+                                    <div class="curso-info">
+                                        <strong>Actualización en Cuidados Intensivos</strong>
+                                        <small class="text-muted">Curso avanzado para enfermería especializada</small>
+                                    </div>
+                                </td>
+                                <td>Dr. Roberto Mendoza</td>
+                                <td><span class="badge modalidad-badge presencial">Presencial</span></td>
+                                <td>40 horas</td>
+                                <td>15/01/2025 - 20/01/2025</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-info btn-material">
+                                        <i class="bi bi-folder"></i> 3 archivos
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-danger btn-delete">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="curso-virtual">
+                                <td>
+                                    <div class="curso-info">
+                                        <strong>Primeros Auxilios Avanzados</strong>
+                                        <small class="text-muted">Técnicas de emergencia y RCP</small>
+                                    </div>
+                                </td>
+                                <td>Dra. Ana López</td>
+                                <td><span class="badge modalidad-badge virtual">Virtual</span></td>
+                                <td>24 horas</td>
+                                <td>22/01/2025 - 25/01/2025</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-info btn-material">
+                                        <i class="bi bi-folder"></i> 2 archivos
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-danger btn-delete">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -166,7 +230,69 @@
         </div>
     </main>
 
-    <!-- ===== FOOTER ===== -->
+    <div id="calendarModal" class="modal-calendar">
+        <div class="modal-calendar-content">
+            <div class="modal-calendar-header">
+                <h5 id="modalCalendarTitle">Seleccionar Fecha</h5>
+                <button class="btn-close-calendar">&times;</button>
+            </div>
+            <div class="modal-calendar-body">
+                <div class="calendar-navigation">
+                    <button class="btn-calendar-nav" id="btnPrevMonth">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <h6 id="currentMonth">Enero 2025</h6>
+                    <button class="btn-calendar-nav" id="btnNextMonth">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-weekday">Dom</div>
+                    <div class="calendar-weekday">Lun</div>
+                    <div class="calendar-weekday">Mar</div>
+                    <div class="calendar-weekday">Mié</div>
+                    <div class="calendar-weekday">Jue</div>
+                    <div class="calendar-weekday">Vie</div>
+                    <div class="calendar-weekday">Sáb</div>
+                    
+                    <div id="calendarDays" class="calendar-days-container">
+                    </div>
+                </div>
+                
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <div class="legend-color available"></div>
+                        <span>Disponible</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color selected"></div>
+                        <span>Seleccionado</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-calendar-footer">
+                <button type="button" class="btn btn-secondary" id="btnCancelCalendar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmDate">Confirmar Fecha</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="materialModal" class="modal-material">
+        <div class="modal-material-content">
+            <div class="modal-material-header">
+                <h5>Material del Curso</h5>
+                <button class="btn-close-material">&times;</button>
+            </div>
+            <div class="modal-material-body">
+                <div id="materialList"></div>
+            </div>
+            <div class="modal-material-footer">
+                <button type="button" class="btn btn-secondary" id="btnCloseMaterial">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">

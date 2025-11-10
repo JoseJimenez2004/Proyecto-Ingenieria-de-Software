@@ -8,12 +8,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
-    <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet"> <!--PLANTILLA GLOBAL-->
+    <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet">
     <link href="/Frontend/src/css/pages/reporte-diario-eventos-piso.css" rel="stylesheet">
 </head>
 <body>
 
-    <!-- ===== HEADER ===== -->
     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
@@ -35,7 +34,6 @@
         </div>
     </header>
 
-    <!-- ===== NAVEGACIÓN ===== -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
@@ -61,7 +59,6 @@
         </div>
     </nav>
 
-    <!-- ===== BREADCRUMB ===== -->
     <div class="breadcrumb-container">
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
@@ -73,95 +70,299 @@
         </div>
     </div>
 
-    <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <main class="main-content page-reporte-diario">
         <div class="form-header">
             <div class="form-title-section">
                 <h2><i class="bi bi-clipboard-plus"></i> Reporte Diario de Eventos del Piso</h2>
-                <p class="form-subtitle">Registra los eventos ocurridos durante el turno en cada piso</p>
+                <p class="form-subtitle">Monitoreo en tiempo real de eventos y actividades por piso</p>
+            </div>
+            <div class="header-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="totalPisosActivos">0</span>
+                        <span class="stat-label">Pisos Activos</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-activity"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="totalEventosHoy">0</span>
+                        <span class="stat-label">Eventos Hoy</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="bi bi-exclamation-triangle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="totalIncidencias">0</span>
+                        <span class="stat-label">Incidencias</span>
+                    </div>
+                </div>
             </div>
         </div>
 
         <div class="form-container">
-            <!-- FORMULARIO DE REGISTRO -->
-            <section class="form-section">
-                <div class="section-header">
-                    <i class="bi bi-pencil-square"></i>
-                    <h3>Registrar Reporte</h3>
-                    <span class="section-badge">Nuevo</span>
-                </div>
+            <div class="form-layout">
+                <section class="form-section">
+                    <div class="section-header">
+                        <i class="bi bi-pencil-square"></i>
+                        <h3>Nuevo Reporte</h3>
+                        <span class="section-badge">Registro</span>
+                    </div>
 
-                <form id="formReporte">
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label for="fecha"><i class="bi bi-calendar-event"></i> Fecha <span>*</span></label>
-                            <input type="date" id="fecha" name="fecha" required>
+                    <form id="formReporte">
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="fecha"><i class="bi bi-calendar-event"></i> Fecha <span>*</span></label>
+                                <div class="date-input-container">
+                                    <input type="text" id="fecha" name="fecha" required readonly placeholder="Seleccione fecha">
+                                    <button type="button" class="btn-calendar" id="btnOpenCalendar">
+                                        <i class="bi bi-calendar3"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="piso"><i class="bi bi-building"></i> Piso <span>*</span></label>
+                                <select id="piso" name="piso" required>
+                                    <option value="" disabled selected>Seleccione piso</option>
+                                    <option value="1">Piso 1 - Pediatría</option>
+                                    <option value="2">Piso 2 - Ginecología</option>
+                                    <option value="3">Piso 3 - Cirugía</option>
+                                    <option value="4">Piso 4 - Cardiología</option>
+                                    <option value="5">Piso 5 - Ortopedia</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-field">
+                                <label for="ingresos"><i class="bi bi-door-open"></i> Ingresos</label>
+                                <input type="number" id="ingresos" name="ingresos" min="0" placeholder="Pacientes ingresados">
+                            </div>
+
+                            <div class="form-field">
+                                <label for="egresos"><i class="bi bi-door-closed"></i> Egresos</label>
+                                <input type="number" id="egresos" name="egresos" min="0" placeholder="Pacientes egresados">
+                            </div>
+
+                            <div class="form-field">
+                                <label for="turno"><i class="bi bi-clock"></i> Turno</label>
+                                <select id="turno" name="turno">
+                                    <option value="" selected>Todos los turnos</option>
+                                    <option value="matutino">Matutino</option>
+                                    <option value="vespertino">Vespertino</option>
+                                    <option value="nocturno">Nocturno</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-field">
-                            <label for="piso"><i class="bi bi-building"></i> Piso <span>*</span></label>
-                            <select id="piso" name="piso" required>
-                                <option value="" disabled selected>Seleccione piso</option>
-                                <option value="1">Piso 1 - Pediatría</option>
-                                <option value="2">Piso 2 - Ginecología</option>
-                                <option value="3">Piso 3 - Cirugía</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-field">
-                            <label for="ingresos"><i class="bi bi-door-open"></i> Ingresos</label>
-                            <input type="number" id="ingresos" name="ingresos" min="0" placeholder="Número de ingresos del día">
+                            <label for="incidencias"><i class="bi bi-exclamation-triangle"></i> Incidencias</label>
+                            <textarea id="incidencias" name="incidencias" rows="2" placeholder="Describa las incidencias relevantes del día..."></textarea>
                         </div>
 
                         <div class="form-field">
-                            <label for="egresos"><i class="bi bi-door-closed"></i> Egresos</label>
-                            <input type="number" id="egresos" name="egresos" min="0" placeholder="Número de egresos del día">
+                            <label for="observaciones"><i class="bi bi-chat-text"></i> Observaciones</label>
+                            <textarea id="observaciones" name="observaciones" rows="2" placeholder="Comentarios adicionales y observaciones..."></textarea>
+                        </div>
+
+                        <div class="form-actions-footer">
+                            <button type="reset" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Limpiar</button>
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Registrar Reporte</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section class="dashboard-section">
+                    <div class="section-header">
+                        <i class="bi bi-speedometer2"></i>
+                        <h3>Dashboard de Pisos</h3>
+                        <div class="section-actions">
+                            <button class="btn btn-outline-primary btn-sm" id="btnActualizar">
+                                <i class="bi bi-arrow-clockwise"></i> Actualizar
+                            </button>
                         </div>
                     </div>
 
-                    <div class="form-field form-field-full">
-                        <label for="incidencias"><i class="bi bi-exclamation-triangle"></i> Incidencias</label>
-                        <textarea id="incidencias" name="incidencias" rows="2" placeholder="Incidentes relevantes del día"></textarea>
-                    </div>
+                    <div class="pisos-grid" id="pisosGrid">
+                        <div class="piso-card" data-piso="1">
+                            <div class="piso-header">
+                                <div class="piso-info">
+                                    <h5>Piso 1</h5>
+                                    <span class="piso-especialidad">Pediatría</span>
+                                </div>
+                                <div class="piso-status active">
+                                    <i class="bi bi-circle-fill"></i>
+                                    Activo
+                                </div>
+                            </div>
+                            <div class="piso-stats">
+                                <div class="stat">
+                                    <span class="stat-value">12</span>
+                                    <span class="stat-label">Ingresos</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">8</span>
+                                    <span class="stat-label">Egresos</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">2</span>
+                                    <span class="stat-label">Incidencias</span>
+                                </div>
+                            </div>
+                            <div class="piso-events">
+                                <span class="event-tag urgente">Urgente</span>
+                                <span class="event-tag rutina">Rutina</span>
+                            </div>
+                        </div>
 
-                    <div class="form-field form-field-full">
-                        <label for="observaciones"><i class="bi bi-chat-text"></i> Observaciones</label>
-                        <textarea id="observaciones" name="observaciones" rows="2" placeholder="Comentarios adicionales"></textarea>
-                    </div>
+                        <div class="piso-card" data-piso="2">
+                            <div class="piso-header">
+                                <div class="piso-info">
+                                    <h5>Piso 2</h5>
+                                    <span class="piso-especialidad">Ginecología</span>
+                                </div>
+                                <div class="piso-status active">
+                                    <i class="bi bi-circle-fill"></i>
+                                    Activo
+                                </div>
+                            </div>
+                            <div class="piso-stats">
+                                <div class="stat">
+                                    <span class="stat-value">6</span>
+                                    <span class="stat-label">Ingresos</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">4</span>
+                                    <span class="stat-label">Egresos</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">1</span>
+                                    <span class="stat-label">Incidencias</span>
+                                </div>
+                            </div>
+                            <div class="piso-events">
+                                <span class="event-tag rutina">Rutina</span>
+                            </div>
+                        </div>
 
-                    <div class="form-actions-footer">
-                        <button type="reset" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Limpiar</button>
-                        <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Registrar Reporte</button>
+                        <div class="piso-card" data-piso="3">
+                            <div class="piso-header">
+                                <div class="piso-info">
+                                    <h5>Piso 3</h5>
+                                    <span class="piso-especialidad">Cirugía</span>
+                                </div>
+                                <div class="piso-status inactivo">
+                                    <i class="bi bi-circle-fill"></i>
+                                    Sin reporte
+                                </div>
+                            </div>
+                            <div class="piso-stats">
+                                <div class="stat">
+                                    <span class="stat-value">0</span>
+                                    <span class="stat-label">Ingresos</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">0</span>
+                                    <span class="stat-label">Egresos</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-value">0</span>
+                                    <span class="stat-label">Incidencias</span>
+                                </div>
+                            </div>
+                            <div class="piso-events">
+                                <span class="event-tag vacio">Sin eventos</span>
+                            </div>
+                        </div>
                     </div>
-                </form>
-            </section>
+                </section>
+            </div>
 
-            <!-- TABLA DE REPORTES -->
-            <section class="form-section">
+            <section class="reportes-section">
                 <div class="section-header">
                     <i class="bi bi-list-ul"></i>
-                    <h3>Reportes Registrados</h3>
+                    <h3>Reportes del Día</h3>
+                    <div class="section-actions">
+                        <select id="filtroPiso" class="form-select form-select-sm">
+                            <option value="">Todos los pisos</option>
+                            <option value="1">Piso 1 - Pediatría</option>
+                            <option value="2">Piso 2 - Ginecología</option>
+                            <option value="3">Piso 3 - Cirugía</option>
+                            <option value="4">Piso 4 - Cardiología</option>
+                            <option value="5">Piso 5 - Ortopedia</option>
+                        </select>
+                        <button class="btn btn-outline-secondary btn-sm" id="btnExportar">
+                            <i class="bi bi-download"></i> Exportar
+                        </button>
+                    </div>
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table table-striped align-middle">
+                    <table class="table table-hover align-middle">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>Fecha</th>
                                 <th>Piso</th>
+                                <th>Turno</th>
                                 <th>Ingresos</th>
                                 <th>Egresos</th>
                                 <th>Incidencias</th>
-                                <th>Observaciones</th>
-                                <th>Acción</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody id="tablaReportes">
-                            <tr>
-                            
+                            <tr class="reporte-urgente">
+                                <td>15/01/2025</td>
+                                <td>
+                                    <div class="piso-info-tabla">
+                                        <strong>Piso 1</strong>
+                                        <small>Pediatría</small>
+                                    </div>
+                                </td>
+                                <td><span class="badge turno-matutino">Matutino</span></td>
+                                <td>12</td>
+                                <td>8</td>
+                                <td>Fiebre alta en paciente pediátrico</td>
+                                <td><span class="badge estado-urgente">Urgente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary btn-detalles">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger btn-eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="reporte-rutina">
+                                <td>15/01/2025</td>
+                                <td>
+                                    <div class="piso-info-tabla">
+                                        <strong>Piso 2</strong>
+                                        <small>Ginecología</small>
+                                    </div>
+                                </td>
+                                <td><span class="badge turno-vespertino">Vespertino</span></td>
+                                <td>6</td>
+                                <td>4</td>
+                                <td>Control prenatal rutinario</td>
+                                <td><span class="badge estado-normal">Normal</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary btn-detalles">
+                                        <i class="bi bi-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger btn-eliminar">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -170,7 +371,58 @@
         </div>
     </main>
 
-    <!-- ===== FOOTER ===== -->
+    <div id="calendarModal" class="modal-calendar">
+        <div class="modal-calendar-content">
+            <div class="modal-calendar-header">
+                <h5>Seleccionar Fecha</h5>
+                <button class="btn-close-calendar">&times;</button>
+            </div>
+            <div class="modal-calendar-body">
+                <div class="calendar-navigation">
+                    <button class="btn-calendar-nav" id="btnPrevMonth">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <h6 id="currentMonth">Enero 2025</h6>
+                    <button class="btn-calendar-nav" id="btnNextMonth">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="calendar-weekday">Dom</div>
+                    <div class="calendar-weekday">Lun</div>
+                    <div class="calendar-weekday">Mar</div>
+                    <div class="calendar-weekday">Mié</div>
+                    <div class="calendar-weekday">Jue</div>
+                    <div class="calendar-weekday">Vie</div>
+                    <div class="calendar-weekday">Sáb</div>
+                    
+                    <div id="calendarDays" class="calendar-days-container">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-calendar-footer">
+                <button type="button" class="btn btn-secondary" id="btnCancelCalendar">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmDate">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalDetalles" class="modal-detalles">
+        <div class="modal-detalles-content">
+            <div class="modal-detalles-header">
+                <h5>Detalles del Reporte</h5>
+                <button class="btn-close-modal">&times;</button>
+            </div>
+            <div class="modal-detalles-body">
+                <div id="detallesContenido"></div>
+            </div>
+            <div class="modal-detalles-footer">
+                <button type="button" class="btn btn-secondary" id="btnCerrarDetalles">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <footer class="hospital-footer">
         <div class="container-fluid">
             <div class="footer-content">
