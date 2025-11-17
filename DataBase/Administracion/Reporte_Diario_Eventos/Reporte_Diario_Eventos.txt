@@ -1,0 +1,9 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+fecha                        fecha_reporte    DATE                        Fecha del reporte. Es NOT NULL.
+piso                         piso_id          INTEGER                     ID del piso reportado. Es una Llave Foránea a la tabla 'pisos'. Es NOT NULL.
+ingresos                     num_ingresos     INTEGER                     Número de pacientes ingresados. Puede ser NULL (o DEFAULT 0).
+egresos                      num_egresos      INTEGER                     Número de pacientes egresados. Puede ser NULL (o DEFAULT 0).
+turno                        turno            tipo_turno_reporte_enum     Turno del reporte (matutino, vespertino, nocturno). Puede ser NULL si es "Todos los turnos".
+incidencias                  incidencias      TEXT                        Descripción de incidencias. Puede ser NULL.
+observaciones                observaciones    TEXT                        Observaciones adicionales. Puede ser NULL.

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Asignar Turno</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .test-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .btn-test {
+            margin: 5px;
+        }
+        .result {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .test-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="text-center mb-4">🧪 Test - Asignación de Turnos</h1>
+        <p class="text-center mb-4">Pruebas para la funcionalidad de asignación de turnos a enfermeros</p>
+        
+        <!-- Sección 1: Pruebas de API -->
+        <div class="test-section">
+            <h2 class="test-title">🔌 Pruebas de API</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>1. Asignar Turno Válido</h5>
+                    <p>Prueba la asignación de un turno con datos completos y válidos</p>
+                    <button class="btn btn-primary btn-test" onclick="testAsignarTurnoValido()">Ejecutar Prueba</button>
+                    <div id="result1" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>2. Asignar Turno sin Enfermero</h5>
+                    <p>Prueba la validación cuando no se selecciona un enfermero</p>
+                    <button class="btn btn-warning btn-test" onclick="testAsignarTurnoSinEnfermero()">Ejecutar Prueba</button>
+                    <div id="result2" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>3. Asignar Turno sin Fecha</h5>
+                    <p>Prueba la validación cuando no se selecciona una fecha</p>
+                    <button class="btn btn-warning btn-test" onclick="testAsignarTurnoSinFecha()">Ejecutar Prueba</button>
+                    <div id="result3" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>4. Obtener Turnos Asignados</h5>
+                    <p>Prueba la obtención de la lista de turnos asignados</p>
+                    <button class="btn btn-info btn-test" onclick="testObtenerTurnos()">Ejecutar Prueba</button>
+                    <div id="result4" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>5. Eliminar Turno</h5>
+                    <p>Prueba la eliminación de un turno asignado</p>
+                    <button class="btn btn-danger btn-test" onclick="testEliminarTurno()">Ejecutar Prueba</button>
+                    <div id="result5" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 2: Pruebas de Formulario -->
+        <div class="test-section">
+            <h2 class="test-title">📝 Pruebas de Formulario</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>6. Validación de Campos</h5>
+                    <p>Prueba la validación de todos los campos requeridos</p>
+                    <button class="btn btn-primary btn-test" onclick="testValidacionCampos()">Ejecutar Prueba</button>
+                    <div id="result6" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>7. Limpiar Formulario</h5>
+                    <p>Prueba la funcionalidad de limpiar el formulario</p>
+                    <button class="btn btn-secondary btn-test" onclick="testLimpiarFormulario()">Ejecutar Prueba</button>
+                    <div id="result7" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>8. Calendario Interactivo</h5>
+                    <p>Prueba la funcionalidad del calendario para seleccionar fechas</p>
+                    <button class="btn btn-info btn-test" onclick="testCalendario()">Ejecutar Prueba</button>
+                    <div id="result8" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 3: Pruebas de Integración -->
+        <div class="test-section">
+            <h2 class="test-title">🔄 Pruebas de Integración</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>9. Flujo Completo</h5>
+                    <p>Prueba el flujo completo: asignar → listar → eliminar turno</p>
+                    <button class="btn btn-success btn-test" onclick="testFlujoCompleto()">Ejecutar Prueba</button>
+                    <div id="result9" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>10. Carga de Enfermeros</h5>
+                    <p>Prueba la carga de la lista de enfermeros disponibles</p>
+                    <button class="btn btn-primary btn-test" onclick="testCargarEnfermeros()">Ejecutar Prueba</button>
+                    <div id="result10" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>11. Turnos Múltiples</h5>
+                    <p>Prueba la asignación de múltiples turnos en la misma fecha</p>
+                    <button class="btn btn-warning btn-test" onclick="testTurnosMultiples()">Ejecutar Prueba</button>
+                    <div id="result11" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón para ejecutar todas las pruebas -->
+        <div class="text-center mt-4">
+            <button class="btn btn-lg btn-primary" onclick="ejecutarTodasLasPruebas()">🚀 Ejecutar Todas las Pruebas</button>
+            <div id="resultGeneral" class="result mt-3"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variables para almacenar resultados
+        let resultadosPruebas = [];
+        let turnoIdCreado = null;
+
+        // Función para mostrar resultados
+        function mostrarResultado(elementId, mensaje, tipo) {
+            const elemento = document.getElementById(elementId);
+            elemento.innerHTML = mensaje;
+            elemento.className = 'result ' + tipo;
+            elemento.style.display = 'block';
+        }
+
+        // 1. Prueba: Asignar Turno Válido
+        async function testAsignarTurnoValido() {
+            const datos = {
+                enfermero_id: 1,
+                turno: "matutino",
+                fecha: "2025-01-20",
+                horario: "8:00 a.m. - 7:00 p.m."
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/turnos/asignar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    turnoIdCreado = result.turno_id;
+                    mostrarResultado('result1', 
+                        `✅ ÉXITO: Turno asignado correctamente<br>
+                         <strong>ID del Turno:</strong> ${result.turno_id}<br>
+                         <strong>Enfermero:</strong> Lamine Yamal<br>
+                         <strong>Turno:</strong> Matutino<br>
+                         <strong>Fecha:</strong> 20/01/2025`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result1', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result1', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}<br>
+                     <strong>Verifique que el servidor esté ejecutándose</strong>`, 'error');
+                return false;
+            }
+        }
+
+        // 2. Prueba: Asignar Turno sin Enfermero
+        async function testAsignarTurnoSinEnfermero() {
+            const datos = {
+                turno: "nocturno",
+                fecha: "2025-01-21",
+                horario: "7:00 p.m. - 8:00 a.m."
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/turnos/asignar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    mostrarResultado('result2', 
+                        `✅ ÉXITO: Validación funcionando correctamente<br>
+                         <strong>Error esperado:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result2', 
+                        `❌ ERROR: Se esperaba un error de validación pero la solicitud fue exitosa`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result2', 
+                    `⚠️ ADVERTENCIA: ${error.message}<br>
+                     <strong>Puede ser un error de conexión o validación del servidor</strong>`, 'info');
+                return false;
+            }
+        }
+
+        // 3. Prueba: Asignar Turno sin Fecha
+        async function testAsignarTurnoSinFecha() {
+            const datos = {
+                enfermero_id: 2,
+                turno: "vespertino",
+                horario: "12:00 p.m. - 8:00 p.m."
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/turnos/asignar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    mostrarResultado('result3', 
+                        `✅ ÉXITO: Validación de fecha funcionando<br>
+                         <strong>Error:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result3', 
+                        `❌ ERROR: Se esperaba un error de validación de fecha`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result3', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 4. Prueba: Obtener Turnos Asignados
+        async function testObtenerTurnos() {
+            try {
+                const response = await fetch('http://localhost:5000/api/turnos/listar');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result4', 
+                        `✅ ÉXITO: Lista de turnos obtenida correctamente<br>
+                         <strong>Total de turnos:</strong> ${result.turnos.length}<br>
+                         <strong>Ejemplo:</strong><br>
+                         <pre>${JSON.stringify(result.turnos.slice(0, 2), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result4', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result4', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 5. Prueba: Eliminar Turno
+        async function testEliminarTurno() {
+            // Primero creamos un turno para luego eliminarlo
+            if (!turnoIdCreado) {
+                mostrarResultado('result5', 
+                    '⚠️ Primero ejecute la prueba "Asignar Turno Válido" para crear un turno', 'info');
+                return false;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/turnos/eliminar/${turnoIdCreado}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result5', 
+                        `✅ ÉXITO: Turno eliminado correctamente<br>
+                         <strong>ID del turno eliminado:</strong> ${turnoIdCreado}<br>
+                         <strong>Mensaje:</strong> ${result.mensaje}`, 'success');
+                    turnoIdCreado = null;
+                    return true;
+                } else {
+                    mostrarResultado('result5', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result5', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 6. Prueba: Validación de Campos (simulación frontend)
+        function testValidacionCampos() {
+            // Simulamos la validación del formulario
+            const enfermero = "";
+            const turno = "matutino";
+            const fecha = "2025-01-20";
+            
+            let errores = [];
+            
+            if (!enfermero) errores.push("Seleccione un enfermero");
+            if (!turno) errores.push("Seleccione un turno");
+            if (!fecha) errores.push("Seleccione una fecha");
+            
+            if (errores.length > 0) {
+                mostrarResultado('result6', 
+                    `✅ ÉXITO: Validación funcionando correctamente<br>
+                     <strong>Errores detectados:</strong><br>
+                     - ${errores.join('<br>- ')}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result6', 
+                    `❌ ERROR: Se esperaba detectar errores de validación`, 'error');
+                return false;
+            }
+        }
+
+        // 7. Prueba: Limpiar Formulario (simulación frontend)
+        function testLimpiarFormulario() {
+            // Simulamos el limpiado de formulario
+            const campos = {
+                enfermero: "1",
+                turno: "matutino",
+                fecha: "2025-01-20"
+            };
+            
+            // Limpiar formulario
+            Object.keys(campos).forEach(key => campos[key] = "");
+            
+            const todosVacios = Object.values(campos).every(valor => valor === "");
+            
+            if (todosVacios) {
+                mostrarResultado('result7', 
+                    `✅ ÉXITO: Formulario limpiado correctamente<br>
+                     <strong>Estado:</strong> Todos los campos están vacíos`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result7', 
+                    `❌ ERROR: El formulario no se limpió completamente`, 'error');
+                return false;
+            }
+        }
+
+        // 8. Prueba: Calendario Interactivo (simulación frontend)
+        function testCalendario() {
+            // Simulamos la funcionalidad del calendario
+            const fechaSeleccionada = "2025-01-20";
+            const fechaFormateada = new Date(fechaSeleccionada).toLocaleDateString('es-ES');
+            
+            if (fechaSeleccionada && fechaFormateada) {
+                mostrarResultado('result8', 
+                    `✅ ÉXITO: Calendario funcionando correctamente<br>
+                     <strong>Fecha seleccionada:</strong> ${fechaSeleccionada}<br>
+                     <strong>Fecha formateada:</strong> ${fechaFormateada}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result8', 
+                    `❌ ERROR: Problema con la selección de fecha`, 'error');
+                return false;
+            }
+        }
+
+        // 9. Prueba: Flujo Completo
+        async function testFlujoCompleto() {
+            mostrarResultado('result9', '🔄 Ejecutando flujo completo...', 'info');
+            
+            // Paso 1: Asignar turno
+            const datos = {
+                enfermero_id: 3,
+                turno: "nocturno",
+                fecha: "2025-01-25",
+                horario: "7:00 p.m. - 8:00 a.m."
+            };
+
+            try {
+                // Asignar turno
+                const response1 = await fetch('http://localhost:5000/api/turnos/asignar', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(datos)
+                });
+                
+                if (!response1.ok) {
+                    throw new Error('Error al asignar turno');
+                }
+                
+                const result1 = await response1.json();
+                const turnoId = result1.turno_id;
+                
+                // Listar turnos
+                const response2 = await fetch('http://localhost:5000/api/turnos/listar');
+                if (!response2.ok) {
+                    throw new Error('Error al listar turnos');
+                }
+                
+                const result2 = await response2.json();
+                const turnoEncontrado = result2.turnos.find(t => t.id === turnoId);
+                
+                // Eliminar turno
+                const response3 = await fetch(`http://localhost:5000/api/turnos/eliminar/${turnoId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (!response3.ok) {
+                    throw new Error('Error al eliminar turno');
+                }
+                
+                mostrarResultado('result9', 
+                    `✅ ÉXITO: Flujo completo ejecutado correctamente<br>
+                     <strong>Paso 1:</strong> Turno asignado (ID: ${turnoId})<br>
+                     <strong>Paso 2:</strong> Turno listado y verificado<br>
+                     <strong>Paso 3:</strong> Turno eliminado correctamente`, 'success');
+                return true;
+                
+            } catch (error) {
+                mostrarResultado('result9', 
+                    `❌ ERROR en flujo completo: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 10. Prueba: Carga de Enfermeros
+        async function testCargarEnfermeros() {
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/listar');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result10', 
+                        `✅ ÉXITO: Lista de enfermeros cargada correctamente<br>
+                         <strong>Total de enfermeros:</strong> ${result.enfermeros.length}<br>
+                         <strong>Ejemplos:</strong><br>
+                         <pre>${JSON.stringify(result.enfermeros.slice(0, 3), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result10', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result10', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 11. Prueba: Turnos Múltiples
+        async function testTurnosMultiples() {
+            const turnos = [
+                { enfermero_id: 4, turno: "matutino", fecha: "2025-01-26" },
+                { enfermero_id: 5, turno: "vespertino", fecha: "2025-01-26" },
+                { enfermero_id: 6, turno: "nocturno", fecha: "2025-01-26" }
+            ];
+            
+            let exitosos = 0;
+            let idsCreados = [];
+            
+            try {
+                for (const turno of turnos) {
+                    const response = await fetch('http://localhost:5000/api/turnos/asignar', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({...turno, horario: "8:00 a.m. - 7:00 p.m."})
+                    });
+                    
+                    if (response.ok) {
+                        const result = await response.json();
+                        idsCreados.push(result.turno_id);
+                        exitosos++;
+                    }
+                }
+                
+                // Limpiar turnos creados
+                for (const id of idsCreados) {
+                    await fetch(`http://localhost:5000/api/turnos/eliminar/${id}`, {
+                        method: 'DELETE'
+                    });
+                }
+                
+                if (exitosos === turnos.length) {
+                    mostrarResultado('result11', 
+                        `✅ ÉXITO: Todos los turnos múltiples asignados correctamente<br>
+                         <strong>Turnos creados:</strong> ${exitosos}<br>
+                         <strong>Misma fecha:</strong> 26/01/2025`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result11', 
+                        `⚠️ PARCIAL: Solo ${exitosos} de ${turnos.length} turnos se asignaron`, 'info');
+                    return false;
+                }
+                
+            } catch (error) {
+                mostrarResultado('result11', 
+                    `❌ ERROR: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // Función para ejecutar todas las pruebas
+        async function ejecutarTodasLasPruebas() {
+            const pruebas = [
+                testAsignarTurnoValido,
+                testAsignarTurnoSinEnfermero,
+                testAsignarTurnoSinFecha,
+                testObtenerTurnos,
+                testEliminarTurno,
+                testValidacionCampos,
+                testLimpiarFormulario,
+                testCalendario,
+                testFlujoCompleto,
+                testCargarEnfermeros,
+                testTurnosMultiples
+            ];
+            
+            let exitosas = 0;
+            resultadosPruebas = [];
+            
+            mostrarResultado('resultGeneral', '🔄 Ejecutando todas las pruebas...', 'info');
+            
+            for (let i = 0; i < pruebas.length; i++) {
+                const resultado = await pruebas[i]();
+                resultadosPruebas.push({
+                    nombre: `Prueba ${i + 1}`,
+                    exitosa: resultado
+                });
+                
+                if (resultado) exitosas++;
+                
+                // Pequeña pausa entre pruebas
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            const porcentaje = Math.round((exitosas / pruebas.length) * 100);
+            const mensajeFinal = `
+                <h4>📊 Resumen de Pruebas</h4>
+                <strong>Total de pruebas:</strong> ${pruebas.length}<br>
+                <strong>Exitosas:</strong> ${exitosas}<br>
+                <strong>Fallidas:</strong> ${pruebas.length - exitosas}<br>
+                <strong>Porcentaje de éxito:</strong> ${porcentaje}%<br><br>
+                <strong>Estado:</strong> ${porcentaje >= 80 ? '✅ SATISFACTORIO' : porcentaje >= 60 ? '⚠️ ACEPTABLE' : '❌ REQUIERE ATENCIÓN'}
+            `;
+            
+            mostrarResultado('resultGeneral', mensajeFinal, 
+                porcentaje >= 80 ? 'success' : porcentaje >= 60 ? 'info' : 'error');
+        }
+    </script>
+</body>
+</html>

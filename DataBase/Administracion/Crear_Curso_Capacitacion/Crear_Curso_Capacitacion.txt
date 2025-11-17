@@ -1,0 +1,10 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+nombreCurso                  nombre_curso     VARCHAR(255)                Almacena el título del curso. Es NOT NULL.
+instructor                   instructor       VARCHAR(255)                Nombre del instructor. Es NOT NULL.
+modalidad                    modalidad        tipo_modalidad_curso (ENUM) Almacena la modalidad. Usar un ENUM es lo más eficiente para (presencial, virtual, hibrido). Es NOT NULL.
+fechaInicio                  fecha_inicio     DATE                        Almacena la fecha de inicio del curso. Es NOT NULL.
+fechaFin                     fecha_fin        DATE                        Almacena la fecha de finalización del curso. Es NOT NULL.
+duracion                     duracion_horas   INTEGER                     Duración total en horas. Es un número entero y puede ser nulo (NULL), ya que no está marcado como *.
+descripcion                  descripcion      TEXT                        Descripción larga del curso. El tipo TEXT es ideal para párrafos. Puede ser NULL.
+material                     (Tabla separada) materiales_curso            Este campo (file upload) no se guarda en la tabla 'cursos'. Requiere una segunda tabla (materiales_curso) para registrar cada archivo.

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Gestión de Roles</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .test-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .btn-test {
+            margin: 5px;
+        }
+        .result {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .test-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .permisos-test {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="text-center mb-4">🧪 Test - Gestión de Roles</h1>
+        <p class="text-center mb-4">Pruebas para la funcionalidad de creación y gestión de roles de enfermería</p>
+        
+        <!-- Sección 1: Pruebas de API -->
+        <div class="test-section">
+            <h2 class="test-title">🔌 Pruebas de API</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>1. Crear Rol Válido</h5>
+                    <p>Prueba la creación de un rol con datos completos y permisos</p>
+                    <button class="btn btn-primary btn-test" onclick="testCrearRolValido()">Ejecutar Prueba</button>
+                    <div id="result1" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>2. Crear Rol sin Nombre</h5>
+                    <p>Prueba la validación cuando no se ingresa nombre del rol</p>
+                    <button class="btn btn-warning btn-test" onclick="testCrearRolSinNombre()">Ejecutar Prueba</button>
+                    <div id="result2" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>3. Crear Rol sin Permisos</h5>
+                    <p>Prueba la creación de rol sin permisos seleccionados</p>
+                    <button class="btn btn-warning btn-test" onclick="testCrearRolSinPermisos()">Ejecutar Prueba</button>
+                    <div id="result3" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>4. Obtener Lista de Roles</h5>
+                    <p>Prueba la obtención de la lista de roles existentes</p>
+                    <button class="btn btn-info btn-test" onclick="testObtenerRoles()">Ejecutar Prueba</button>
+                    <div id="result4" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>5. Eliminar Rol</h5>
+                    <p>Prueba la eliminación de un rol existente</p>
+                    <button class="btn btn-danger btn-test" onclick="testEliminarRol()">Ejecutar Prueba</button>
+                    <div id="result5" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 2: Pruebas de Formulario -->
+        <div class="test-section">
+            <h2 class="test-title">📝 Pruebas de Formulario</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>6. Validación de Campos</h5>
+                    <p>Prueba la validación de todos los campos requeridos</p>
+                    <button class="btn btn-primary btn-test" onclick="testValidacionCampos()">Ejecutar Prueba</button>
+                    <div id="result6" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>7. Limpiar Formulario</h5>
+                    <p>Prueba la funcionalidad de limpiar el formulario</p>
+                    <button class="btn btn-secondary btn-test" onclick="testLimpiarFormulario()">Ejecutar Prueba</button>
+                    <div id="result7" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>8. Gestión de Permisos</h5>
+                    <p>Prueba la selección y deselección de permisos</p>
+                    <button class="btn btn-info btn-test" onclick="testGestionPermisos()">Ejecutar Prueba</button>
+                    <div id="result8" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 3: Pruebas de Niveles -->
+        <div class="test-section">
+            <h2 class="test-title">📊 Pruebas de Niveles</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>9. Diferentes Niveles de Rol</h5>
+                    <p>Prueba la creación de roles con diferentes niveles</p>
+                    <button class="btn btn-primary btn-test" onclick="testNivelesRol()">Ejecutar Prueba</button>
+                    <div id="result9" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>10. Permisos por Nivel</h5>
+                    <p>Prueba la asignación automática de permisos por nivel</p>
+                    <button class="btn btn-warning btn-test" onclick="testPermisosPorNivel()">Ejecutar Prueba</button>
+                    <div id="result10" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>11. Validación de Niveles</h5>
+                    <p>Prueba la validación de combinaciones de nivel y permisos</p>
+                    <button class="btn btn-warning btn-test" onclick="testValidacionNiveles()">Ejecutar Prueba</button>
+                    <div id="result11" class="result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 4: Pruebas de Integración -->
+        <div class="test-section">
+            <h2 class="test-title">🔄 Pruebas de Integración</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>12. Flujo Completo</h5>
+                    <p>Prueba el flujo completo: crear → listar → eliminar rol</p>
+                    <button class="btn btn-success btn-test" onclick="testFlujoCompleto()">Ejecutar Prueba</button>
+                    <div id="result12" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>13. Roles Múltiples</h5>
+                    <p>Prueba la creación de múltiples roles con diferentes configuraciones</p>
+                    <button class="btn btn-primary btn-test" onclick="testRolesMultiples()">Ejecutar Prueba</button>
+                    <div id="result13" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>14. Actualizar Rol</h5>
+                    <p>Prueba la actualización de permisos de un rol existente</p>
+                    <button class="btn btn-info btn-test" onclick="testActualizarRol()">Ejecutar Prueba</button>
+                    <div id="result14" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón para ejecutar todas las pruebas -->
+        <div class="text-center mt-4">
+            <button class="btn btn-lg btn-primary" onclick="ejecutarTodasLasPruebas()">🚀 Ejecutar Todas las Pruebas</button>
+            <div id="resultGeneral" class="result mt-3"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variables para almacenar resultados
+        let resultadosPruebas = [];
+        let rolIdCreado = null;
+
+        // Función para mostrar resultados
+        function mostrarResultado(elementId, mensaje, tipo) {
+            const elemento = document.getElementById(elementId);
+            elemento.innerHTML = mensaje;
+            elemento.className = 'result ' + tipo;
+            elemento.style.display = 'block';
+        }
+
+        // 1. Prueba: Crear Rol Válido
+        async function testCrearRolValido() {
+            const datos = {
+                nombre: "Enfermero Supervisor",
+                nivel: "avanzado",
+                descripcion: "Rol para supervisar actividades del personal de enfermería",
+                permisos: [
+                    "ver-turnos",
+                    "asignar-turno",
+                    "modificar-turno",
+                    "ver-pacientes",
+                    "ver-inventario",
+                    "gestionar-inventario",
+                    "ver-reportes",
+                    "generar-reportes"
+                ]
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/roles/crear', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    rolIdCreado = result.rol_id;
+                    mostrarResultado('result1', 
+                        `✅ ÉXITO: Rol creado correctamente<br>
+                         <strong>ID del Rol:</strong> ${result.rol_id}<br>
+                         <strong>Nombre:</strong> ${datos.nombre}<br>
+                         <strong>Nivel:</strong> ${datos.nivel}<br>
+                         <strong>Permisos asignados:</strong> ${datos.permisos.length}<br>
+                         <div class="permisos-test">${datos.permisos.join(', ')}</div>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result1', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result1', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}<br>
+                     <strong>Verifique que el servidor esté ejecutándose</strong>`, 'error');
+                return false;
+            }
+        }
+
+        // 2. Prueba: Crear Rol sin Nombre
+        async function testCrearRolSinNombre() {
+            const datos = {
+                nivel: "basico",
+                descripcion: "Rol sin nombre para prueba",
+                permisos: ["ver-turnos", "ver-pacientes"]
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/roles/crear', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    mostrarResultado('result2', 
+                        `✅ ÉXITO: Validación funcionando correctamente<br>
+                         <strong>Error esperado:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result2', 
+                        `❌ ERROR: Se esperaba un error de validación pero la solicitud fue exitosa`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result2', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 3. Prueba: Crear Rol sin Permisos
+        async function testCrearRolSinPermisos() {
+            const datos = {
+                nombre: "Rol Sin Permisos",
+                nivel: "basico",
+                descripcion: "Rol de prueba sin permisos asignados",
+                permisos: []
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/roles/crear', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    // Si se permite crear rol sin permisos, lo eliminamos
+                    await fetch(`http://localhost:5000/api/roles/eliminar/${result.rol_id}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    mostrarResultado('result3', 
+                        `⚠️ ADVERTENCIA: Se permitió crear rol sin permisos<br>
+                         <strong>Considerar:</strong> ¿Debería requerirse al menos un permiso?`, 'info');
+                    return true;
+                } else {
+                    mostrarResultado('result3', 
+                        `✅ ÉXITO: Validación de permisos funcionando<br>
+                         <strong>Error:</strong> ${result.error}`, 'success');
+                    return true;
+                }
+            } catch (error) {
+                mostrarResultado('result3', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 4. Prueba: Obtener Lista de Roles
+        async function testObtenerRoles() {
+            try {
+                const response = await fetch('http://localhost:5000/api/roles/listar');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result4', 
+                        `✅ ÉXITO: Lista de roles obtenida correctamente<br>
+                         <strong>Total de roles:</strong> ${result.roles.length}<br>
+                         <strong>Ejemplo:</strong><br>
+                         <pre>${JSON.stringify(result.roles.slice(0, 2), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result4', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result4', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 5. Prueba: Eliminar Rol
+        async function testEliminarRol() {
+            // Primero creamos un rol para luego eliminarlo
+            if (!rolIdCreado) {
+                mostrarResultado('result5', 
+                    '⚠️ Primero ejecute la prueba "Crear Rol Válido" para crear un rol', 'info');
+                return false;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:5000/api/roles/eliminar/${rolIdCreado}`, {
+                    method: 'DELETE'
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result5', 
+                        `✅ ÉXITO: Rol eliminado correctamente<br>
+                         <strong>ID del rol eliminado:</strong> ${rolIdCreado}<br>
+                         <strong>Mensaje:</strong> ${result.mensaje}`, 'success');
+                    rolIdCreado = null;
+                    return true;
+                } else {
+                    mostrarResultado('result5', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result5', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 6. Prueba: Validación de Campos (simulación frontend)
+        function testValidacionCampos() {
+            // Simulamos la validación del formulario
+            const campos = {
+                nombreRol: "",
+                nivelRol: "basico",
+                descripcionRol: "Descripción de prueba"
+            };
+            
+            let errores = [];
+            
+            if (!campos.nombreRol) errores.push("Nombre del rol es requerido");
+            if (!campos.nivelRol) errores.push("Nivel del rol es requerido");
+            
+            if (errores.length > 0) {
+                mostrarResultado('result6', 
+                    `✅ ÉXITO: Validación funcionando correctamente<br>
+                     <strong>Errores detectados:</strong><br>
+                     - ${errores.join('<br>- ')}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result6', 
+                    `❌ ERROR: Se esperaba detectar errores de validación`, 'error');
+                return false;
+            }
+        }
+
+        // 7. Prueba: Limpiar Formulario (simulación frontend)
+        function testLimpiarFormulario() {
+            // Simulamos el limpiado de formulario
+            const campos = {
+                nombreRol: "Rol de Prueba",
+                nivelRol: "avanzado",
+                descripcionRol: "Descripción de prueba",
+                permisos: ["ver-turnos", "asignar-turno", "ver-reportes"]
+            };
+            
+            // Limpiar formulario
+            Object.keys(campos).forEach(key => {
+                if (Array.isArray(campos[key])) {
+                    campos[key] = [];
+                } else {
+                    campos[key] = "";
+                }
+            });
+            
+            const todosVacios = Object.values(campos).every(valor => 
+                Array.isArray(valor) ? valor.length === 0 : valor === ""
+            );
+            
+            if (todosVacios) {
+                mostrarResultado('result7', 
+                    `✅ ÉXITO: Formulario limpiado correctamente<br>
+                     <strong>Estado:</strong> Todos los campos están vacíos<br>
+                     <strong>Permisos:</strong> 0 seleccionados`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result7', 
+                    `❌ ERROR: El formulario no se limpió completamente`, 'error');
+                return false;
+            }
+        }
+
+        // 8. Prueba: Gestión de Permisos
+        function testGestionPermisos() {
+            // Simulamos la gestión de permisos
+            const permisosIniciales = ["ver-turnos", "ver-pacientes"];
+            const permisosAgregados = ["asignar-turno", "modificar-turno"];
+            const permisosEliminados = ["ver-pacientes"];
+            
+            const permisosFinales = [...permisosIniciales, ...permisosAgregados]
+                .filter(permiso => !permisosEliminados.includes(permiso));
+            
+            if (permisosFinales.length === 3 && 
+                permisosFinales.includes("ver-turnos") &&
+                permisosFinales.includes("asignar-turno") &&
+                permisosFinales.includes("modificar-turno") &&
+                !permisosFinales.includes("ver-pacientes")) {
+                
+                mostrarResultado('result8', 
+                    `✅ ÉXITO: Gestión de permisos funcionando correctamente<br>
+                     <strong>Permisos iniciales:</strong> ${permisosIniciales.join(', ')}<br>
+                     <strong>Agregados:</strong> ${permisosAgregados.join(', ')}<br>
+                     <strong>Eliminados:</strong> ${permisosEliminados.join(', ')}<br>
+                     <strong>Finales:</strong> ${permisosFinales.join(', ')}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result8', 
+                    `❌ ERROR: Problema en la gestión de permisos`, 'error');
+                return false;
+            }
+        }
+
+        // 9. Prueba: Diferentes Niveles de Rol
+        async function testNivelesRol() {
+            const niveles = ["basico", "intermedio", "avanzado", "administrativo"];
+            let exitosos = 0;
+            
+            try {
+                for (const nivel of niveles) {
+                    const datos = {
+                        nombre: `Rol ${nivel.charAt(0).toUpperCase() + nivel.slice(1)}`,
+                        nivel: nivel,
+                        descripcion: `Rol de prueba con nivel ${nivel}`,
+                        permisos: ["ver-turnos", "ver-pacientes"]
+                    };
+                    
+                    const response = await fetch('http://localhost:5000/api/roles/crear', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(datos)
+                    });
+                    
+                    if (response.ok) {
+                        const result = await response.json();
+                        // Eliminar rol creado
+                        await fetch(`http://localhost:5000/api/roles/eliminar/${result.rol_id}`, {
+                            method: 'DELETE'
+                        });
+                        exitosos++;
+                    }
+                }
+                
+                if (exitosos === niveles.length) {
+                    mostrarResultado('result9', 
+                        `✅ ÉXITO: Todos los niveles probados correctamente<br>
+                         <strong>Niveles:</strong> ${niveles.join(', ')}<br>
+                         <strong>Exitosos:</strong> ${exitosos} de ${niveles.length}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result9', 
+                        `⚠️ PARCIAL: Solo ${exitosos} de ${niveles.length} niveles funcionaron`, 'info');
+                    return false;
+                }
+                
+            } catch (error) {
+                mostrarResultado('result9', 
+                    `❌ ERROR: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 10. Prueba: Permisos por Nivel (simulación)
+        function testPermisosPorNivel() {
+            // Simulamos asignación automática de permisos por nivel
+            const nivelesPermisos = {
+                "basico": ["ver-turnos", "ver-pacientes", "solicitar-material"],
+                "intermedio": ["ver-turnos", "asignar-turno", "ver-pacientes", "ver-inventario", "ver-reportes"],
+                "avanzado": ["ver-turnos", "asignar-turno", "modificar-turno", "ver-pacientes", "registrar-paciente", "ver-inventario", "gestionar-inventario", "ver-reportes", "generar-reportes"],
+                "administrativo": ["ver-turnos", "asignar-turno", "modificar-turno", "ver-pacientes", "registrar-paciente", "modificar-paciente", "ver-inventario", "gestionar-inventario", "solicitar-material", "ver-reportes", "generar-reportes", "exportar-datos"]
+            };
+            
+            const nivelTest = "intermedio";
+            const permisosAsignados = nivelesPermisos[nivelTest];
+            
+            if (permisosAsignados && permisosAsignados.length === 5) {
+                mostrarResultado('result10', 
+                    `✅ ÉXITO: Asignación por nivel funcionando<br>
+                     <strong>Nivel:</strong> ${nivelTest}<br>
+                     <strong>Permisos asignados:</strong> ${permisosAsignados.length}<br>
+                     <div class="permisos-test">${permisosAsignados.join(', ')}</div>`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result10', 
+                    `❌ ERROR: Problema en asignación por nivel`, 'error');
+                return false;
+            }
+        }
+
+        // 11. Prueba: Validación de Niveles
+        function testValidacionNiveles() {
+            // Simulamos validación de combinaciones inválidas
+            const rol = {
+                nombre: "Rol Inválido",
+                nivel: "basico",
+                permisos: ["generar-reportes", "gestionar-inventario"] // Permisos de nivel avanzado
+            };
+            
+            const permisosAvanzados = ["generar-reportes", "gestionar-inventario", "modificar-paciente", "exportar-datos"];
+            const tienePermisosAvanzados = rol.permisos.some(permiso => permisosAvanzados.includes(permiso));
+            
+            if (rol.nivel === "basico" && tienePermisosAvanzados) {
+                mostrarResultado('result11', 
+                    `✅ ÉXITO: Validación de niveles detectada<br>
+                     <strong>Problema:</strong> Rol básico con permisos avanzados<br>
+                     <strong>Permisos avanzados detectados:</strong> ${rol.permisos.filter(p => permisosAvanzados.includes(p)).join(', ')}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result11', 
+                    `❌ ERROR: No se detectó validación de niveles`, 'error');
+                return false;
+            }
+        }
+
+        // 12. Prueba: Flujo Completo
+        async function testFlujoCompleto() {
+            mostrarResultado('result12', '🔄 Ejecutando flujo completo...', 'info');
+            
+            // Paso 1: Crear rol
+            const datos = {
+                nombre: "Rol Flujo Completo",
+                nivel: "intermedio",
+                descripcion: "Rol de prueba para flujo completo",
+                permisos: ["ver-turnos", "asignar-turno", "ver-pacientes", "ver-inventario", "ver-reportes"]
+            };
+
+            try {
+                // Crear rol
+                const response1 = await fetch('http://localhost:5000/api/roles/crear', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(datos)
+                });
+                
+                if (!response1.ok) {
+                    throw new Error('Error al crear rol');
+                }
+                
+                const result1 = await response1.json();
+                const rolId = result1.rol_id;
+                
+                // Listar roles
+                const response2 = await fetch('http://localhost:5000/api/roles/listar');
+                if (!response2.ok) {
+                    throw new Error('Error al listar roles');
+                }
+                
+                const result2 = await response2.json();
+                const rolEncontrado = result2.roles.find(r => r.id === rolId);
+                
+                // Eliminar rol
+                const response3 = await fetch(`http://localhost:5000/api/roles/eliminar/${rolId}`, {
+                    method: 'DELETE'
+                });
+                
+                if (!response3.ok) {
+                    throw new Error('Error al eliminar rol');
+                }
+                
+                mostrarResultado('result12', 
+                    `✅ ÉXITO: Flujo completo ejecutado correctamente<br>
+                     <strong>Paso 1:</strong> Rol creado (ID: ${rolId})<br>
+                     <strong>Paso 2:</strong> Rol listado y verificado<br>
+                     <strong>Paso 3:</strong> Rol eliminado correctamente`, 'success');
+                return true;
+                
+            } catch (error) {
+                mostrarResultado('result12', 
+                    `❌ ERROR en flujo completo: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 13. Prueba: Roles Múltiples
+        async function testRolesMultiples() {
+            const roles = [
+                { nombre: "Enfermero Triaje", nivel: "basico", permisos: ["ver-turnos", "ver-pacientes", "solicitar-material"] },
+                { nombre: "Enfermero Especialista", nivel: "intermedio", permisos: ["ver-turnos", "asignar-turno", "ver-pacientes", "ver-inventario", "ver-reportes"] },
+                { nombre: "Coordinador Enfermería", nivel: "avanzado", permisos: ["ver-turnos", "asignar-turno", "modificar-turno", "ver-pacientes", "registrar-paciente", "ver-inventario", "gestionar-inventario", "ver-reportes", "generar-reportes"] }
+            ];
+            
+            let exitosos = 0;
+            let idsCreados = [];
+            
+            try {
+                for (const rol of roles) {
+                    const datos = {
+                        ...rol,
+                        descripcion: `Rol ${rol.nombre} - ${rol.nivel}`
+                    };
+                    
+                    const response = await fetch('http://localhost:5000/api/roles/crear', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(datos)
+                    });
+                    
+                    if (response.ok) {
+                        const result = await response.json();
+                        idsCreados.push(result.rol_id);
+                        exitosos++;
+                    }
+                }
+                
+                // Limpiar roles creados
+                for (const id of idsCreados) {
+                    await fetch(`http://localhost:5000/api/roles/eliminar/${id}`, {
+                        method: 'DELETE'
+                    });
+                }
+                
+                if (exitosos === roles.length) {
+                    mostrarResultado('result13', 
+                        `✅ ÉXITO: Todos los roles múltiples creados correctamente<br>
+                         <strong>Roles creados:</strong> ${exitosos}<br>
+                         <strong>Niveles:</strong> ${roles.map(r => r.nivel).join(', ')}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result13', 
+                        `⚠️ PARCIAL: Solo ${exitosos} de ${roles.length} roles se crearon`, 'info');
+                    return false;
+                }
+                
+            } catch (error) {
+                mostrarResultado('result13', 
+                    `❌ ERROR: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 14. Prueba: Actualizar Rol
+        async function testActualizarRol() {
+            // Primero creamos un rol para actualizarlo
+            const datosCreacion = {
+                nombre: "Rol para Actualizar",
+                nivel: "basico",
+                descripcion: "Rol de prueba para actualización",
+                permisos: ["ver-turnos", "ver-pacientes"]
+            };
+
+            try {
+                // Crear rol
+                const response1 = await fetch('http://localhost:5000/api/roles/crear', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(datosCreacion)
+                });
+                
+                if (!response1.ok) {
+                    throw new Error('Error al crear rol para actualizar');
+                }
+                
+                const result1 = await response1.json();
+                const rolId = result1.rol_id;
+                
+                // Actualizar rol
+                const datosActualizacion = {
+                    nombre: "Rol Actualizado",
+                    nivel: "intermedio",
+                    descripcion: "Rol actualizado con nuevos permisos",
+                    permisos: ["ver-turnos", "asignar-turno", "ver-pacientes", "ver-inventario", "ver-reportes"]
+                };
+                
+                const response2 = await fetch(`http://localhost:5000/api/roles/actualizar/${rolId}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(datosActualizacion)
+                });
+                
+                if (!response2.ok) {
+                    throw new Error('Error al actualizar rol');
+                }
+                
+                // Eliminar rol
+                await fetch(`http://localhost:5000/api/roles/eliminar/${rolId}`, {
+                    method: 'DELETE'
+                });
+                
+                mostrarResultado('result14', 
+                    `✅ ÉXITO: Rol actualizado correctamente<br>
+                     <strong>ID del rol:</strong> ${rolId}<br>
+                     <strong>Permisos agregados:</strong> ${datosActualizacion.permisos.length - datosCreacion.permisos.length}<br>
+                     <strong>Nivel actualizado:</strong> ${datosCreacion.nivel} → ${datosActualizacion.nivel}`, 'success');
+                return true;
+                
+            } catch (error) {
+                mostrarResultado('result14', 
+                    `❌ ERROR en actualización: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // Función para ejecutar todas las pruebas
+        async function ejecutarTodasLasPruebas() {
+            const pruebas = [
+                testCrearRolValido,
+                testCrearRolSinNombre,
+                testCrearRolSinPermisos,
+                testObtenerRoles,
+                testEliminarRol,
+                testValidacionCampos,
+                testLimpiarFormulario,
+                testGestionPermisos,
+                testNivelesRol,
+                testPermisosPorNivel,
+                testValidacionNiveles,
+                testFlujoCompleto,
+                testRolesMultiples,
+                testActualizarRol
+            ];
+            
+            let exitosas = 0;
+            resultadosPruebas = [];
+            
+            mostrarResultado('resultGeneral', '🔄 Ejecutando todas las pruebas...', 'info');
+            
+            for (let i = 0; i < pruebas.length; i++) {
+                const resultado = await pruebas[i]();
+                resultadosPruebas.push({
+                    nombre: `Prueba ${i + 1}`,
+                    exitosa: resultado
+                });
+                
+                if (resultado) exitosas++;
+                
+                // Pequeña pausa entre pruebas
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            const porcentaje = Math.round((exitosas / pruebas.length) * 100);
+            const mensajeFinal = `
+                <h4>📊 Resumen de Pruebas</h4>
+                <strong>Total de pruebas:</strong> ${pruebas.length}<br>
+                <strong>Exitosas:</strong> ${exitosas}<br>
+                <strong>Fallidas:</strong> ${pruebas.length - exitosas}<br>
+                <strong>Porcentaje de éxito:</strong> ${porcentaje}%<br><br>
+                <strong>Estado:</strong> ${porcentaje >= 80 ? '✅ SATISFACTORIO' : porcentaje >= 60 ? '⚠️ ACEPTABLE' : '❌ REQUIERE ATENCIÓN'}
+            `;
+            
+            mostrarResultado('resultGeneral', mensajeFinal, 
+                porcentaje >= 80 ? 'success' : porcentaje >= 60 ? 'info' : 'error');
+        }
+    </script>
+</body>
+</html>

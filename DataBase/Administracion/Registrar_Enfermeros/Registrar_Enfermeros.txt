@@ -1,0 +1,18 @@
+Campo del Formulario (name)   Columna en BDD       Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===================  ==========================  =============================================================================================================================
+nombre                       nombre_completo      VARCHAR(255)                Nombre completo del enfermero. Es NOT NULL.
+email                        email                VARCHAR(255)                Correo institucional. Es NOT NULL y UNIQUE. Usado para login.
+fecha_nacimiento             fecha_nacimiento     DATE                        Fecha de nacimiento del enfermero. Es NOT NULL.
+curp                         curp                 VARCHAR(18)                 CURP del enfermero. Es NOT NULL y UNIQUE.
+telefono                     telefono             VARCHAR(20)                 Teléfono de contacto. Es NOT NULL.
+cedula_profesional           cedula_profesional   VARCHAR(50)                 Cédula profesional. Es NOT NULL y UNIQUE.
+direccion                    direccion            TEXT                        Dirección de residencia completa. Es NOT NULL.
+puesto                       puesto               tipo_puesto_enum            Puesto asignado (base, especialista, jefatura). Es NOT NULL.
+especialidad                 especialidad         VARCHAR(255)                Especialidad (si aplica). Puede ser NULL.
+fecha_contratacion           fecha_contratacion   DATE                        Fecha de inicio de contrato. Es NOT NULL.
+tipo_rotacion                tipo_rotacion        tipo_rotacion_enum          Tipo de rotación (fijo, variable). Es NOT NULL.
+supervisor                   supervisor           VARCHAR(255)                Nombre del supervisor (campo readonly).
+usuario                      username             VARCHAR(100)                Nombre de usuario para el sistema. Es NOT NULL y UNIQUE.
+contrasena                   password_hash        VARCHAR(255)                Contraseña para el sistema. Se almacena como un HASH. Es NOT NULL.
+rol_acceso                   rol_id               INTEGER                     ID del rol (base, jefatura, coordinador). Es una Llave Foránea a la tabla 'roles'. Es NOT NULL.
+areas_acceso                 areas_acceso         TEXT[]                      Arreglo de strings con las áreas permitidas (ej. {'urgencias', 'uti'}).

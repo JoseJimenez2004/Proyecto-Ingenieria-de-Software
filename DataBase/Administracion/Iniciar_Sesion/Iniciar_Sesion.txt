@@ -1,0 +1,4 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+email                        email            VARCHAR(255)                Email del enfermero usado para el login. Es la columna de búsqueda. Debe ser NOT NULL y UNIQUE.
+password                     password_hash    VARCHAR(255)                El backend recibe el texto plano, lo "hashea" y lo compara con el HASH almacenado en esta columna. Es NOT NULL.

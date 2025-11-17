@@ -1,0 +1,6 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+nombreRol                    nombre_rol       VARCHAR(255)                Almacena el nombre del rol. Es NOT NULL y UNIQUE (no pueden existir dos roles con el mismo nombre).
+nivelRol                     nivel_rol        tipo_nivel_rol (ENUM)       Almacena el nivel del rol (basico, intermedio, avanzado, administrativo). No es requerido, puede tener un DEFAULT.
+descripcionRol               descripcion      TEXT                        Descripción larga de las funciones del rol. Puede ser NULL.
+permisos                     (Tabla N:M)      roles_permisos              Este campo (checkboxes) no es una columna. Es una relación N:M (Muchos-a-Muchos) que une un ROL con múltiples PERMISOS.

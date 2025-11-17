@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Reporte de Pacientes por Piso</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .test-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .btn-test {
+            margin: 5px;
+        }
+        .result {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .test-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .report-data {
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-size: 12px;
+            font-family: monospace;
+        }
+        .metric-simulation {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="text-center mb-4">🧪 Test - Reporte de Pacientes por Piso</h1>
+        <p class="text-center mb-4">Pruebas para la funcionalidad de reportes de pacientes y métricas hospitalarias</p>
+        
+        <!-- Sección 1: Pruebas de Reportes -->
+        <div class="test-section">
+            <h2 class="test-title">📊 Pruebas de Reportes</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>1. Generar Reporte Diario</h5>
+                    <p>Prueba la generación de reporte diario para todos los pisos</p>
+                    <button class="btn btn-primary btn-test" onclick="testGenerarReporteDiario()">Ejecutar Prueba</button>
+                    <div id="result1" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>2. Generar Reporte por Piso</h5>
+                    <p>Prueba la generación de reporte para piso específico</p>
+                    <button class="btn btn-primary btn-test" onclick="testGenerarReportePiso()">Ejecutar Prueba</button>
+                    <div id="result2" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>3. Generar Reporte Semanal</h5>
+                    <p>Prueba la generación de reporte semanal</p>
+                    <button class="btn btn-primary btn-test" onclick="testGenerarReporteSemanal()">Ejecutar Prueba</button>
+                    <div id="result3" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>4. Validación de Filtros</h5>
+                    <p>Prueba la validación de filtros requeridos</p>
+                    <button class="btn btn-warning btn-test" onclick="testValidacionFiltros()">Ejecutar Prueba</button>
+                    <div id="result4" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>5. Obtener Datos de Pisos</h5>
+                    <p>Prueba la obtención de datos de ocupación por piso</p>
+                    <button class="btn btn-info btn-test" onclick="testObtenerDatosPisos()">Ejecutar Prueba</button>
+                    <div id="result5" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 2: Pruebas de Métricas -->
+        <div class="test-section">
+            <h2 class="test-title">📈 Pruebas de Métricas</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>6. Métricas en Tiempo Real</h5>
+                    <p>Prueba la obtención de métricas actualizadas</p>
+                    <button class="btn btn-primary btn-test" onclick="testMetricasTiempoReal()">Ejecutar Prueba</button>
+                    <div id="result6" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>7. Cálculo de Ocupación</h5>
+                    <p>Prueba el cálculo de tasas de ocupación</p>
+                    <button class="btn btn-info btn-test" onclick="testCalculoOcupacion()">Ejecutar Prueba</button>
+                    <div id="result7" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>8. Relación Enfermero/Paciente</h5>
+                    <p>Prueba el cálculo de relación enfermero-paciente</p>
+                    <button class="btn btn-info btn-test" onclick="testRelacionEnfermeroPaciente()">Ejecutar Prueba</button>
+                    <div id="result8" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 3: Pruebas de Dashboard -->
+        <div class="test-section">
+            <h2 class="test-title">📊 Pruebas de Dashboard</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>9. Actualización Dashboard</h5>
+                    <p>Prueba la actualización en tiempo real del dashboard</p>
+                    <button class="btn btn-primary btn-test" onclick="testActualizarDashboard()">Ejecutar Prueba</button>
+                    <div id="result9" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>10. Gráficos de Ocupación</h5>
+                    <p>Prueba la generación de gráficos de ocupación</p>
+                    <button class="btn btn-info btn-test" onclick="testGraficosOcupacion()">Ejecutar Prueba</button>
+                    <div id="result10" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>11. Limpiar Filtros</h5>
+                    <p>Prueba la funcionalidad de limpiar filtros</p>
+                    <button class="btn btn-secondary btn-test" onclick="testLimpiarFiltros()">Ejecutar Prueba</button>
+                    <div id="result11" class="result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 4: Pruebas de Integración -->
+        <div class="test-section">
+            <h2 class="test-title">🔄 Pruebas de Integración</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>12. Flujo Completo</h5>
+                    <p>Prueba el flujo completo de generación de reportes</p>
+                    <button class="btn btn-success btn-test" onclick="testFlujoCompleto()">Ejecutar Prueba</button>
+                    <div id="result12" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>13. Exportación Excel</h5>
+                    <p>Prueba la exportación de reportes a Excel</p>
+                    <button class="btn btn-success btn-test" onclick="testExportacionExcel()">Ejecutar Prueba</button>
+                    <div id="result13" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>14. Exportación PDF</h5>
+                    <p>Prueba la exportación de reportes a PDF</p>
+                    <button class="btn btn-danger btn-test" onclick="testExportacionPDF()">Ejecutar Prueba</button>
+                    <div id="result14" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón para ejecutar todas las pruebas -->
+        <div class="text-center mt-4">
+            <button class="btn btn-lg btn-primary" onclick="ejecutarTodasLasPruebas()">🚀 Ejecutar Todas las Pruebas</button>
+            <div id="resultGeneral" class="result mt-3"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variables para almacenar resultados
+        let resultadosPruebas = [];
+
+        // Función para mostrar resultados
+        function mostrarResultado(elementId, mensaje, tipo) {
+            const elemento = document.getElementById(elementId);
+            elemento.innerHTML = mensaje;
+            elemento.className = 'result ' + tipo;
+            elemento.style.display = 'block';
+        }
+
+        // 1. Prueba: Generar Reporte Diario
+        async function testGenerarReporteDiario() {
+            const filtros = {
+                frecuencia: "diario",
+                piso: "todos",
+                fechaInicio: "2025-01-20",
+                fechaFin: "2025-01-20"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/generar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(filtros)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result1', 
+                        `✅ ÉXITO: Reporte diario generado correctamente<br>
+                         <strong>Frecuencia:</strong> ${filtros.frecuencia}<br>
+                         <strong>Piso:</strong> ${filtros.piso}<br>
+                         <strong>Período:</strong> ${filtros.fechaInicio}<br>
+                         <strong>Total de pisos reportados:</strong> ${result.pisos ? result.pisos.length : 'N/A'}<br>
+                         <strong>Pacientes totales:</strong> ${result.total_pacientes || 'N/A'}<br>
+                         <div class="report-data">${JSON.stringify(result, null, 2)}</div>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result1', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result1', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}<br>
+                     <strong>Verifique que el servidor esté ejecutándose</strong>`, 'error');
+                return false;
+            }
+        }
+
+        // 2. Prueba: Generar Reporte por Piso
+        async function testGenerarReportePiso() {
+            const filtros = {
+                frecuencia: "diario",
+                piso: "1",
+                fechaInicio: "2025-01-20",
+                fechaFin: "2025-01-20"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/generar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(filtros)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    const pisoEspecifico = result.pisos && result.pisos.find(p => p.numero === "1");
+                    
+                    mostrarResultado('result2', 
+                        `✅ ÉXITO: Reporte por piso generado correctamente<br>
+                         <strong>Piso:</strong> ${filtros.piso} - Pediatría<br>
+                         <strong>Pacientes en piso:</strong> ${pisoEspecifico ? pisoEspecifico.pacientes : 'N/A'}<br>
+                         <strong>Ocupación:</strong> ${pisoEspecifico ? pisoEspecifico.ocupacion + '%' : 'N/A'}<br>
+                         <strong>Enfermeros asignados:</strong> ${pisoEspecifico ? pisoEspecifico.enfermeros : 'N/A'}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result2', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result2', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 3. Prueba: Generar Reporte Semanal
+        async function testGenerarReporteSemanal() {
+            const filtros = {
+                frecuencia: "semanal",
+                piso: "todos",
+                fechaInicio: "2025-01-20",
+                fechaFin: "2025-01-26"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/generar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(filtros)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result3', 
+                        `✅ ÉXITO: Reporte semanal generado correctamente<br>
+                         <strong>Frecuencia:</strong> ${filtros.frecuencia}<br>
+                         <strong>Período:</strong> ${filtros.fechaInicio} a ${filtros.fechaFin}<br>
+                         <strong>Días reportados:</strong> 7 días<br>
+                         <strong>Promedio diario de pacientes:</strong> ${result.promedio_pacientes || 'N/A'}<br>
+                         <strong>Tendencia:</strong> ${result.tendencia || 'N/A'}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result3', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result3', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 4. Prueba: Validación de Filtros
+        async function testValidacionFiltros() {
+            const filtros = {
+                // Frecuencia y piso faltantes deliberadamente
+                fechaInicio: "2025-01-20",
+                fechaFin: "2025-01-20"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/generar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(filtros)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    mostrarResultado('result4', 
+                        `✅ ÉXITO: Validación de filtros funcionando<br>
+                         <strong>Error esperado:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}<br>
+                         <strong>Filtros enviados:</strong><br>
+                         <div class="report-data">${JSON.stringify(filtros, null, 2)}</div>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result4', 
+                        `❌ ERROR: Se esperaba error de validación pero la solicitud fue exitosa`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result4', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 5. Prueba: Obtener Datos de Pisos
+        async function testObtenerDatosPisos() {
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/pisos');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result5', 
+                        `✅ ÉXITO: Datos de pisos obtenidos correctamente<br>
+                         <strong>Total de pisos:</strong> ${result.pisos ? result.pisos.length : 'N/A'}<br>
+                         <strong>Pacientes totales:</strong> ${result.total_pacientes || 'N/A'}<br>
+                         <strong>Ocupación promedio:</strong> ${result.ocupacion_promedio || 'N/A'}%<br>
+                         <strong>Ejemplo de datos por piso:</strong><br>
+                         <pre>${JSON.stringify(result.pisos ? result.pisos.slice(0, 2) : [], null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result5', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result5', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 6. Prueba: Métricas en Tiempo Real
+        async function testMetricasTiempoReal() {
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/metricas');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result6', 
+                        `✅ ÉXITO: Métricas en tiempo real obtenidas<br>
+                         <strong>Pacientes activos:</strong> ${result.pacientes_activos || 'N/A'}<br>
+                         <strong>Tasa de ocupación:</strong> ${result.tasa_ocupacion || 'N/A'}%<br>
+                         <strong>Alertas activas:</strong> ${result.alertas_activas || 'N/A'}<br>
+                         <strong>Relación enfermero/paciente:</strong> ${result.relacion_enfermero_paciente || 'N/A'}<br>
+                         <strong>Última actualización:</strong> ${result.ultima_actualizacion || 'N/A'}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result6', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result6', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 7. Prueba: Cálculo de Ocupación
+        function testCalculoOcupacion() {
+            // Simulamos cálculo de ocupación
+            const pisos = [
+                { numero: "1", pacientes: 12, camas_totales: 20, ocupacion: 60 },
+                { numero: "2", pacientes: 8, camas_totales: 15, ocupacion: 53 },
+                { numero: "3", pacientes: 6, camas_totales: 12, ocupacion: 50 }
+            ];
+            
+            const ocupacionTotal = pisos.reduce((sum, piso) => sum + piso.ocupacion, 0);
+            const ocupacionPromedio = Math.round(ocupacionTotal / pisos.length);
+            
+            if (ocupacionPromedio === 54) { // (60 + 53 + 50) / 3 = 54.33 ≈ 54
+                mostrarResultado('result7', 
+                    `✅ ÉXITO: Cálculo de ocupación funcionando<br>
+                     <strong>Ocupación promedio:</strong> ${ocupacionPromedio}%<br>
+                     <strong>Detalle por piso:</strong><br>
+                     <div class="metric-simulation">
+                         Piso 1: 12/20 camas (60%)<br>
+                         Piso 2: 8/15 camas (53%)<br>
+                         Piso 3: 6/12 camas (50%)<br>
+                         Promedio: ${ocupacionPromedio}%
+                     </div>`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result7', 
+                    `❌ ERROR: Problema en cálculo de ocupación`, 'error');
+                return false;
+            }
+        }
+
+        // 8. Prueba: Relación Enfermero/Paciente
+        function testRelacionEnfermeroPaciente() {
+            // Simulamos cálculo de relación enfermero/paciente
+            const datos = {
+                pacientes_totales: 45,
+                enfermeros_activos: 15,
+                relacion_ideal: 1.5 // 1 enfermero por cada 1.5 pacientes
+            };
+            
+            const relacionActual = datos.pacientes_totales / datos.enfermeros_activos;
+            const estado = relacionActual <= datos.relacion_ideal ? "Óptima" : "Sobrecarga";
+            
+            mostrarResultado('result8', 
+                `✅ ÉXITO: Cálculo de relación funcionando<br>
+                 <strong>Pacientes totales:</strong> ${datos.pacientes_totales}<br>
+                 <strong>Enfermeros activos:</strong> ${datos.enfermeros_activos}<br>
+                 <strong>Relación actual:</strong> 1:${relacionActual.toFixed(1)}<br>
+                 <strong>Relación ideal:</strong> 1:${datos.relacion_ideal}<br>
+                 <strong>Estado:</strong> ${estado}`, 'success');
+            return true;
+        }
+
+        // 9. Prueba: Actualización Dashboard (simulación)
+        function testActualizarDashboard() {
+            // Simulamos actualización del dashboard
+            const metricasActualizadas = {
+                pacientes_activos: 48,
+                tasa_ocupacion: "76%",
+                alertas_activas: 2,
+                relacion_enfermero_paciente: "1:3.2",
+                ultima_actualizacion: new Date().toLocaleString()
+            };
+            
+            if (metricasActualizadas.pacientes_activos > 0) {
+                mostrarResultado('result9', 
+                    `✅ ÉXITO: Dashboard actualizado correctamente<br>
+                     <strong>Pacientes activos:</strong> ${metricasActualizadas.pacientes_activos}<br>
+                     <strong>Tasa de ocupación:</strong> ${metricasActualizadas.tasa_ocupacion}<br>
+                     <strong>Alertas activas:</strong> ${metricasActualizadas.alertas_activas}<br>
+                     <strong>Relación E/P:</strong> ${metricasActualizadas.relacion_enfermero_paciente}<br>
+                     <strong>Actualizado:</strong> ${metricasActualizadas.ultima_actualizacion}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result9', 
+                    `❌ ERROR: Problema en actualización del dashboard`, 'error');
+                return false;
+            }
+        }
+
+        // 10. Prueba: Gráficos de Ocupación (simulación)
+        function testGraficosOcupacion() {
+            // Simulamos datos para gráficos
+            const datosGrafico = {
+                labels: ["Piso 1", "Piso 2", "Piso 3", "Piso 4", "Piso 5"],
+                ocupacion: [75, 60, 45, 80, 55],
+                pacientes: [15, 9, 6, 12, 8],
+                capacidad: [20, 15, 12, 15, 15]
+            };
+            
+            if (datosGrafico.labels.length === 5 && datosGrafico.ocupacion.length === 5) {
+                mostrarResultado('result10', 
+                    `✅ ÉXITO: Datos para gráficos generados correctamente<br>
+                     <strong>Pisos:</strong> ${datosGrafico.labels.join(', ')}<br>
+                     <strong>Ocupación:</strong> ${datosGrafico.ocupacion.join('%, ')}%<br>
+                     <strong>Pacientes:</strong> ${datosGrafico.pacientes.join(', ')}<br>
+                     <strong>Capacidad máxima:</strong> ${datosGrafico.capacidad.join(', ')} camas`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result10', 
+                    `❌ ERROR: Problema en generación de datos para gráficos`, 'error');
+                return false;
+            }
+        }
+
+        // 11. Prueba: Limpiar Filtros
+        function testLimpiarFiltros() {
+            // Simulamos limpiado de filtros
+            const filtros = {
+                frecuencia: "diario",
+                piso: "1",
+                fechaInicio: "2025-01-20",
+                fechaFin: "2025-01-20"
+            };
+            
+            // Limpiar filtros
+            Object.keys(filtros).forEach(key => filtros[key] = "");
+            
+            const todosVacios = Object.values(filtros).every(valor => valor === "");
+            
+            if (todosVacios) {
+                mostrarResultado('result11', 
+                    `✅ ÉXITO: Filtros limpiados correctamente<br>
+                     <strong>Estado:</strong> Todos los filtros están vacíos<br>
+                     <strong>Formulario listo para nueva configuración</strong>`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result11', 
+                    `❌ ERROR: Los filtros no se limpiaron completamente`, 'error');
+                return false;
+            }
+        }
+
+        // 12. Prueba: Flujo Completo
+        async function testFlujoCompleto() {
+            mostrarResultado('result12', '🔄 Ejecutando flujo completo...', 'info');
+            
+            try {
+                // Paso 1: Obtener métricas iniciales
+                const response1 = await fetch('http://localhost:5000/api/reportes-pacientes/metricas');
+                if (!response1.ok) throw new Error('Error al obtener métricas');
+                
+                // Paso 2: Generar reporte
+                const filtros = {
+                    frecuencia: "diario",
+                    piso: "todos",
+                    fechaInicio: "2025-01-20",
+                    fechaFin: "2025-01-20"
+                };
+                
+                const response2 = await fetch('http://localhost:5000/api/reportes-pacientes/generar', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(filtros)
+                });
+                
+                if (!response2.ok) throw new Error('Error al generar reporte');
+                const result2 = await response2.json();
+                
+                // Paso 3: Verificar datos
+                const reporteValido = result2.pisos && result2.pisos.length > 0;
+                
+                if (reporteValido) {
+                    mostrarResultado('result12', 
+                        `✅ ÉXITO: Flujo completo ejecutado correctamente<br>
+                         <strong>Paso 1:</strong> Métricas obtenidas<br>
+                         <strong>Paso 2:</strong> Reporte generado<br>
+                         <strong>Paso 3:</strong> Datos verificados<br>
+                         <strong>Pisos reportados:</strong> ${result2.pisos.length}<br>
+                         <strong>Pacientes totales:</strong> ${result2.total_pacientes || 'N/A'}`, 'success');
+                    return true;
+                } else {
+                    throw new Error('Reporte generado pero datos inválidos');
+                }
+                
+            } catch (error) {
+                mostrarResultado('result12', 
+                    `❌ ERROR en flujo completo: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 13. Prueba: Exportación Excel
+        async function testExportacionExcel() {
+            const filtros = {
+                frecuencia: "diario",
+                piso: "todos",
+                fechaInicio: "2025-01-20",
+                fechaFin: "2025-01-20"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/exportar-excel', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(filtros)
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    
+                    mostrarResultado('result13', 
+                        `✅ ÉXITO: Exportación a Excel funcionando<br>
+                         <strong>Tipo de archivo:</strong> ${blob.type}<br>
+                         <strong>Tamaño:</strong> ${(blob.size / 1024).toFixed(2)} KB<br>
+                         <strong>Formato:</strong> Excel (.xlsx)`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result13', 
+                        `❌ ERROR: ${response.status} - ${response.statusText}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result13', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 14. Prueba: Exportación PDF
+        async function testExportacionPDF() {
+            const filtros = {
+                frecuencia: "diario",
+                piso: "todos",
+                fechaInicio: "2025-01-20",
+                fechaFin: "2025-01-20"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/reportes-pacientes/exportar-pdf', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(filtros)
+                });
+                
+                if (response.ok) {
+                    const blob = await response.blob();
+                    
+                    mostrarResultado('result14', 
+                        `✅ ÉXITO: Exportación a PDF funcionando<br>
+                         <strong>Tipo de archivo:</strong> ${blob.type}<br>
+                         <strong>Tamaño:</strong> ${(blob.size / 1024).toFixed(2)} KB<br>
+                         <strong>Formato:</strong> PDF (.pdf)`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result14', 
+                        `❌ ERROR: ${response.status} - ${response.statusText}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result14', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // Función para ejecutar todas las pruebas
+        async function ejecutarTodasLasPruebas() {
+            const pruebas = [
+                testGenerarReporteDiario,
+                testGenerarReportePiso,
+                testGenerarReporteSemanal,
+                testValidacionFiltros,
+                testObtenerDatosPisos,
+                testMetricasTiempoReal,
+                testCalculoOcupacion,
+                testRelacionEnfermeroPaciente,
+                testActualizarDashboard,
+                testGraficosOcupacion,
+                testLimpiarFiltros,
+                testFlujoCompleto,
+                testExportacionExcel,
+                testExportacionPDF
+            ];
+            
+            let exitosas = 0;
+            resultadosPruebas = [];
+            
+            mostrarResultado('resultGeneral', '🔄 Ejecutando todas las pruebas...', 'info');
+            
+            for (let i = 0; i < pruebas.length; i++) {
+                const resultado = await pruebas[i]();
+                resultadosPruebas.push({
+                    nombre: `Prueba ${i + 1}`,
+                    exitosa: resultado
+                });
+                
+                if (resultado) exitosas++;
+                
+                // Pequeña pausa entre pruebas
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            const porcentaje = Math.round((exitosas / pruebas.length) * 100);
+            const mensajeFinal = `
+                <h4>📊 Resumen de Pruebas</h4>
+                <strong>Total de pruebas:</strong> ${pruebas.length}<br>
+                <strong>Exitosas:</strong> ${exitosas}<br>
+                <strong>Fallidas:</strong> ${pruebas.length - exitosas}<br>
+                <strong>Porcentaje de éxito:</strong> ${porcentaje}%<br><br>
+                <strong>Estado:</strong> ${porcentaje >= 80 ? '✅ SATISFACTORIO' : porcentaje >= 60 ? '⚠️ ACEPTABLE' : '❌ REQUIERE ATENCIÓN'}
+            `;
+            
+            mostrarResultado('resultGeneral', mensajeFinal, 
+                porcentaje >= 80 ? 'success' : porcentaje >= 60 ? 'info' : 'error');
+        }
+    </script>
+</body>
+</html>

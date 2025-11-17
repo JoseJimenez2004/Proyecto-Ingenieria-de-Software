@@ -1,0 +1,5 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+enfermero                  enfermero_id   INTEGER                     Almacena el ID del enfermero. Es una llave foránea (Foreign Key) que apunta a una tabla enfermeros. Es NOT NULL.
+turno                      turno          tipo_turno (ENUM)           Almacena el tipo de turno. Usar un tipo ENUM es lo más eficiente y seguro para valores fijos (matutino, nocturno, etc.). Es NOT NULL.
+fecha                      fecha          DATE                        Almacena la fecha específica del turno. El tipo DATE es ideal para esto. Es NOT NULL.

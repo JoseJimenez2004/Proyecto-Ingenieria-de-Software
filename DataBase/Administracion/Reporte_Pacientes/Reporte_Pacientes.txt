@@ -1,0 +1,6 @@
+ Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+frecuencia                   (Parámetro)      VARCHAR                     Parámetro de consulta. No es una columna; se usa en el backend para agrupar el reporte (diario, semanal, mensual).
+piso                         (Parámetro)      VARCHAR                     Parámetro de consulta. Se usa para filtrar por 'piso_id' o 'todos'. El valor es un ID (ej. '1') o 'todos'.
+fechaInicio                  (Parámetro)      DATE                        Parámetro de consulta. Se usa como 'fecha_inicio' en una cláusula WHERE para filtrar el rango de fechas.
+fechaFin                     (Parámetro)      DATE                        Parámetro de consulta. Se usa como 'fecha_fin' en una cláusula WHERE para filtrar el rango de fechas.
