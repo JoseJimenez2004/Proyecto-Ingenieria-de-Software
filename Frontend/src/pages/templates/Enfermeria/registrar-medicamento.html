@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Medicamento - AlivioHospital</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="/Frontend/src/css/pages/generalLayout.css" rel="stylesheet">
+  <link href="/Frontend/src/css/pages/registrar-medicamento.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="hospital-header">
+    <div class="container-fluid">
+      <div class="header-content">
+        <div class="hospital-brand">
+          <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="hospital-logo">
+          <div class="hospital-name">
+            <h1>AlivioHospital</h1>
+            <p>Cuidado Humano, Ciencia de Vanguardia</p>
+          </div>
+        </div>
+        <div class="header-actions">
+          <span class="user-welcome">Bienvenido</span>
+          <button class="btn-logout">
+            <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVEGACIÓN -->
+  <nav class="main-navigation">
+    <div class="container-fluid">
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html" class="nav-link"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+        <li class="nav-item active"><a href="registrar-medicamento.html" class="nav-link"><i class="bi bi-capsule"></i> Registrar Medicamento</a></li>
+        <li class="nav-item"><a href="devolver-medicamento.html" class="nav-link"><i class="bi bi-arrow-repeat"></i> Devolver Medicamento</a></li>
+        <li class="nav-item"><a href="inventario.html" class="nav-link"><i class="bi bi-archive"></i> Inventario</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb-container">
+    <div class="container-fluid">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard.html">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="#">Insumos</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Registrar Medicamento</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="main-content">
+    <div class="form-header">
+      <div class="form-title-section">
+        <h2><i class="bi bi-capsule"></i> Registrar Medicamento</h2>
+        <p class="form-subtitle">Registra nuevos medicamentos o insumos disponibles en el piso o área</p>
+      </div>
+    </div>
+
+    <div class="form-container">
+      <form id="formMedicamento">
+        <section class="form-section">
+          <div class="section-header">
+            <i class="bi bi-info-circle"></i>
+            <h3>Datos del Medicamento</h3>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="nombreMedicamento">Nombre del Medicamento <span>*</span></label>
+              <input type="text" id="nombreMedicamento" placeholder="Ej. Paracetamol 500mg" required>
+            </div>
+
+            <div class="form-field">
+              <label for="presentacion">Presentación</label>
+              <select id="presentacion">
+                <option value="">Seleccione...</option>
+                <option>Tableta</option>
+                <option>Solución Inyectable</option>
+                <option>Jarabe</option>
+                <option>Cápsula</option>
+                <option>Pomada</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="cantidad">Cantidad Disponible <span>*</span></label>
+              <input type="number" id="cantidad" min="1" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="area">Área Asignada</label>
+              <select id="area">
+                <option value="">Seleccione área</option>
+                <option>Urgencias</option>
+                <option>Cirugía</option>
+                <option>Hospitalización</option>
+                <option>Pediatría</option>
+                <option>Terapia Intensiva</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="responsable">Responsable del Registro</label>
+              <input type="text" id="responsable" placeholder="Ej. María López">
+            </div>
+          </div>
+        </section>
+
+        <!-- Botones -->
+        <div class="form-actions-footer">
+          <button type="reset" class="btn btn-outline-primary">
+            <i class="bi bi-arrow-counterclockwise"></i> Limpiar
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-save"></i> Registrar Medicamento
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="hospital-footer">
+    <div class="container-fluid">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="footer-logo">
+          <div class="footer-info">
+            <h3>AlivioHospital</h3>
+            <p>Proveer atención médica hospitalaria de Alta Especialidad con un enfoque integral</p>
+          </div>
+        </div>
+        <div class="footer-links">
+          <div class="footer-section">
+            <h4>Contacto</h4>
+            <p><i class="bi bi-telephone"></i> (55) 1234-5678</p>
+            <p><i class="bi bi-envelope"></i> info@aliviohospital.com</p>
+          </div>
+          <div class="footer-section">
+            <h4>Horarios</h4>
+            <p>Administración: 8:00 - 18:00</p>
+            <p>Urgencias: 24/7</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 AlivioHospital. Todos los derechos reservados.</p>
+        <div class="footer-social">
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-twitter"></i></a>
+          <a href="#"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/Frontend/src/js/pages/registrar-medicamento.js"></script>
+</body>
+</html>
