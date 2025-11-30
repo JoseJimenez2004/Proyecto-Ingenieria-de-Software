@@ -1,0 +1,8 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+nombre_rol                   nombre_rol       VARCHAR(100)                Almacena el nombre del rol. UNIQUE, NOT NULL.
+descripcion                  descripcion      TEXT                        Almacena la descripción detallada del rol. NOT NULL.
+nivel_acceso                 nivel_acceso     INTEGER                     Almacena el nivel de acceso (1-10). NOT NULL, CHECK (1-10).
+permisos                     permisos         JSONB                       Almacena los permisos específicos en formato JSON. NOT NULL.
+activo                       activo           BOOLEAN                     Indica si el rol está activo. DEFAULT TRUE.
+color_rol                    color_rol        VARCHAR(7)                  Almacena el color hexadecimal del rol. DEFAULT '#6B7280'.

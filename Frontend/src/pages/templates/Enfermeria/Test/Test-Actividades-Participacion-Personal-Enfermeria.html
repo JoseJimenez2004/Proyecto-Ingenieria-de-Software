@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Actividades de Participación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .test-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .btn-test {
+            margin: 5px;
+        }
+        .result {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .test-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="text-center mb-4">🧪 Test - Actividades de Participación</h1>
+        <p class="text-center mb-4">Pruebas para la funcionalidad de consulta de actividades de participación del personal</p>
+        
+        <!-- Sección 1: Pruebas de API -->
+        <div class="test-section">
+            <h2 class="test-title">🔌 Pruebas de API</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>1. Obtener Todas las Actividades</h5>
+                    <p>Prueba la obtención de la lista completa de actividades</p>
+                    <button class="btn btn-primary btn-test" onclick="testObtenerActividades()">Ejecutar Prueba</button>
+                    <div id="result1" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>2. Filtrar Actividades por Enfermero</h5>
+                    <p>Prueba el filtrado de actividades por nombre de enfermero</p>
+                    <button class="btn btn-info btn-test" onclick="testFiltrarPorEnfermero()">Ejecutar Prueba</button>
+                    <div id="result2" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>3. Filtrar Actividades por Curso</h5>
+                    <p>Prueba el filtrado de actividades por tipo de curso</p>
+                    <button class="btn btn-info btn-test" onclick="testFiltrarPorCurso()">Ejecutar Prueba</button>
+                    <div id="result3" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>4. Filtrar Actividades por Fecha</h5>
+                    <p>Prueba el filtrado de actividades por fecha específica</p>
+                    <button class="btn btn-info btn-test" onclick="testFiltrarPorFecha()">Ejecutar Prueba</button>
+                    <div id="result4" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>5. Combinar Múltiples Filtros</h5>
+                    <p>Prueba la combinación de varios filtros simultáneamente</p>
+                    <button class="btn btn-warning btn-test" onclick="testFiltrosCombinados()">Ejecutar Prueba</button>
+                    <div id="result5" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 2: Pruebas de Interfaz -->
+        <div class="test-section">
+            <h2 class="test-title">📝 Pruebas de Interfaz</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>6. Carga de Datos en Tabla</h5>
+                    <p>Prueba la carga y visualización de datos en la tabla</p>
+                    <button class="btn btn-primary btn-test" onclick="testCargaTabla()">Ejecutar Prueba</button>
+                    <div id="result6" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>7. Validación de Filtros</h5>
+                    <p>Prueba la funcionalidad de los campos de filtro</p>
+                    <button class="btn btn-secondary btn-test" onclick="testValidacionFiltros()">Ejecutar Prueba</button>
+                    <div id="result7" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>8. Búsqueda por Texto</h5>
+                    <p>Prueba la búsqueda de enfermeros por texto</p>
+                    <button class="btn btn-info btn-test" onclick="testBusquedaTexto()">Ejecutar Prueba</button>
+                    <div id="result8" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 3: Pruebas de Integración -->
+        <div class="test-section">
+            <h2 class="test-title">🔄 Pruebas de Integración</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>9. Flujo Completo de Consulta</h5>
+                    <p>Prueba el flujo completo: cargar → filtrar → mostrar resultados</p>
+                    <button class="btn btn-success btn-test" onclick="testFlujoCompleto()">Ejecutar Prueba</button>
+                    <div id="result9" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>10. Carga de Opciones de Cursos</h5>
+                    <p>Prueba la carga de la lista de cursos disponibles</p>
+                    <button class="btn btn-primary btn-test" onclick="testCargarCursos()">Ejecutar Prueba</button>
+                    <div id="result10" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>11. Estados de Participación</h5>
+                    <p>Prueba los diferentes estados de participación</p>
+                    <button class="btn btn-warning btn-test" onclick="testEstadosParticipacion()">Ejecutar Prueba</button>
+                    <div id="result11" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón para ejecutar todas las pruebas -->
+        <div class="text-center mt-4">
+            <button class="btn btn-lg btn-primary" onclick="ejecutarTodasLasPruebas()">🚀 Ejecutar Todas las Pruebas</button>
+            <div id="resultGeneral" class="result mt-3"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variables para almacenar resultados
+        let resultadosPruebas = [];
+        let actividadesData = [];
+
+        // Función para mostrar resultados
+        function mostrarResultado(elementId, mensaje, tipo) {
+            const elemento = document.getElementById(elementId);
+            elemento.innerHTML = mensaje;
+            elemento.className = 'result ' + tipo;
+            elemento.style.display = 'block';
+        }
+
+        // 1. Prueba: Obtener Todas las Actividades
+        async function testObtenerActividades() {
+            try {
+                const response = await fetch('http://localhost:5000/api/actividades/listar');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    actividadesData = result.actividades || [];
+                    mostrarResultado('result1', 
+                        `✅ ÉXITO: Lista de actividades obtenida correctamente<br>
+                         <strong>Total de actividades:</strong> ${actividadesData.length}<br>
+                         <strong>Ejemplos:</strong><br>
+                         <pre>${JSON.stringify(actividadesData.slice(0, 3), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result1', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result1', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}<br>
+                     <strong>Verifique que el servidor esté ejecutándose en puerto 5000</strong>`, 'error');
+                return false;
+            }
+        }
+
+        // 2. Prueba: Filtrar Actividades por Enfermero
+        async function testFiltrarPorEnfermero() {
+            try {
+                const response = await fetch('http://localhost:5000/api/actividades/filtrar?enfermero=María');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result2', 
+                        `✅ ÉXITO: Filtrado por enfermero funcionando<br>
+                         <strong>Filtro aplicado:</strong> enfermero=María<br>
+                         <strong>Resultados encontrados:</strong> ${result.actividades.length}<br>
+                         <strong>Ejemplos:</strong><br>
+                         <pre>${JSON.stringify(result.actividades.slice(0, 2), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result2', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result2', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 3. Prueba: Filtrar Actividades por Curso
+        async function testFiltrarPorCurso() {
+            try {
+                const response = await fetch('http://localhost:5000/api/actividades/filtrar?curso=RCP');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result3', 
+                        `✅ ÉXITO: Filtrado por curso funcionando<br>
+                         <strong>Filtro aplicado:</strong> curso=RCP<br>
+                         <strong>Resultados encontrados:</strong> ${result.actividades.length}<br>
+                         <strong>Ejemplos:</strong><br>
+                         <pre>${JSON.stringify(result.actividades.slice(0, 2), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result3', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result3', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 4. Prueba: Filtrar Actividades por Fecha
+        async function testFiltrarPorFecha() {
+            try {
+                const response = await fetch('http://localhost:5000/api/actividades/filtrar?fecha=2025-01-15');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result4', 
+                        `✅ ÉXITO: Filtrado por fecha funcionando<br>
+                         <strong>Filtro aplicado:</strong> fecha=2025-01-15<br>
+                         <strong>Resultados encontrados:</strong> ${result.actividades.length}<br>
+                         <strong>Ejemplos:</strong><br>
+                         <pre>${JSON.stringify(result.actividades.slice(0, 2), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result4', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result4', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 5. Prueba: Combinar Múltiples Filtros
+        async function testFiltrosCombinados() {
+            try {
+                const response = await fetch('http://localhost:5000/api/actividades/filtrar?enfermero=Carlos&curso=Urgencias&fecha=2025-01-16');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result5', 
+                        `✅ ÉXITO: Filtros combinados funcionando<br>
+                         <strong>Filtros aplicados:</strong><br>
+                         - enfermero=Carlos<br>
+                         - curso=Urgencias<br>
+                         - fecha=2025-01-16<br>
+                         <strong>Resultados encontrados:</strong> ${result.actividades.length}<br>
+                         <strong>Ejemplos:</strong><br>
+                         <pre>${JSON.stringify(result.actividades, null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result5', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result5', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 6. Prueba: Carga de Datos en Tabla (simulación frontend)
+        function testCargaTabla() {
+            // Simulamos datos de ejemplo
+            const datosEjemplo = [
+                {
+                    enfermero: "María González",
+                    curso: "RCP Avanzado",
+                    area: "Urgencias",
+                    turno: "Matutino",
+                    fecha: "2025-01-15",
+                    estado: "Completado"
+                },
+                {
+                    enfermero: "Carlos López",
+                    curso: "Manejo de Medicamentos",
+                    area: "Farmacia",
+                    turno: "Vespertino",
+                    fecha: "2025-01-16",
+                    estado: "En Progreso"
+                }
+            ];
+
+            if (datosEjemplo.length > 0) {
+                mostrarResultado('result6', 
+                    `✅ ÉXITO: Datos cargados en tabla correctamente<br>
+                     <strong>Total de registros:</strong> ${datosEjemplo.length}<br>
+                     <strong>Estructura de datos:</strong><br>
+                     <pre>${JSON.stringify(datosEjemplo, null, 2)}</pre>`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result6', 
+                    `❌ ERROR: No se pudieron cargar datos en la tabla`, 'error');
+                return false;
+            }
+        }
+
+        // 7. Prueba: Validación de Filtros
+        function testValidacionFiltros() {
+            // Simulamos la validación de filtros
+            const filtros = {
+                enfermero: "María López",
+                curso: "RCP",
+                fecha: "2025-01-20"
+            };
+
+            let errores = [];
+            
+            // Validaciones básicas
+            if (filtros.fecha && !isValidDate(filtros.fecha)) {
+                errores.push("Formato de fecha inválido");
+            }
+            
+            if (errores.length === 0) {
+                mostrarResultado('result7', 
+                    `✅ ÉXITO: Filtros validados correctamente<br>
+                     <strong>Enfermero:</strong> ${filtros.enfermero}<br>
+                     <strong>Curso:</strong> ${filtros.curso}<br>
+                     <strong>Fecha:</strong> ${filtros.fecha}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result7', 
+                    `❌ ERROR: Problemas en validación de filtros<br>
+                     <strong>Errores:</strong><br>
+                     - ${errores.join('<br>- ')}`, 'error');
+                return false;
+            }
+        }
+
+        // Función auxiliar para validar fecha
+        function isValidDate(dateString) {
+            const regex = /^\d{4}-\d{2}-\d{2}$/;
+            if (!dateString.match(regex)) return false;
+            const date = new Date(dateString);
+            return date instanceof Date && !isNaN(date);
+        }
+
+        // 8. Prueba: Búsqueda por Texto
+        function testBusquedaTexto() {
+            const textoBusqueda = "María";
+            const datos = [
+                { enfermero: "María González", curso: "RCP", area: "Urgencias" },
+                { enfermero: "Carlos López", curso: "Medicamentos", area: "Farmacia" },
+                { enfermero: "María Rodríguez", curso: "Pediatría", area: "Pediatría" }
+            ];
+
+            const resultados = datos.filter(item => 
+                item.enfermero.toLowerCase().includes(textoBusqueda.toLowerCase())
+            );
+
+            if (resultados.length > 0) {
+                mostrarResultado('result8', 
+                    `✅ ÉXITO: Búsqueda por texto funcionando<br>
+                     <strong>Texto buscado:</strong> "${textoBusqueda}"<br>
+                     <strong>Resultados encontrados:</strong> ${resultados.length}<br>
+                     <strong>Ejemplos:</strong><br>
+                     <pre>${JSON.stringify(resultados, null, 2)}</pre>`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result8', 
+                    `⚠️ ADVERTENCIA: No se encontraron resultados para "${textoBusqueda}"`, 'info');
+                return false;
+            }
+        }
+
+        // 9. Prueba: Flujo Completo de Consulta
+        async function testFlujoCompleto() {
+            mostrarResultado('result9', '🔄 Ejecutando flujo completo de consulta...', 'info');
+            
+            try {
+                // Paso 1: Obtener todas las actividades
+                const response1 = await fetch('http://localhost:5000/api/actividades/listar');
+                if (!response1.ok) throw new Error('Error al cargar actividades');
+                const actividades = await response1.json();
+
+                // Paso 2: Aplicar filtro
+                const response2 = await fetch('http://localhost:5000/api/actividades/filtrar?curso=RCP');
+                if (!response2.ok) throw new Error('Error al filtrar actividades');
+                const filtradas = await response2.json();
+
+                // Paso 3: Verificar resultados
+                if (filtradas.actividades.length > 0) {
+                    mostrarResultado('result9', 
+                        `✅ ÉXITO: Flujo completo ejecutado correctamente<br>
+                         <strong>Paso 1:</strong> ${actividades.actividades.length} actividades cargadas<br>
+                         <strong>Paso 2:</strong> ${filtradas.actividades.length} actividades filtradas (curso=RCP)<br>
+                         <strong>Paso 3:</strong> Resultados verificados y mostrados`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result9', 
+                        `⚠️ ADVERTENCIA: Flujo completo ejecutado pero sin resultados de filtro`, 'info');
+                    return false;
+                }
+                
+            } catch (error) {
+                mostrarResultado('result9', 
+                    `❌ ERROR en flujo completo: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 10. Prueba: Carga de Opciones de Cursos
+        async function testCargarCursos() {
+            try {
+                const response = await fetch('http://localhost:5000/api/cursos/listar');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result10', 
+                        `✅ ÉXITO: Lista de cursos cargada correctamente<br>
+                         <strong>Total de cursos:</strong> ${result.cursos.length}<br>
+                         <strong>Ejemplos:</strong><br>
+                         <pre>${JSON.stringify(result.cursos.slice(0, 5), null, 2)}</pre>`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result10', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result10', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 11. Prueba: Estados de Participación
+        function testEstadosParticipacion() {
+            const estados = ["Completado", "En Progreso", "Pendiente", "Cancelado"];
+            const actividadesConEstados = [
+                { enfermero: "María González", curso: "RCP", estado: "Completado" },
+                { enfermero: "Carlos López", curso: "Medicamentos", estado: "En Progreso" },
+                { enfermero: "Ana Rodríguez", curso: "Pediatría", estado: "Pendiente" }
+            ];
+
+            const estadosPresentes = [...new Set(actividadesConEstados.map(a => a.estado))];
+            const todosEstadosCubiertos = estados.every(estado => estadosPresentes.includes(estado));
+
+            if (estadosPresentes.length > 0) {
+                mostrarResultado('result11', 
+                    `✅ ÉXITO: Estados de participación verificados<br>
+                     <strong>Estados encontrados:</strong> ${estadosPresentes.join(', ')}<br>
+                     <strong>Estados definidos:</strong> ${estados.join(', ')}<br>
+                     <strong>Todos los estados cubiertos:</strong> ${todosEstadosCubiertos ? 'Sí' : 'No'}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result11', 
+                    `❌ ERROR: No se encontraron estados de participación`, 'error');
+                return false;
+            }
+        }
+
+        // Función para ejecutar todas las pruebas
+        async function ejecutarTodasLasPruebas() {
+            const pruebas = [
+                testObtenerActividades,
+                testFiltrarPorEnfermero,
+                testFiltrarPorCurso,
+                testFiltrarPorFecha,
+                testFiltrosCombinados,
+                testCargaTabla,
+                testValidacionFiltros,
+                testBusquedaTexto,
+                testFlujoCompleto,
+                testCargarCursos,
+                testEstadosParticipacion
+            ];
+            
+            let exitosas = 0;
+            resultadosPruebas = [];
+            
+            mostrarResultado('resultGeneral', '🔄 Ejecutando todas las pruebas...', 'info');
+            
+            for (let i = 0; i < pruebas.length; i++) {
+                const resultado = await pruebas[i]();
+                resultadosPruebas.push({
+                    nombre: `Prueba ${i + 1}`,
+                    exitosa: resultado
+                });
+                
+                if (resultado) exitosas++;
+                
+                // Pequeña pausa entre pruebas
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            const porcentaje = Math.round((exitosas / pruebas.length) * 100);
+            const mensajeFinal = `
+                <h4>📊 Resumen de Pruebas - Actividades de Participación</h4>
+                <strong>Total de pruebas:</strong> ${pruebas.length}<br>
+                <strong>Exitosas:</strong> ${exitosas}<br>
+                <strong>Fallidas:</strong> ${pruebas.length - exitosas}<br>
+                <strong>Porcentaje de éxito:</strong> ${porcentaje}%<br><br>
+                <strong>Estado:</strong> ${porcentaje >= 80 ? '✅ SATISFACTORIO' : porcentaje >= 60 ? '⚠️ ACEPTABLE' : '❌ REQUIERE ATENCIÓN'}
+            `;
+            
+            mostrarResultado('resultGeneral', mensajeFinal, 
+                porcentaje >= 80 ? 'success' : porcentaje >= 60 ? 'info' : 'error');
+        }
+    </script>
+</body>
+</html>

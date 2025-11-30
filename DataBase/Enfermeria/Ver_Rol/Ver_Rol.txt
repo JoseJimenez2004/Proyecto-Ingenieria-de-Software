@@ -1,0 +1,16 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+nombre_completo              nombre_completo  VARCHAR(255)                Nombre completo del enfermero. NOT NULL.
+id_empleado                  id_empleado      VARCHAR(50)                 ID único de empleado (ej: ENF001). UNIQUE, NOT NULL.
+email                        email            VARCHAR(255)                Correo electrónico institucional. UNIQUE, validación de formato.
+telefono                     telefono         VARCHAR(20)                 Número de teléfono. Formato internacional.
+especialidad                 especialidad_id  INTEGER                     ID de la especialidad. Llave foránea a especialidades.
+fecha_contratacion           fecha_contratacion DATE                      Fecha de contratación. NOT NULL, CHECK (<= CURRENT_DATE).
+estado                       estado           tipo_estado_empleado (ENUM) Estado laboral (activo, inactivo, licencia, vacaciones). NOT NULL.
+turno_principal              turno_principal  tipo_turno (ENUM)           Turno principal de trabajo. NOT NULL.
+avatar_url                   avatar_url       TEXT                        URL de la foto del empleado. Opcional.
+direccion                    direccion        TEXT                        Dirección completa. Opcional.
+fecha_nacimiento             fecha_nacimiento DATE                        Fecha de nacimiento. CHECK (edad >= 18).
+numero_cedula                numero_cedula    VARCHAR(50)                 Número de cédula profesional. UNIQUE.
+emergencia_contacto          emergencia_contacto VARCHAR(255)             Nombre de contacto de emergencia.
+emergencia_telefono          emergencia_telefono VARCHAR(20)              Teléfono de emergencia.

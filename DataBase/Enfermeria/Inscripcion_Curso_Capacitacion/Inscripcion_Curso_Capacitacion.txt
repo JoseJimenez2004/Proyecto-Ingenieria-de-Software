@@ -1,0 +1,8 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+curso                         curso_id         INTEGER                     Almacena el ID del curso. Llave foránea que referencia a la tabla cursos. NOT NULL.
+fecha                         fecha_inscripcion DATE                       Almacena la fecha de inscripción al curso. NOT NULL.
+enfermero                     enfermero_id     INTEGER                     Almacena el ID del enfermero. Llave foránea que referencia a la tabla enfermeros. NOT NULL.
+area                          area             VARCHAR(100)                Almacena el área asignada del enfermero. NOT NULL.
+turno                         turno            tipo_turno (ENUM)           Almacena el turno del enfermero. NOT NULL.
+estado_inscripcion            estado           tipo_estado_inscripcion (ENUM) Almacena el estado de la inscripción (inscrito, en_curso, completado, cancelado). NOT NULL.

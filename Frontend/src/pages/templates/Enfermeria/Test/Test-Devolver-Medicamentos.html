@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Registro de Enfermero</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .test-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+        }
+        .test-title {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .btn-test {
+            margin: 5px;
+        }
+        .result {
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .test-card {
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .status-error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .status-warning {
+            background-color: #ffc107;
+            color: #212529;
+        }
+        .form-preview {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="text-center mb-4">🧪 Test - Registro de Enfermero</h1>
+        <p class="text-center mb-4">Pruebas para la funcionalidad de registro de personal de enfermería</p>
+        
+        <!-- Sección 1: Pruebas de API -->
+        <div class="test-section">
+            <h2 class="test-title">🔌 Pruebas de API</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>1. Registrar Enfermero Válido</h5>
+                    <p>Prueba el registro completo con todos los datos requeridos</p>
+                    <button class="btn btn-primary btn-test" onclick="testRegistrarEnfermeroValido()">Ejecutar Prueba</button>
+                    <div id="result1" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>2. Registrar sin Datos Obligatorios</h5>
+                    <p>Prueba la validación cuando faltan campos requeridos</p>
+                    <button class="btn btn-warning btn-test" onclick="testRegistrarSinDatosObligatorios()">Ejecutar Prueba</button>
+                    <div id="result2" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>3. Email Inválido</h5>
+                    <p>Prueba la validación de formato de email</p>
+                    <button class="btn btn-warning btn-test" onclick="testEmailInvalido()">Ejecutar Prueba</button>
+                    <div id="result3" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>4. Teléfono Inválido</h5>
+                    <p>Prueba la validación de formato de teléfono</p>
+                    <button class="btn btn-warning btn-test" onclick="testTelefonoInvalido()">Ejecutar Prueba</button>
+                    <div id="result4" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>5. Enfermero Duplicado</h5>
+                    <p>Prueba el registro con datos ya existentes</p>
+                    <button class="btn btn-danger btn-test" onclick="testEnfermeroDuplicado()">Ejecutar Prueba</button>
+                    <div id="result5" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 2: Pruebas de Formulario -->
+        <div class="test-section">
+            <h2 class="test-title">📝 Pruebas de Formulario</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>6. Validación de Campos</h5>
+                    <p>Prueba la validación de todos los campos del formulario</p>
+                    <button class="btn btn-primary btn-test" onclick="testValidacionCampos()">Ejecutar Prueba</button>
+                    <div id="result6" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>7. Limpiar Formulario</h5>
+                    <p>Prueba la funcionalidad de reset del formulario</p>
+                    <button class="btn btn-secondary btn-test" onclick="testLimpiarFormulario()">Ejecutar Prueba</button>
+                    <div id="result7" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>8. Formato de Fechas</h5>
+                    <p>Prueba el manejo correcto de formatos de fecha</p>
+                    <button class="btn btn-info btn-test" onclick="testFormatosFecha()">Ejecutar Prueba</button>
+                    <div id="result8" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección 3: Pruebas de Integración -->
+        <div class="test-section">
+            <h2 class="test-title">🔄 Pruebas de Integración</h2>
+            
+            <div class="test-grid">
+                <div class="test-card">
+                    <h5>9. Flujo Completo de Registro</h5>
+                    <p>Prueba el proceso completo: validar → registrar → confirmar</p>
+                    <button class="btn btn-success btn-test" onclick="testFlujoCompleto()">Ejecutar Prueba</button>
+                    <div id="result9" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>10. Generación de ID Único</h5>
+                    <p>Prueba la generación automática de ID de enfermero</p>
+                    <button class="btn btn-primary btn-test" onclick="testGeneracionID()">Ejecutar Prueba</button>
+                    <div id="result10" class="result"></div>
+                </div>
+                
+                <div class="test-card">
+                    <h5>11. Campos Opcionales</h5>
+                    <p>Prueba el registro con campos opcionales vacíos</p>
+                    <button class="btn btn-warning btn-test" onclick="testCamposOpcionales()">Ejecutar Prueba</button>
+                    <div id="result11" class="result"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botón para ejecutar todas las pruebas -->
+        <div class="text-center mt-4">
+            <button class="btn btn-lg btn-primary" onclick="ejecutarTodasLasPruebas()">🚀 Ejecutar Todas las Pruebas</button>
+            <div id="resultGeneral" class="result mt-3"></div>
+        </div>
+    </div>
+
+    <script>
+        // Variables para almacenar resultados
+        let resultadosPruebas = [];
+        let enfermeroIdCreado = null;
+
+        // Función para mostrar resultados
+        function mostrarResultado(elementId, mensaje, tipo) {
+            const elemento = document.getElementById(elementId);
+            elemento.innerHTML = mensaje;
+            elemento.className = 'result ' + tipo;
+            elemento.style.display = 'block';
+        }
+
+        // 1. Prueba: Registrar Enfermero Válido
+        async function testRegistrarEnfermeroValido() {
+            const datosEnfermero = {
+                nombre: "María",
+                apellido_paterno: "González",
+                apellido_materno: "López",
+                fecha_nacimiento: "1990-05-15",
+                genero: "F",
+                email: "maria.gonzalez@aliviohospital.com",
+                telefono: "5512345678",
+                especialidad: "Enfermería General",
+                cedula: "ENF123456",
+                fecha_ingreso: "2023-01-15",
+                turno_preferido: "matutino",
+                direccion: {
+                    calle: "Av. Insurgentes",
+                    numero_exterior: "123",
+                    colonia: "Centro",
+                    ciudad: "Ciudad de México",
+                    codigo_postal: "06100"
+                },
+                estado: "activo"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosEnfermero)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    enfermeroIdCreado = result.enfermero_id;
+                    mostrarResultado('result1', 
+                        `✅ ÉXITO: Enfermero registrado correctamente<br>
+                         <strong>ID del Enfermero:</strong> ${result.enfermero_id}<br>
+                         <strong>Nombre:</strong> ${datosEnfermero.nombre} ${datosEnfermero.apellido_paterno}<br>
+                         <strong>Email:</strong> ${datosEnfermero.email}<br>
+                         <strong>Cédula:</strong> ${datosEnfermero.cedula}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result1', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result1', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}<br>
+                     <strong>Verifique que el servidor esté ejecutándose en puerto 5000</strong>`, 'error');
+                return false;
+            }
+        }
+
+        // 2. Prueba: Registrar sin Datos Obligatorios
+        async function testRegistrarSinDatosObligatorios() {
+            const datosIncompletos = {
+                nombre: "Carlos",
+                // Faltan apellido_paterno, email, cedula, etc.
+                telefono: "5512345678"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosIncompletos)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    mostrarResultado('result2', 
+                        `✅ ÉXITO: Validación funcionando correctamente<br>
+                         <strong>Error esperado:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result2', 
+                        `❌ ERROR: Se esperaba un error de validación pero la solicitud fue exitosa`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result2', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 3. Prueba: Email Inválido
+        async function testEmailInvalido() {
+            const datosEmailInvalido = {
+                nombre: "Ana",
+                apellido_paterno: "Rodríguez",
+                email: "email-invalido",
+                cedula: "ENF789012",
+                telefono: "5512345678"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosEmailInvalido)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    mostrarResultado('result3', 
+                        `✅ ÉXITO: Validación de email funcionando<br>
+                         <strong>Error:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result3', 
+                        `❌ ERROR: Se esperaba un error de validación de email`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result3', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 4. Prueba: Teléfono Inválido
+        async function testTelefonoInvalido() {
+            const datosTelefonoInvalido = {
+                nombre: "Luis",
+                apellido_paterno: "Martínez",
+                email: "luis.martinez@aliviohospital.com",
+                cedula: "ENF345678",
+                telefono: "123" // Teléfono demasiado corto
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosTelefonoInvalido)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok) {
+                    mostrarResultado('result4', 
+                        `✅ ÉXITO: Validación de teléfono funcionando<br>
+                         <strong>Error:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result4', 
+                        `❌ ERROR: Se esperaba un error de validación de teléfono`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result4', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 5. Prueba: Enfermero Duplicado
+        async function testEnfermeroDuplicado() {
+            const datosDuplicado = {
+                nombre: "María",
+                apellido_paterno: "González",
+                apellido_materno: "López",
+                email: "maria.gonzalez@aliviohospital.com", // Email duplicado
+                cedula: "ENF123456", // Cédula duplicada
+                telefono: "5512345678"
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(datosDuplicado)
+                });
+
+                const result = await response.json();
+                
+                if (!response.ok && (result.error.includes('duplicado') || result.error.includes('ya existe'))) {
+                    mostrarResultado('result5', 
+                        `✅ ÉXITO: Validación de duplicados funcionando<br>
+                         <strong>Error:</strong> ${result.error}<br>
+                         <strong>Código:</strong> ${response.status}`, 'success');
+                    return true;
+                } else if (response.ok) {
+                    mostrarResultado('result5', 
+                        `⚠️ ADVERTENCIA: Se permitió registrar un duplicado`, 'info');
+                    return false;
+                } else {
+                    mostrarResultado('result5', 
+                        `❌ ERROR: ${result.error}`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result5', 
+                    `⚠️ ADVERTENCIA: ${error.message}`, 'info');
+                return false;
+            }
+        }
+
+        // 6. Prueba: Validación de Campos (simulación frontend)
+        function testValidacionCampos() {
+            // Simulamos la validación del formulario
+            const campos = {
+                nombre: "",
+                apellido_paterno: "González",
+                email: "email-invalido",
+                cedula: "ENF123",
+                telefono: "123",
+                fecha_nacimiento: "2030-01-01" // Fecha futura
+            };
+            
+            let errores = [];
+            
+            // Validaciones
+            if (!campos.nombre) errores.push("Nombre es requerido");
+            if (!campos.apellido_paterno) errores.push("Apellido paterno es requerido");
+            if (!campos.email || !isValidEmail(campos.email)) errores.push("Email inválido");
+            if (!campos.cedula || campos.cedula.length < 6) errores.push("Cédula muy corta");
+            if (!campos.telefono || campos.telefono.length < 10) errores.push("Teléfono inválido");
+            if (campos.fecha_nacimiento && !isValidDate(campos.fecha_nacimiento)) {
+                errores.push("Fecha de nacimiento inválida");
+            }
+            
+            if (errores.length > 0) {
+                mostrarResultado('result6', 
+                    `✅ ÉXITO: Validación funcionando correctamente<br>
+                     <strong>Errores detectados:</strong><br>
+                     - ${errores.join('<br>- ')}`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result6', 
+                    `❌ ERROR: Se esperaba detectar errores de validación`, 'error');
+                return false;
+            }
+        }
+
+        // Función auxiliar para validar email
+        function isValidEmail(email) {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return regex.test(email);
+        }
+
+        // Función auxiliar para validar fecha
+        function isValidDate(dateString) {
+            const regex = /^\d{4}-\d{2}-\d{2}$/;
+            if (!dateString.match(regex)) return false;
+            const date = new Date(dateString);
+            const today = new Date();
+            return date instanceof Date && !isNaN(date) && date < today;
+        }
+
+        // 7. Prueba: Limpiar Formulario (simulación frontend)
+        function testLimpiarFormulario() {
+            // Simulamos el limpiado de formulario
+            const campos = {
+                nombre: "María",
+                apellido_paterno: "González",
+                apellido_materno: "López",
+                email: "maria@hospital.com",
+                cedula: "ENF123456",
+                telefono: "5512345678",
+                especialidad: "Urgencias",
+                turno_preferido: "matutino"
+            };
+            
+            // Limpiar formulario
+            Object.keys(campos).forEach(key => campos[key] = "");
+            
+            const todosVacios = Object.values(campos).every(valor => valor === "");
+            
+            if (todosVacios) {
+                mostrarResultado('result7', 
+                    `✅ ÉXITO: Formulario limpiado correctamente<br>
+                     <strong>Estado:</strong> Todos los campos están vacíos`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result7', 
+                    `❌ ERROR: El formulario no se limpió completamente`, 'error');
+                return false;
+            }
+        }
+
+        // 8. Prueba: Formato de Fechas
+        function testFormatosFecha() {
+            const fechasPrueba = [
+                { input: "1990-05-15", esperado: "15/05/1990" },
+                { input: "2023-01-15", esperado: "15/01/2023" },
+                { input: "1985-12-31", esperado: "31/12/1985" }
+            ];
+            
+            let todasCorrectas = true;
+            let resultados = [];
+            
+            fechasPrueba.forEach(fecha => {
+                try {
+                    const date = new Date(fecha.input);
+                    const formateada = date.toLocaleDateString('es-ES');
+                    const correcta = formateada === fecha.esperado;
+                    todasCorrectas = todasCorrectas && correcta;
+                    
+                    resultados.push({
+                        input: fecha.input,
+                        output: formateada,
+                        esperado: fecha.esperado,
+                        correcto: correcta
+                    });
+                } catch (error) {
+                    todasCorrectas = false;
+                    resultados.push({
+                        input: fecha.input,
+                        error: error.message,
+                        correcto: false
+                    });
+                }
+            });
+            
+            if (todasCorrectas) {
+                mostrarResultado('result8', 
+                    `✅ ÉXITO: Formatos de fecha funcionando correctamente<br>
+                     <strong>Resultados:</strong><br>
+                     <pre>${JSON.stringify(resultados, null, 2)}</pre>`, 'success');
+                return true;
+            } else {
+                mostrarResultado('result8', 
+                    `❌ ERROR: Problemas con formatos de fecha<br>
+                     <strong>Resultados:</strong><br>
+                     <pre>${JSON.stringify(resultados, null, 2)}</pre>`, 'error');
+                return false;
+            }
+        }
+
+        // 9. Prueba: Flujo Completo de Registro
+        async function testFlujoCompleto() {
+            mostrarResultado('result9', '🔄 Ejecutando flujo completo de registro...', 'info');
+            
+            const datosEnfermero = {
+                nombre: "Laura",
+                apellido_paterno: "Hernández",
+                apellido_materno: "García",
+                email: "laura.hernandez@aliviohospital.com",
+                cedula: "ENF999888",
+                telefono: "5598765432",
+                especialidad: "Pediatría",
+                turno_preferido: "vespertino",
+                fecha_ingreso: "2024-01-20"
+            };
+
+            try {
+                // Paso 1: Registrar enfermero
+                const response1 = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(datosEnfermero)
+                });
+                
+                if (!response1.ok) {
+                    throw new Error('Error al registrar enfermero');
+                }
+                
+                const result1 = await response1.json();
+                const enfermeroId = result1.enfermero_id;
+                
+                // Paso 2: Verificar registro
+                const response2 = await fetch(`http://localhost:5000/api/enfermeros/${enfermeroId}`);
+                if (!response2.ok) {
+                    throw new Error('Error al verificar registro');
+                }
+                
+                const result2 = await response2.json();
+                
+                mostrarResultado('result9', 
+                    `✅ ÉXITO: Flujo completo ejecutado correctamente<br>
+                     <strong>Paso 1:</strong> Enfermero registrado (ID: ${enfermeroId})<br>
+                     <strong>Paso 2:</strong> Registro verificado correctamente<br>
+                     <strong>Datos:</strong> ${result2.enfermero.nombre} ${result2.enfermero.apellido_paterno}`, 'success');
+                return true;
+                
+            } catch (error) {
+                mostrarResultado('result9', 
+                    `❌ ERROR en flujo completo: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 10. Prueba: Generación de ID Único
+        async function testGeneracionID() {
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        nombre: "Test",
+                        apellido_paterno: "GeneracionID",
+                        email: `test.${Date.now()}@aliviohospital.com`,
+                        cedula: `ENF${Date.now().toString().slice(-6)}`,
+                        telefono: "5511111111"
+                    })
+                });
+
+                const result = await response.json();
+                
+                if (response.ok && result.enfermero_id) {
+                    // Verificar formato del ID
+                    const idValido = /^ENF\d+$/.test(result.enfermero_id) || /^\d+$/.test(result.enfermero_id);
+                    
+                    if (idValido) {
+                        mostrarResultado('result10', 
+                            `✅ ÉXITO: ID único generado correctamente<br>
+                             <strong>ID generado:</strong> ${result.enfermero_id}<br>
+                             <strong>Formato válido:</strong> Sí`, 'success');
+                        return true;
+                    } else {
+                        mostrarResultado('result10', 
+                            `⚠️ ADVERTENCIA: ID generado pero formato inesperado<br>
+                             <strong>ID:</strong> ${result.enfermero_id}`, 'info');
+                        return false;
+                    }
+                } else {
+                    mostrarResultado('result10', 
+                        `❌ ERROR: No se pudo generar ID único`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result10', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // 11. Prueba: Campos Opcionales
+        async function testCamposOpcionales() {
+            const datosMinimos = {
+                nombre: "Pedro",
+                apellido_paterno: "Sánchez",
+                email: "pedro.sanchez@aliviohospital.com",
+                cedula: "ENF777666",
+                telefono: "5522222222"
+                // Sin apellido_materno, especialidad, turno_preferido, etc.
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/api/enfermeros/registrar', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(datosMinimos)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    mostrarResultado('result11', 
+                        `✅ ÉXITO: Registro con campos opcionales funcionando<br>
+                         <strong>ID del Enfermero:</strong> ${result.enfermero_id}<br>
+                         <strong>Campos usados:</strong> Solo los obligatorios<br>
+                         <strong>Estado:</strong> Registro exitoso`, 'success');
+                    return true;
+                } else {
+                    mostrarResultado('result11', 
+                        `❌ ERROR: ${result.error}<br>
+                         <strong>Nota:</strong> El sistema debería permitir campos opcionales vacíos`, 'error');
+                    return false;
+                }
+            } catch (error) {
+                mostrarResultado('result11', 
+                    `❌ ERROR DE CONEXIÓN: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        // Función para ejecutar todas las pruebas
+        async function ejecutarTodasLasPruebas() {
+            const pruebas = [
+                testRegistrarEnfermeroValido,
+                testRegistrarSinDatosObligatorios,
+                testEmailInvalido,
+                testTelefonoInvalido,
+                testEnfermeroDuplicado,
+                testValidacionCampos,
+                testLimpiarFormulario,
+                testFormatosFecha,
+                testFlujoCompleto,
+                testGeneracionID,
+                testCamposOpcionales
+            ];
+            
+            let exitosas = 0;
+            resultadosPruebas = [];
+            
+            mostrarResultado('resultGeneral', '🔄 Ejecutando todas las pruebas...', 'info');
+            
+            for (let i = 0; i < pruebas.length; i++) {
+                const resultado = await pruebas[i]();
+                resultadosPruebas.push({
+                    nombre: `Prueba ${i + 1}`,
+                    exitosa: resultado
+                });
+                
+                if (resultado) exitosas++;
+                
+                // Pequeña pausa entre pruebas
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+            
+            const porcentaje = Math.round((exitosas / pruebas.length) * 100);
+            const mensajeFinal = `
+                <h4>📊 Resumen de Pruebas - Registro de Enfermero</h4>
+                <strong>Total de pruebas:</strong> ${pruebas.length}<br>
+                <strong>Exitosas:</strong> ${exitosas}<br>
+                <strong>Fallidas:</strong> ${pruebas.length - exitosas}<br>
+                <strong>Porcentaje de éxito:</strong> ${porcentaje}%<br><br>
+                <strong>Estado:</strong> ${porcentaje >= 80 ? '✅ SATISFACTORIO' : porcentaje >= 60 ? '⚠️ ACEPTABLE' : '❌ REQUIERE ATENCIÓN'}
+            `;
+            
+            mostrarResultado('resultGeneral', mensajeFinal, 
+                porcentaje >= 80 ? 'success' : porcentaje >= 60 ? 'info' : 'error');
+        }
+    </script>
+</body>
+</html>

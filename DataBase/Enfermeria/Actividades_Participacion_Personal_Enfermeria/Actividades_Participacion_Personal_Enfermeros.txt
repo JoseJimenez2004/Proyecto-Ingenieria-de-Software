@@ -1,0 +1,8 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+enfermero                    enfermero_id     INTEGER                     Almacena el ID del enfermero. Llave foránea que referencia a la tabla enfermeros. NOT NULL.
+curso_actividad              curso_id         INTEGER                     Almacena el ID del curso o actividad. Llave foránea que referencia a la tabla cursos. NOT NULL.
+area                         area             VARCHAR(100)                Almacena el área o especialidad de la actividad. NOT NULL.
+turno                        turno            tipo_turno (ENUM)           Almacena el tipo de turno (matutino, vespertino, nocturno). NOT NULL.
+fecha                        fecha            DATE                        Almacena la fecha de participación en la actividad. NOT NULL.
+estado                       estado           tipo_estado_actividad (ENUM) Almacena el estado de participación (completado, en_progreso, pendiente). NOT NULL.

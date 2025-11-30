@@ -1,0 +1,8 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+widget_type                  widget_type      tipo_widget (ENUM)          Tipo de widget (metricas, grafico, lista, alertas). NOT NULL.
+titulo                       titulo           VARCHAR(200)                Título del widget o sección. NOT NULL.
+configuracion                configuracion    JSONB                       Configuración específica del widget. NOT NULL.
+posicion                     posicion         INTEGER                     Posición en el dashboard (ordenamiento). NOT NULL.
+activo                       activo           BOOLEAN                     Indica si el widget está activo. DEFAULT TRUE.
+usuario_id                   usuario_id       INTEGER                     Usuario al que pertenece el widget (NULL = global). Opcional.

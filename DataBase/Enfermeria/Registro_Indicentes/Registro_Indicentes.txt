@@ -1,0 +1,15 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+nombre_curso                 nombre           VARCHAR(255)                Nombre del curso o actividad. NOT NULL.
+descripcion                  descripcion      TEXT                        Descripción detallada del curso. NOT NULL.
+area                         area             VARCHAR(100)                Área o especialidad del curso. NOT NULL.
+duracion_horas               duracion_horas   INTEGER                     Duración total en horas. NOT NULL, CHECK (> 0).
+cupo_maximo                  cupo_maximo      INTEGER                     Cupo máximo de participantes. NOT NULL, CHECK (> 0).
+fecha_inicio                 fecha_inicio     DATE                        Fecha de inicio del curso. NOT NULL.
+fecha_fin                    fecha_fin        DATE                        Fecha de finalización. NOT NULL, CHECK (>= fecha_inicio).
+horario                      horario          VARCHAR(100)                Horario del curso (ej: "Lunes 14:00-16:00").
+lugar                        lugar            VARCHAR(200)                Lugar donde se imparte el curso.
+instructor                   instructor       VARCHAR(255)                Nombre del instructor o facilitador.
+costo                        costo            DECIMAL(10,2)               Costo del curso. DEFAULT 0.
+requiere_aprobar             requiere_aprobar BOOLEAN                     Indica si requiere aprobación. DEFAULT FALSE.
+activo                       activo           BOOLEAN                     Indica si el curso está activo. DEFAULT TRUE.

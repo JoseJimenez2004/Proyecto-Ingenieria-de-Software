@@ -1,0 +1,8 @@
+Campo del Formulario (name)   Columna en BDD   Tipo de Dato (PostgreSQL)   Descripción y Restricciones
+==========================   ===============  ==========================  =============================================================================================================================
+tipo_reporte                 tipo_reporte     tipo_reporte (ENUM)         Tipo de reporte a generar (personal, capacitacion, turnos, rendimiento). NOT NULL.
+fecha_inicio                 fecha_inicio     DATE                        Fecha inicial del período del reporte. NOT NULL.
+fecha_fin                    fecha_fin        DATE                        Fecha final del período del reporte. NOT NULL.
+filtro_area                  filtro_area      VARCHAR(100)                Filtro por área específica. Opcional.
+filtro_estado                filtro_estado    tipo_estado_empleado (ENUM) Filtro por estado del empleado. Opcional.
+formato_salida               formato_salida   tipo_formato (ENUM)         Formato de salida (pdf, excel, html). NOT NULL.
