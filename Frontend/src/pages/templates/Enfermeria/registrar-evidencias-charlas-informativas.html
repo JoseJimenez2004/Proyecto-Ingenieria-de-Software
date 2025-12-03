@@ -3,14 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Enfermero - AlivioHospital</title>
+    <title>Registrar Evidencias - AlivioHospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS global -->
     <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+    <!-- CSS específico de esta página -->
+    <link href="/Frontend/src/css/pages/registro-evidencias.css" rel="stylesheet">
 </head>
-<body>
+<body class="page-evidencias">
+
     <!-- Header Profesional -->
     <header class="hospital-header">
         <div class="container-fluid">
@@ -37,32 +42,38 @@
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="registro-enfermero.html" class="nav-link">
                         <i class="bi bi-person-plus"></i>
                         Registrar Enfermero
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../curso-capacitacion.html" class="nav-link">
+                    <a href="asignar-turno.html" class="nav-link">
+                        <i class="bi bi-calendar-check"></i>
+                        Asignar Turno
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="registrar-evidencias-charlas-informativas.html" class="nav-link">
+                        <i class="bi bi-journal-text"></i>
+                        Evidencias Charlas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="curso-capacitacion.html" class="nav-link">
                         <i class="bi bi-book"></i>
                         Cursos Capacitación
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../crear-rol.html" class="nav-link">
-                        <i class="bi bi-shield-check"></i>
-                        Gestión de Roles
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="../reportes.html" class="nav-link">
+                    <a href="reportes.html" class="nav-link">
                         <i class="bi bi-graph-up"></i>
                         Reportes
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../dashboard.html" class="nav-link">
+                    <a href="dashboard.html" class="nav-link">
                         <i class="bi bi-speedometer2"></i>
                         Dashboard
                     </a>
@@ -76,14 +87,52 @@
         <div class="container-fluid">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="dashboard.html">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
+                    <li class="breadcrumb-item active" aria-current="page">Evidencias Charlas Informativas</li>
                 </ol>
             </nav>
         </div>
     </div>
 
+    <!-- Contenido Principal -->
+    <main class="main-content page-evidencias">
+        <div class="form-header">
+            <div class="form-title-section">
+                <h2><i class="bi bi-journal-plus"></i> Registrar Evidencia de Charla</h2>
+                <p class="form-subtitle">Registra las evidencias de las charlas informativas impartidas al personal</p>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <section class="form-section">
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="nombre-charla"><i class="bi bi-chat-square-text"></i> Nombre de la Charla</label>
+                        <input type="text" id="nombre-charla" placeholder="Ingrese el nombre de la charla">
+                    </div>
+                    <div class="form-field">
+                        <label for="fecha-charla"><i class="bi bi-calendar-event"></i> Fecha de la Charla</label>
+                        <input type="date" id="fecha-charla">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="responsable-charla"><i class="bi bi-person"></i> Responsable</label>
+                        <input type="text" id="responsable-charla" placeholder="Nombre del responsable">
+                    </div>
+                    <div class="form-field">
+                        <label for="descripcion-charla"><i class="bi bi-card-text"></i> Descripción</label>
+                        <textarea id="descripcion-charla" rows="3" placeholder="Descripción breve de la charla"></textarea>
+                    </div>
+                </div>
+                <div class="form-actions-footer">
+                    <button class="btn btn-primary" id="guardar-evidencia"><i class="bi bi-save"></i> Guardar Evidencia</button>
+                    <button class="btn btn-outline-secondary" id="limpiar-form"><i class="bi bi-trash"></i> Limpiar Formulario</button>
+                </div>
+            </section>
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer class="hospital-footer">
@@ -121,6 +170,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+    <!-- JS específico de esta página -->
+    <script src="/Frontend/src/js/pages/registro-evidencias.js"></script>
 </body>
 </html>

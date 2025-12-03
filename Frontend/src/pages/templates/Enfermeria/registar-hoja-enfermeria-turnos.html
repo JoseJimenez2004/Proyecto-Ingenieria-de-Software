@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Enfermero - AlivioHospital</title>
+    <title>Registro Hoja de Enfermería - AlivioHospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/registro-hoja-turno.css" rel="stylesheet">
 </head>
-<body>
+<body class="page-hoja-enfermeria">
+
     <!-- Header Profesional -->
     <header class="hospital-header">
         <div class="container-fluid">
@@ -37,10 +39,16 @@
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="registro-enfermero.html" class="nav-link">
                         <i class="bi bi-person-plus"></i>
                         Registrar Enfermero
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="#" class="nav-link">
+                        <i class="bi bi-file-earmark-medical"></i>
+                        Hoja Enfermería
                     </a>
                 </li>
                 <li class="nav-item">
@@ -78,12 +86,125 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
                     <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
+                    <li class="breadcrumb-item active" aria-current="page">Registro Hoja Enfermería</li>
                 </ol>
             </nav>
         </div>
     </div>
 
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="form-header">
+            <div class="form-title-section">
+                <h2><i class="bi bi-file-earmark-medical"></i> Hoja de Enfermería</h2>
+                <p class="form-subtitle">Registro de signos vitales y procedimientos realizados por el personal de enfermería</p>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <form id="formHojaEnfermeria">
+                
+                <!-- Datos Generales -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i class="bi bi-person-badge"></i>
+                        <h3>Datos del Enfermero</h3>
+                        <span class="section-badge">Requerido</span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="enfermero"><i class="bi bi-person"></i> Enfermero <span>*</span></label>
+                            <select id="enfermero" name="enfermero" required>
+                                <option value="" disabled selected>Seleccione un enfermero</option>
+                                <option value="1">Lamine Yamal</option>
+                                <option value="2">Esteban Trabajos</option>
+                                <option value="3">Walter Blanco</option>
+                                <option value="4">María González</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="turno"><i class="bi bi-clock"></i> Turno <span>*</span></label>
+                            <select id="turno" name="turno" required>
+                                <option value="" disabled selected>Seleccione turno</option>
+                                <option value="matutino">Matutino</option>
+                                <option value="vespertino">Vespertino</option>
+                                <option value="nocturno">Nocturno</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <label for="fecha"><i class="bi bi-calendar"></i> Fecha <span>*</span></label>
+                            <input type="date" id="fecha" name="fecha" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Signos Vitales -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i class="bi bi-heart-pulse"></i>
+                        <h3>Signos Vitales</h3>
+                        <span class="section-badge">Opcional</span>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="tension"><i class="bi bi-thermometer-half"></i> Tensión Arterial</label>
+                            <input type="text" id="tension" name="tension" placeholder="Ej: 120/80 mmHg">
+                        </div>
+                        <div class="form-field">
+                            <label for="temperatura"><i class="bi bi-thermometer-sun"></i> Temperatura</label>
+                            <input type="text" id="temperatura" name="temperatura" placeholder="Ej: 36.5 °C">
+                        </div>
+                        <div class="form-field">
+                            <label for="frecuencia"><i class="bi bi-heart"></i> Frecuencia Cardíaca</label>
+                            <input type="text" id="frecuencia" name="frecuencia" placeholder="Ej: 72 bpm">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Procedimientos -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i class="bi bi-list-check"></i>
+                        <h3>Procedimientos Realizados</h3>
+                        <span class="section-badge">Opcional</span>
+                    </div>
+
+                    <div class="checkbox-grid">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="procedimientos" value="curacion">
+                            <span class="checkmark"></span> Curación
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="procedimientos" value="inyeccion">
+                            <span class="checkmark"></span> Inyección
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="procedimientos" value="medicamento">
+                            <span class="checkmark"></span> Administración de Medicamento
+                        </label>
+                    </div>
+                </section>
+
+                <!-- Observaciones -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <i class="bi bi-pencil-square"></i>
+                        <h3>Observaciones</h3>
+                        <span class="section-badge">Opcional</span>
+                    </div>
+                    <textarea name="observaciones" id="observaciones" rows="4" placeholder="Ingrese observaciones..."></textarea>
+                </section>
+
+                <!-- Acciones -->
+                <div class="form-actions-footer">
+                    <button type="reset" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Limpiar</button>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </main>
 
     <!-- Footer -->
     <footer class="hospital-footer">
@@ -121,6 +242,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+    <script src="/Frontend/src/js/pages/registro-hoja-turno.js"></script>
 </body>
 </html>

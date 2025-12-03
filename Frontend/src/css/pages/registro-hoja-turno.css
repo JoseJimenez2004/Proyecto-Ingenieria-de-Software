@@ -1,0 +1,50 @@
+/* ===== ESTILO ESPECÍFICO PARA HOJA DE ENFERMERÍA ===== */
+
+.page-hoja-enfermeria textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    background: var(--white);
+    resize: vertical;
+}
+
+.page-hoja-enfermeria textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Ajustes para checkbox grid en procedimientos */
+.page-hoja-enfermeria .checkbox-grid {
+    margin-top: 1rem;
+}
+
+/* Ajuste de botones para formulario */
+.page-hoja-enfermeria .form-actions-footer {
+    background: #f8fafc;
+    border-top: 1px solid var(--border-color);
+}
+
+/* Mensajes de alerta temporales */
+.alert-success, .alert-error {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: none;
+    animation: slideIn 0.3s ease;
+}
+
+.alert-success {
+    background: var(--success-color);
+    color: var(--white);
+}
+
+.alert-error {
+    background: var(--error-color);
+    color: var(--white);
+}

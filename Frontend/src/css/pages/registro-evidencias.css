@@ -1,0 +1,34 @@
+/* ===== ESTILOS ESPECÍFICOS PARA LA PÁGINA DE EVIDENCIAS ===== */
+
+.page-evidencias .form-container {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.page-evidencias label i {
+    color: var(--secondary-color);
+}
+
+.page-evidencias textarea {
+    resize: vertical;
+}
+
+.page-evidencias .btn-primary {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+}
+
+.page-evidencias .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(60, 179, 113, 0.3);
+}
+
+.page-evidencias .btn-outline-secondary {
+    border-color: var(--border-color);
+    color: var(--text-dark);
+}
+
+.page-evidencias .btn-outline-secondary:hover {
+    background: #f8fafc;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
