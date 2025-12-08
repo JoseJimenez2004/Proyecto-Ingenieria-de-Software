@@ -5,6 +5,7 @@
     const tipo = document.getElementById("tipo");
     const otroTexto = document.getElementById("otroTexto");
 
+
     const gravedad = document.getElementById("gravedad");
     const reportante = document.getElementById("reportante");
     const encargado = document.getElementById("Encargado");
@@ -73,6 +74,20 @@
         incidentes = JSON.parse(localStorage.getItem("incidentes"));
     }
 
+form.addEventListener('submit', function(e) {
+    e.preventDefault(); // evita que se envíe automáticamente
+
+    // checkValidity() revisa todos los campos con required
+    if (!form.checkValidity()) {
+        alert('Por favor completa todos los campos obligatorios');
+        form.classList.add('was-validated'); // para estilos de Bootstrap
+        return; // salir sin registrar
+    }
+    form.classList.remove('was-validated');
+
+    registrarIncidente();
+});
+
     // Funcion para mostrar campo otro en tipo de incidente
     tipo.addEventListener("change", () => {
         if (tipo.value === "otro") {
@@ -86,31 +101,30 @@
     });
 
     // Registrar incidente
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    function registrarIncidente() {
+    const tipoFinal = tipo.value === "otro" ? otroTexto.value : tipo.value;
 
-        const tipoFinal = tipo.value === "otro" ? otroTexto.value : tipo.value;
+    const nuevo = {
+        id: Date.now(),
+        fechaHora: fechaHora.value,
+        ubicacion: ubicacion.value,
+        tipo: tipoFinal,
+        gravedad: gravedad.value,
+        reportante: reportante.value,
+        encargado: encargado.value,
+        descripcion: descripcion.value,
+        estado: "Abierto"
+    };
 
-        const nuevo = {
-            id: Date.now(),
-            fechaHora: fechaHora.value,
-            ubicacion: ubicacion.value,
-            tipo: tipoFinal || "Otro",
-            gravedad: gravedad.value,
-            reportante: reportante.value,
-            encargado: encargado.value,
-            descripcion: descripcion.value,
-            estado: "Abierto"
-        };
+    incidentes.push(nuevo);
+    localStorage.setItem("incidentes", JSON.stringify(incidentes));
 
-        incidentes.push(nuevo);
-        localStorage.setItem("incidentes", JSON.stringify(incidentes));
+    form.reset();
+    otroTexto.classList.add("oculto");
 
-        form.reset();
-        otroTexto.classList.add("oculto");
+    mostrarTabla();
+}
 
-        mostrarTabla();
-    });
 
     // Limpiar formulario
     limpiarBtn.addEventListener("click", () => form.reset());
@@ -137,7 +151,7 @@
                     <td class="${i.estado === "Resuelto" ? "estado-resuelto" : "estado-abierto"}">${i.estado}</td>
                     <td>
                         <button class="btn btn-ssm btn-primary opcionesbtn" data-id="${i.id}">
-                            Opciónes
+                            Opciones
                         </button>
                     </td>
                 </tr>
