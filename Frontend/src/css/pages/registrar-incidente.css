@@ -1,0 +1,170 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background: #f7f9fc;
+    color: #1f2937;
+}
+
+.btn-logout {
+    color:#ecf0f5
+}
+
+.btn-logout:hover {
+    background:#0b254b;
+    color: #ffffff;
+}
+/* Card */
+.card {
+    border-radius: 10px;
+}
+
+/* Tabla */
+.table thead th {
+    border-bottom: 0;
+}
+.table tbody tr td {
+    vertical-align: middle;
+}
+
+/*Estilo de placeholder en select*/
+.placeholder-select {
+    color: #777; /* gris como placeholder */
+}
+
+.placeholder-select option {
+    color: black;
+}
+.placeholder-select option[disabled][hidden] {
+    display: none; /* oculta completamente el placeholder del menú */
+}
+
+/* Cuando el usuario selecciona algo */
+.placeholder-select:not(:invalid) {
+    color: black;
+}
+
+.oculto {
+    display: none;
+}
+
+.mostrar {
+    display: block;
+}
+
+/*Botones tabla*/
+.opcionesbtn {
+    background-color: #13415a;
+    color: #ffffff;
+}
+
+/* Gravedad */
+.badge-gravedad {
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.78rem;
+    color: white;
+}
+.badge-bajo { background: #289ba3; }      /* verde */
+.badge-medio { background: #f59e0b; }     /* amarillo */
+.badge-alto { background: #dc2626; }      /* rojo */
+.badge-critico { background: #7f1d1d; }   /* oscuro */
+
+.btn-registrar {
+    background-color: #0369a1;
+    border-color: #0284c7;
+    color: #ffffff;
+}
+
+.btn-registrar:hover {
+    background-color: #002e46;
+    border-color: #0369a1;
+    color: #ffffff;
+}
+
+.btn-limpiar{
+    border-color: #0369a1;
+    color: #0369a1;
+}
+.btn-limpiar:hover {
+    background-color: #002e46;
+    color: #ffffff;
+}
+
+/*Botones de borrar y exportar*/
+
+.btn-success {
+    background-color: #038eff;
+    border-color: #0065fc;
+}
+
+.btn-success:hover {
+    background-color: #093f4d;
+    border-color: #0053a8;
+}
+
+.btn-danger {
+    background-color: #02013d;
+    border-color: #02013d;
+}
+
+.btn-danger:hover {
+    background-color: #230163;
+    border-color: #230163;
+    color: #ffffff;
+}
+
+/*tamaño de botones exportar y borrar*/
+.btn-sm {
+    padding: .400rem 5rem;
+}
+
+.btn-ssm {
+    padding: .5rem .5rem;
+}
+
+/* Modal (simple) */
+.modal {
+    background: rgba(15, 23, 42, 0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal .modal-dialog {
+    max-width: 900px;
+}
+.modal .modal-content {
+    border-radius: 12px;
+}
+
+/*Botones del modal*/
+
+.btn-warning {
+    background-color: #ff5e00ee;
+    border-color: #ff5e00ee;
+    color: #ffffff;
+}
+.btn-warning:hover {
+    background-color: #fd3705;
+    border-color: #fd3705;
+    color: #ffffff;
+}
+
+.btn-secondary {
+    background-color: #345186;
+    border-color: #345186;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #1a3261;
+    border-color: #1a3261;
+    color: #ffffff;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .hospital-logo, .footer-logo { display: none; }
+}
