@@ -24,6 +24,11 @@
 .hospital-name h1 { margin: 0; }
 .hospital-name p { margin: 0; opacity: 0.8; }
 
+.btn-sm {
+   padding: .15rem .2rem;
+   font-size: medium;
+}
+
 /* ==== ESTILO DE CUADROS AZULES ==== */
 .section-header {
     display: flex;
