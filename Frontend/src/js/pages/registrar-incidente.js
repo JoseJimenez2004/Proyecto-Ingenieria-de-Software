@@ -150,7 +150,10 @@ form.addEventListener('submit', function(e) {
                     <td>${i.reportante}</td>
                     <td class="${i.estado === "Resuelto" ? "estado-resuelto" : "estado-abierto"}">${i.estado}</td>
                     <td>
-                        <button class="btn btn-ssm btn-primary opcionesbtn" data-id="${i.id}">
+                        <button class="btn btn-ssm btn-primary opcionesbtn" 
+                                    data-id="${i.id}" 
+                                 data-num="${index + 1}"
+                            >
                             Opciones
                         </button>
                     </td>
@@ -170,33 +173,35 @@ form.addEventListener('submit', function(e) {
     let incidenteSeleccionado = null;
 
     function abrirModal(e) {
-        const id = Number(e.target.dataset.id);
-        incidenteSeleccionado = incidentes.find(i => i.id === id);
+    const id = Number(e.target.dataset.id);
+    const numeroIncidente = e.target.dataset.num;
 
-        modalTitulo.textContent = "Incidente #" + id;
+    incidenteSeleccionado = incidentes.find(i => i.id === id);
 
-        // Actualiza el texto y color del botón según el estado
-        if (incidenteSeleccionado.estado === "Resuelto") {
+    modalTitulo.textContent = "Incidente " + numeroIncidente;
+
+    if (incidenteSeleccionado.estado === "Resuelto") {
         toggleEstadoBtn.textContent = "Marcar como ABIERTO";
         toggleEstadoBtn.className = "btn btn-warning";
-        } else {
+    } else {
         toggleEstadoBtn.textContent = "Marcar como RESUELTO";
         toggleEstadoBtn.className = "btn btn-success";
-        }
-        
-        modalBody.innerHTML = `
-            <p><strong>Fecha:</strong> ${incidenteSeleccionado.fechaHora.replace("T"," ")}</p>
-            <p><strong>Ubicación:</strong> ${incidenteSeleccionado.ubicacion}</p>
-            <p><strong>Tipo:</strong> ${incidenteSeleccionado.tipo}</p>
-            <p><strong>Gravedad:</strong> ${incidenteSeleccionado.gravedad}</p>
-            <p><strong>Reportante:</strong> ${incidenteSeleccionado.reportante}</p>
-            <p><strong>Encargado:</strong> ${incidenteSeleccionado.encargado}</p>
-            <p><strong>Descripción:</strong><br>${incidenteSeleccionado.descripcion}</p>
-            <p><strong>Estado:</strong> ${incidenteSeleccionado.estado}</p>
-        `;
-
-        modal.style.display = "flex";
     }
+    
+    modalBody.innerHTML = `
+        <p><strong>Fecha:</strong> ${incidenteSeleccionado.fechaHora.replace("T"," ")}</p>
+        <p><strong>Ubicación:</strong> ${incidenteSeleccionado.ubicacion}</p>
+        <p><strong>Tipo:</strong> ${incidenteSeleccionado.tipo}</p>
+        <p><strong>Gravedad:</strong> ${incidenteSeleccionado.gravedad}</p>
+        <p><strong>Reportante:</strong> ${incidenteSeleccionado.reportante}</p>
+        <p><strong>Encargado:</strong> ${incidenteSeleccionado.encargado}</p>
+        <p><strong>Descripción:</strong><br>${incidenteSeleccionado.descripcion}</p>
+        <p><strong>Estado:</strong> ${incidenteSeleccionado.estado}</p>
+    `;
+
+    modal.style.display = "flex";
+}
+
 
     cerrar1.addEventListener("click", () => modal.style.display = "none");
     cerrar2.addEventListener("click", () => modal.style.display = "none");
