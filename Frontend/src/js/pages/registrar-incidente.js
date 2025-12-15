@@ -27,6 +27,11 @@
     const toggleEstadoBtn = document.getElementById("toggleEstadoBtn");
     const eliminarIncidenteBtn = document.getElementById("eliminarIncidenteBtn");
 
+    const confirmacionModal = document.getElementById("confirmacionEliminarModal");
+    const confirmarEliminarBtn = document.getElementById("confirmarEliminarBtn");
+    const cancelarEliminarBtn = document.getElementById("cancelarEliminarBtn");
+    const mensajeIncidenteEliminar = document.getElementById("mensajeIncidenteEliminar");
+    const cerrarConfirmacion1 = document.getElementById("cerrarConfirmacion1");
     let incidentes = [];
 
     // Ejemplos para probar fronted
@@ -74,7 +79,32 @@
         incidentes = JSON.parse(localStorage.getItem("incidentes"));
     }
 
-form.addEventListener('submit', function(e) {
+// Validacion de formulario
+    const formFields = form.querySelectorAll("input, select, textarea");
+
+    formFields.forEach(field => {
+        field.addEventListener("blur", () => {
+            validateField(field);
+        });
+
+        field.addEventListener("input", () => { 
+            if (field.classList.contains("is-invalid")) {
+                validateField(field);
+            }
+        });
+    });
+
+    function validateField(field) {
+        if (!field.checkValidity()) {
+            field.classList.add("is-invalid"); 
+            field.classList.remove("is-valid");
+        } else {
+            field.classList.remove("is-invalid");
+            field.classList.add("is-valid"); 
+        }
+    }
+
+    form.addEventListener('submit', function(e) {
     e.preventDefault(); // evita que se envíe automáticamente
 
     // checkValidity() revisa todos los campos con required
@@ -124,10 +154,18 @@ form.addEventListener('submit', function(e) {
 
     mostrarTabla();
 }
-
-
-    // Limpiar formulario
-    limpiarBtn.addEventListener("click", () => form.reset());
+    
+   // Limpiar formulario
+    limpiarBtn.addEventListener("click", () => {
+        form.reset();
+        // Quitamos las clases de validación visual de todos los campos
+        formFields.forEach(field => {
+            field.classList.remove("is-invalid");
+            field.classList.remove("is-valid");
+        });
+        form.classList.remove('was-validated'); // Por si acaso se envió el form antes
+        otroTexto.classList.add("oculto"); // Tu lógica de ocultar 'otro'
+    });
 
     // Mostrar tabla
     function mostrarTabla() {
@@ -171,12 +209,25 @@ form.addEventListener('submit', function(e) {
 
     // MODAL
     let incidenteSeleccionado = null;
+    let numeroIncidenteSeleccionado = null; // <-- NUEVA VARIABLE
 
     function abrirModal(e) {
-    const id = Number(e.target.dataset.id);
-    const numeroIncidente = e.target.dataset.num;
+        // Obtenemos el ID del incidente
+        const id = Number(e.target.dataset.id); 
+        // Obtenemos el número de incidente (esto solo está disponible al hacer clic en el botón de la tabla)
+        const numeroIncidente = e.target.dataset.num; 
 
-    incidenteSeleccionado = incidentes.find(i => i.id === id);
+        incidenteSeleccionado = incidentes.find(i => i.id === id);
+
+        // --- NUEVO: GUARDAMOS EL NÚMERO DE INCIDENTE ---
+        if (numeroIncidente) {
+            numeroIncidenteSeleccionado = numeroIncidente;
+        }
+
+        // Usamos el número guardado (en caso de que la llamada venga de otro lado)
+        const numeroMostrar = numeroIncidenteSeleccionado || "Detalles";
+        
+        modalTitulo.textContent = "Incidente " + numeroMostrar;
 
     modalTitulo.textContent = "Incidente " + numeroIncidente;
 
@@ -198,48 +249,92 @@ form.addEventListener('submit', function(e) {
         <p><strong>Descripción:</strong><br>${incidenteSeleccionado.descripcion}</p>
         <p><strong>Estado:</strong> ${incidenteSeleccionado.estado}</p>
     `;
-
     modal.style.display = "flex";
 }
-
-
     cerrar1.addEventListener("click", () => modal.style.display = "none");
     cerrar2.addEventListener("click", () => modal.style.display = "none");
 
   //Logica del boton cambiar estado
     toggleEstadoBtn.addEventListener("click", () => {
-    if (!incidenteSeleccionado) return;
+        if (!incidenteSeleccionado) return;
 
-    // Alternar
-    incidenteSeleccionado.estado =
-        incidenteSeleccionado.estado === "Resuelto"
-        ? "Abierto"
-        : "Resuelto";
+        // Alternar
+        incidenteSeleccionado.estado =
+            incidenteSeleccionado.estado === "Abierto"
+            ? "Resuelto"
+            : "Abierto";
 
-    localStorage.setItem("incidentes", JSON.stringify(incidentes));
-    mostrarTabla();
-   // Actualizar la UI del botón sin cerrar el modal
-    if (incidenteSeleccionado.estado === "Resuelto") {
-        toggleEstadoBtn.textContent = "Marcar como ABIERTO";
-        toggleEstadoBtn.className = "btn btn-warning";
-    } else {
-        toggleEstadoBtn.textContent = "Marcar como RESUELTO";
-        toggleEstadoBtn.className = "btn btn-success";
-    }
+        localStorage.setItem("incidentes", JSON.stringify(incidentes));
+        mostrarTabla();
+        
+        // Actualizar la UI del botón sin cerrar el modal
+        if (incidenteSeleccionado.estado === "Resuelto") {
+            toggleEstadoBtn.textContent = "Marcar como ABIERTO";
+            toggleEstadoBtn.className = "btn btn-warning";
+        } else {
+            toggleEstadoBtn.textContent = "Marcar como RESUELTO";
+            toggleEstadoBtn.className = "btn btn-success";
+        }
 
-    //Actualiza el texto del estado dentro del modal
-    abrirModal({ target: { dataset: { id: incidenteSeleccionado.id } } });
-});
+    modalBody.innerHTML = `
+            <p><strong>Fecha:</strong> ${incidenteSeleccionado.fechaHora.replace("T"," ")}</p>
+            <p><strong>Ubicación:</strong> ${incidenteSeleccionado.ubicacion}</p>
+            <p><strong>Tipo:</strong> ${incidenteSeleccionado.tipo}</p>
+            <p><strong>Gravedad:</strong> ${incidenteSeleccionado.gravedad}</p>
+            <p><strong>Reportante:</strong> ${incidenteSeleccionado.reportante}</p>
+            <p><strong>Encargado:</strong> ${incidenteSeleccionado.encargado}</p>
+            <p><strong>Descripción:</strong><br>${incidenteSeleccionado.descripcion}</p>
+            <p><strong>Estado:</strong> ${incidenteSeleccionado.estado}</p>
+        `;
+        // Aseguramos que el título se actualice
+        modalTitulo.textContent = "Incidente " + numeroIncidenteSeleccionado;
+    });
 
     // Boton Eliminar incidente
     eliminarIncidenteBtn.addEventListener("click", () => {
         if (!incidenteSeleccionado) return;
 
+        // Establecer el mensaje de confirmación
+        mensajeIncidenteEliminar.textContent = 
+            `El incidente No. ${numeroIncidenteSeleccionado} (${incidenteSeleccionado.tipo}) será borrado permanentemente.`;
+        
+        // Ocultar el modal de detalles
+        modal.style.display = "none";
+
+        // Mostrar el modal de confirmación
+        confirmacionModal.style.display = "flex";
+    });
+
+    //Logica del boton confirmar eliminacion
+
+    function ejecutarEliminacion() {
+        if (!incidenteSeleccionado) return;
+
+        // Lógica de eliminación
         incidentes = incidentes.filter(i => i.id !== incidenteSeleccionado.id);
         localStorage.setItem("incidentes", JSON.stringify(incidentes));
 
         mostrarTabla();
-        modal.style.display = "none";
+
+        confirmacionModal.style.display = "none";
+        
+        incidenteSeleccionado = null;
+        numeroIncidenteSeleccionado = null;
+    }
+
+    // Botón ELIMINAR
+    confirmarEliminarBtn.addEventListener("click", () => {
+        ejecutarEliminacion();
+    });
+
+    // Botón CANCELAR
+    cancelarEliminarBtn.addEventListener("click", () => {
+        confirmacionModal.style.display = "none";
+    });
+
+    // Cerrar
+    cerrarConfirmacion1.addEventListener("click", () => {
+        confirmacionModal.style.display = "none";
     });
 
     // Exportar pdf
