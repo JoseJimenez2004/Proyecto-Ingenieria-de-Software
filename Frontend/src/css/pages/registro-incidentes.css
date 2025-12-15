@@ -113,7 +113,12 @@ body {
     color: #ffffff;
 }
 
-/*tamaño de botones exportar y borrar*/
+.opcionesbtn {
+    background: #036aa1dc;
+    color: #ffffff;
+}
+
+/*tamaño de botones opciones, exportar y borrar*/
 .btn-sm {
     padding: .400rem 5rem;
 }
@@ -142,13 +147,13 @@ body {
 /*Botones del modal*/
 
 .btn-warning {
-    background-color: #ff5e00ee;
-    border-color: #ff5e00ee;
+    background-color: #4b5657ee;
+    border-color: #070707ee;
     color: #ffffff;
 }
 .btn-warning:hover {
-    background-color: #fd3705;
-    border-color: #fd3705;
+    background-color: #28282e;
+    border-color: #000000;
     color: #ffffff;
 }
 
@@ -162,6 +167,40 @@ body {
     background-color: #1a3261;
     border-color: #1a3261;
     color: #ffffff;
+}
+
+/*Modal de eliminacion*/
+
+.bg-danger {
+    background-color: #1436cc !important;
+}
+
+.btn-danger-custom {
+    background-color: #230163;
+    border-color: #230163;
+    color: #ffffff;
+}
+
+.btn-danger-custom:hover {
+    background-color: #180050;
+    border-color: #180050;
+    color: #ffffff;
+}
+
+.btn-secondary-custom {
+    background-color: #4b5563;
+    border-color: #4b5563;
+    color: #ffffff;
+}
+
+.btn-secondary-custom:hover {
+    background-color: #1f2937;
+    border-color: #1f2937;
+    color: #ffffff;
+}
+
+.btn-close-white {
+    filter: invert(1);
 }
 
 /* Responsive tweaks */
