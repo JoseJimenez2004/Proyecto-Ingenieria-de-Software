@@ -3,6 +3,8 @@ from app import db
 from app.models.user import Enfermero
 from datetime import datetime
 import bcrypt
+import os
+from app.utils.file_db import save_enfermero_to_file
 
 enfermeros_bp = Blueprint('enfermeros', __name__)
 
@@ -81,13 +83,54 @@ def registrar_enfermero():
         # Establecer contraseña
         nuevo_enfermero.set_password(datos_sistema['contrasena'])
         
+        # Preparar datos para almacenamiento en archivo (simulación)
+        enfermero_record = {
+            'nombre_completo': nuevo_enfermero.nombre_completo,
+            'email': nuevo_enfermero.email,
+            'fecha_nacimiento': nuevo_enfermero.fecha_nacimiento.isoformat() if nuevo_enfermero.fecha_nacimiento else None,
+            'curp': nuevo_enfermero.curp,
+            'telefono': nuevo_enfermero.telefono,
+            'cedula_profesional': nuevo_enfermero.cedula_profesional,
+            'direccion': nuevo_enfermero.direccion,
+            'puesto': nuevo_enfermero.puesto,
+            'especialidad': nuevo_enfermero.especialidad,
+            'fecha_contratacion': nuevo_enfermero.fecha_contratacion.isoformat() if nuevo_enfermero.fecha_contratacion else None,
+            'tipo_rotacion': nuevo_enfermero.tipo_rotacion,
+            'supervisor': nuevo_enfermero.supervisor,
+            'usuario': nuevo_enfermero.usuario,
+            'rol_acceso': nuevo_enfermero.rol_acceso,
+            'areas_acceso': nuevo_enfermero.areas_acceso,
+            # Guardar la contraseña hash (no la contraseña en claro)
+            'contrasena_hash': nuevo_enfermero.contrasena_hash
+        }
+        
+        # Guardar en archivo de simulación (si falla, continuar)
+        file_path = None
+        try:
+            file_path = save_enfermero_to_file(enfermero_record)
+            enfermeros_bp.logger.info(f'[SIM] Enfermero guardado en archivo: {file_path}')
+        except Exception as e:
+            # Registrar error para depuración
+            enfermeros_bp.logger.exception('[SIM] Error guardando enfermero en archivo')
+            file_path = None
+        
+        # Modo simulación: si la variable de entorno FILE_DB_SIMULATE está en '1', no escribimos DB
+        if os.getenv('FILE_DB_SIMULATE') == '1':
+            enfermeros_bp.logger.info('[SIM] Modo simulación activado — no se guardará en la BD')
+            return jsonify({
+                'mensaje': 'Enfermero registrado (simulado, guardado en archivo)',
+                'archivo': file_path,
+                'datos': enfermero_record
+            }), 201
+        
         # Guardar en base de datos
         db.session.add(nuevo_enfermero)
         db.session.commit()
         
         return jsonify({
             'mensaje': 'Enfermero registrado exitosamente',
-            'enfermero_id': nuevo_enfermero.id
+            'enfermero_id': nuevo_enfermero.id,
+            'archivo': file_path
         }), 201
         
     except Exception as e:
@@ -114,3 +157,16 @@ def listar_enfermeros():
         }), 200
     except Exception as e:
         return jsonify({'error': f'Error al obtener enfermeros: {str(e)}'}), 500
+
+
+@enfermeros_bp.route('/api/enfermeros/simulados', methods=['GET'])
+def listar_enfermeros_simulados():
+    """Devuelve las últimas entradas guardadas en el archivo de simulación."""
+    try:
+        from app.utils.file_db import read_enfermeros_file
+
+        registros = read_enfermeros_file(limit=50)
+        return jsonify({'simulados': registros}), 200
+    except Exception as e:
+        enfermeros_bp.logger.exception('Error al leer registros simulados')
+        return jsonify({'error': 'Error al leer registros simulados'}), 500
