@@ -1,0 +1,61 @@
+.roles-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 100px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .roles-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.role-card {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-left: 5px solid #0d6efd; /* color decorativo */
+    transition: 0.2s ease-in-out;
+}
+
+.role-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.role-header h5 {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.role-description {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.role-permissions .permiso-tag {
+    display: inline-block;
+    background: #e9f2ff;
+    color: #0d6efd;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.role-footer {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #777;
+}
+
+.verRolBtn{
+    background: rgb(4, 69, 167);
+    color: rgb(255, 255, 255);}
+
+.btn-sm{
+    padding: .25rem .5rem;
+}

@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Enfermero - AlivioHospital</title>
+    <title>Registro de Incidentes - AlivioHospital</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Hegarty:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="/Frontend/src/css/pages/registro-enfermero.css" rel="stylesheet">
+    <link href="/Frontend/src/css/pages/registro-incidentes.css" rel="stylesheet">
 </head>
 <body>
-    <!-- Header Profesional -->
-    <header class="hospital-header">
+     <header class="hospital-header">
         <div class="container-fluid">
             <div class="header-content">
                 <div class="hospital-brand">
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="header-actions">
-                    <span class="user-welcome">Bienvenido, Administrador</span>
+                    <span class="user-welcome">Bienvenido</span>
                     <button class="btn-logout">
                         <i class="bi bi-box-arrow-right"></i>
                         Cerrar Sesión
@@ -33,94 +33,244 @@
         </div>
     </header>
 
-    <!-- Navegación Principal -->
     <nav class="main-navigation">
         <div class="container-fluid">
             <ul class="nav-menu">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="registro-enfermero.html" class="nav-link">
-                        <i class="bi bi-person-plus"></i>
-                        Registrar Enfermero
+                        <i class="bi bi-person-plus"></i> Registrar Enfermero
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../curso-capacitacion.html" class="nav-link">
-                        <i class="bi bi-book"></i>
-                        Cursos Capacitación
+                    <a href="asignar-turno.html" class="nav-link">
+                        <i class="bi bi-calendar-check"></i> Asignar Turno
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../crear-rol.html" class="nav-link">
-                        <i class="bi bi-shield-check"></i>
-                        Gestión de Roles
+                    <a href="curso-capacitacion.html" class="nav-link">
+                        <i class="bi bi-book"></i> Cursos Capacitación
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../reportes.html" class="nav-link">
-                        <i class="bi bi-graph-up"></i>
-                        Reportes
+                    <a href="crear-rol-enfermeria.html" class="nav-link">
+                        <i class="bi bi-shield-check"></i> Gestión de Roles
+                    </a>
+                </li>
+                <li class="nav-item active">
+                    <a href="reportes.html" class="nav-link">
+                        <i class="bi bi-graph-up"></i> Reportes
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../dashboard.html" class="nav-link">
-                        <i class="bi bi-speedometer2"></i>
-                        Dashboard
+                    <a href="dashboard.html" class="nav-link">
+                        <i class="bi bi-speedometer2"></i> Dashboard
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <!-- Breadcrumb -->
-    <div class="breadcrumb-container">
-        <div class="container-fluid">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="../dashboard.html">Inicio</a></li>
-                    <li class="breadcrumb-item"><a href="#">Recursos Humanos</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Registro de Enfermero</li>
-                </ol>
-            </nav>
+    <!-- contenido registro de incidentes -->
+    <main class="container my-4">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="mb-3">Registro de Incidentes</h2>
+                <p class="text-muted">Registro y administración de incidentes ocurridos en el hospital.</p>
+            </div>
         </div>
-    </div>
 
+        <!-- Formulario y acciones -->
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">Nuevo incidente</h5>
+                        <form id="incidenteForm" novalidate>
+                            <div class="mb-2">
+                                <label for="fechaHora" class="form-label">Fecha y hora</label>
+                                <input type="datetime-local" id="fechaHora" class="form-control" required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese la fecha y hora del incidente.
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="ubicacion" class="form-label">Ubicación</label>
+                                <input type="text" id="ubicacion" class="form-control" placeholder="Ej. Urgencias" required>
+                                <div class="invalid-feedback">
+                                    Por favor ingrese la ubicación del incidente.
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="tipo" class="form-label">Tipo de incidente</label>
+                                <select id="tipo" required class="placeholder-select" required>
+                                    <option value="" disabled selected hidden>Tipo de incidente...</option>
+                                    <option Caida>Caída</option>
+                                    <option Error de medicamento>Error de medicación</option>
+                                    <option Reacción alérgica>Reacción alérgica</option>
+                                    <option Falla de equipo>Falla de equipo</option>
+                                    <option De urgencia>De urgencia</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor seleccione el tipo de incidente.
+                                </div>
+                                <input type="text" id="otroTexto" class="form-control mt-2 oculto" placeholder="Especifique aquí">
+                            </div>
+                            <div class="mb-2">
+                                <label for="gravedad" class="form-label">Gravedad</label>
+                                <select id="gravedad" class="placeholder-select" required>
+                                    <option value="" disabled selected hidden>Gravedad del incidente...</option>
+                                    <option value="Bajo">Bajo</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Alto">Alto</option>
+                                    <option value="Crítico">Crítico</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor seleccione la gravedad del incidente.
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="reportante" class="form-label">Reporte hecho por:</label>
+                                <input type="text" id="reportante" class="form-control" placeholder="Nombre del enfermero/a" required>
+                                <div class="invalid-feedback">
+                                    Por favor introduce el nombre del responsable del reporte.
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <label for="Enacragado" class="form-label">Nombre del medico encargado:</label>
+                                <input type="text" id="Encargado" class="form-control" placeholder="Nombre del medico encargado" required>
+                                <div class="invalid-feedback">
+                                    Por favor introduce el nombre del encargado.
+                                </div>
+                            </div>  
+                            <div class="mb-2">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <textarea id="descripcion" class="form-control" rows="4" placeholder="Describe el incidente" required></textarea>
+                                <div class="invalid-feedback">
+                                    Por favor introduce una descripción del reporte.
+                                </div>
+                            </div>
 
-    <!-- Footer -->
-    <footer class="hospital-footer">
-        <div class="container-fluid">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="footer-logo">
-                    <div class="footer-info">
-                        <h3>AlivioHospital</h3>
-                        <p>Proveer atención médica hospitalaria de Alta Especialidad con un enfoque integral</p>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-section">
-                        <h4>Contacto</h4>
-                        <p><i class="bi bi-telephone"></i> (55) 1234-5678</p>
-                        <p><i class="bi bi-envelope"></i> info@aliviohospital.com</p>
-                    </div>
-                    <div class="footer-section">
-                        <h4>Horarios</h4>
-                        <p>Administración: 8:00 - 18:00</p>
-                        <p>Urgencias: 24/7</p>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-registrar w-100">Registrar incidente</button>
+                                <button type="button" id="limpiarBtn" class="btn btn-outline-secondary btn-limpiar w-20">Limpiar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 AlivioHospital. Todos los derechos reservados.</p>
-                <div class="footer-social">
-                    <a href="#"><i class="bi bi-facebook"></i></a>
-                    <a href="#"><i class="bi bi-twitter"></i></a>
-                    <a href="#"><i class="bi bi-linkedin"></i></a>
+
+            <!-- Tabla de incidentes -->
+            <div class="col-lg-8">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title d-flex justify-content-between align-items-center">
+                            <span>Incidentes registrados</span>
+                            <small id="contadorIncidentes" class="text-muted">0</small>
+                        </h5>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover small" id="incidentesTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>No.</th>
+                                        <th>Fecha / Hora</th>
+                                        <th>Ubicación</th>
+                                        <th>Tipo</th>
+                                        <th>Gravedad</th>
+                                        <th>Reportante</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="mt-3 d-flex gap-2">
+                    <button id="exportPdfBtn" class="btn btn-success btn-sm"><i class="bi bi-download"></i> Exportar archivo</button>
+                    <button id="clearStorageBtn" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i> Borrar todos</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Modal detalles incidente -->
+        <div id="modalIncidente" class="modal" tabindex="-1" style="display:none;">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="modalIncidenteTitulo" class="modal-title">Incidente</h5>
+                        <button type="button" id="cerrarModalIncidente" class="btn-close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modalIncidenteBody"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="toggleEstadoBtn" class="btn btn-success">Cambiar estado</button>
+                        <button id="eliminarIncidenteBtn" class="btn btn-danger">Eliminar</button>
+                        <button id="cerrarModalIncidente2" class="btn btn-secondary">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="confirmacionEliminarModal" class="modal" tabindex="-1" style="display:none;">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title"><i class="bi bi-exclamation-triangle-fill"></i> Confirmar Eliminación</h5>
+                <button type="button" class="btn-close btn-close-white" id="cerrarConfirmacion1"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este incidente?</p>
+                <p class="small text-muted" id="mensajeIncidenteEliminar"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="confirmarEliminarBtn" class="btn btn-danger-custom">Sí, Eliminar</button>
+                <button type="button" id="cancelarEliminarBtn" class="btn btn-secondary-custom">No, Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="hospital-footer mt-4">
+        <div class="container-fluid">
+            <div class="footer-content d-flex justify-content-between align-items-center py-3">
+                <div class="footer-brand d-flex align-items-center">
+                    <img src="/Frontend/src/assets/img/icons/logo.png" alt="AlivioHospital" class="footer-logo me-3">
+                    <div class="footer-info">
+                        <h3 class="h6 mb-0">AlivioHospital</h3>
+                        <p class="small mb-0">Proveer atención médica hospitalaria de Alta Especialidad con un enfoque integral</p>
+                    </div>
+                </div>
+                <div class="footer-links d-flex gap-4">
+                    <div class="footer-section small">
+                        <h4 class="h6">Contacto</h4>
+                        <p class="mb-0"><i class="bi bi-telephone"></i> (55) 1234-5678</p>
+                        <p class="mb-0"><i class="bi bi-envelope"></i> info@aliviohospital.com</p>
+                    </div>
+                    <div class="footer-section small">
+                        <h4 class="h6">Horarios</h4>
+                        <p class="mb-0">Administración: 8:00 - 18:00</p>
+                        <p class="mb-0">Urgencias: 24/7</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom text-center small py-2">
+                <p class="mb-0">&copy; 2025 AlivioHospital. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+    <script src="/Frontend/src/js/pages/registrar-incidente.js"></script>
 </body>
 </html>
